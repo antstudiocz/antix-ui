@@ -15,7 +15,8 @@ import { ProductCard } from '@antixuser/antix-ui';
   imageUrl="https://example.com/product-image.jpg"
   title="Product Name"
   currentPrice="599.00 Kč / pc"
-  isNew={true}
+  deliveryStatus="Doručíme dnes"
+  storeAvailability="Ihned na prodejně"
   onAddToCart={() => console.log('Product added to cart')}
 />
 ```
@@ -28,10 +29,11 @@ import { ProductCard } from '@antixuser/antix-ui';
 | title | string | - | Product title |
 | currentPrice | string | - | Current price of the product (formatted) |
 | originalPrice | string | - | Original price of the product, if on sale (formatted) |
-| isNew | boolean | false | Whether the product is newly added |
-| isDeliveryToday | boolean | false | Whether the product can be delivered today |
-| isInStore | boolean | false | Whether the product is available in store |
+| badges | Badge[] | [] | Array of badge objects to display |
+| deliveryStatus | string | - | Custom delivery status text. If undefined, no delivery status will be shown |
+| storeAvailability | string | - | Custom store availability text. If undefined, no store availability will be shown |
 | onAddToCart | () => void | - | Function called when the add to cart button is clicked |
+| translationNamespace | string | "productCard" | Translation namespace for i18n |
 
 ## Variants
 
@@ -58,33 +60,38 @@ import { ProductCard } from '@antixuser/antix-ui';
 />
 ```
 
-### New Product
+### Product with Custom Availability States
 
 ```tsx
 <ProductCard
   imageUrl="https://example.com/product-image.jpg"
-  title="New Product"
+  title="Product with Custom States"
   currentPrice="399.00 Kč / pc"
-  isNew={true}
+  deliveryStatus="Doručení do 2 dnů"
+  storeAvailability="Dostupné na 3 prodejnách"
   onAddToCart={() => console.log('Product added to cart')}
 />
 ```
 
-## Advanced usage
-
-### Product with all badges
+### Product with i18n Support
 
 ```tsx
-<ProductCard
-  imageUrl="https://example.com/product-image.jpg"
-  title="Fully Featured Product"
-  originalPrice="699.00 Kč / pc"
-  currentPrice="599.00 Kč / pc"
-  isNew={true}
-  isDeliveryToday={true}
-  isInStore={true}
-  onAddToCart={() => console.log('Product added to cart')}
-/>
+import { useTranslation } from 'react-i18next';
+
+function ProductWithI18n() {
+  const { t } = useTranslation('productCard');
+
+  return (
+    <ProductCard
+      imageUrl="https://example.com/product-image.jpg"
+      title="Product with i18n"
+      currentPrice="399.00 Kč / pc"
+      deliveryStatus={t('deliveryToday')}
+      storeAvailability={t('inStore')}
+      onAddToCart={() => console.log('Product added to cart')}
+    />
+  );
+}
 ```
 
 ## Accessibility

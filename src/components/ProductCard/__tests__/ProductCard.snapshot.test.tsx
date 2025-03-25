@@ -27,8 +27,8 @@ describe('ProductCard Snapshots', () => {
         {...defaultProps}
         originalPrice="399.00 Kč / pc"
         badges={badges}
-        isDeliveryToday={true}
-        isInStore={true}
+        deliveryStatus="Doručíme dnes"
+        storeAvailability="Ihned na prodejně"
       />
     );
     expect(container).toMatchSnapshot();
@@ -59,21 +59,21 @@ describe('ProductCard Snapshots', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('matches snapshot with Delivery Today badge only', () => {
+  it('matches snapshot with delivery status only', () => {
     const { container } = render(
       <ProductCard 
         {...defaultProps}
-        isDeliveryToday={true}
+        deliveryStatus="Doručíme dnes"
       />
     );
     expect(container).toMatchSnapshot();
   });
 
-  it('matches snapshot with In Store badge only', () => {
+  it('matches snapshot with store availability only', () => {
     const { container } = render(
       <ProductCard 
         {...defaultProps}
-        isInStore={true}
+        storeAvailability="Ihned na prodejně"
       />
     );
     expect(container).toMatchSnapshot();

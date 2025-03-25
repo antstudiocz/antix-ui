@@ -48,14 +48,14 @@ describe('ProductCard', () => {
       expect(screen.getByText('Akce')).toBeInTheDocument();
     });
 
-    it('renders Delivery Today badge when isDeliveryToday is true', () => {
-      render(<ProductCard {...defaultProps} isDeliveryToday={true} />);
+    it('renders delivery status when provided', () => {
+      render(<ProductCard {...defaultProps} deliveryStatus="Doručíme dnes" />);
       
       expect(screen.getByText('Doručíme dnes')).toBeInTheDocument();
     });
 
-    it('renders In Store badge when isInStore is true', () => {
-      render(<ProductCard {...defaultProps} isInStore={true} />);
+    it('renders store availability when provided', () => {
+      render(<ProductCard {...defaultProps} storeAvailability="Ihned na prodejně" />);
       
       expect(screen.getByText('Ihned na prodejně')).toBeInTheDocument();
     });
@@ -70,8 +70,8 @@ describe('ProductCard', () => {
         <ProductCard 
           {...defaultProps} 
           badges={badges}
-          isDeliveryToday={true} 
-          isInStore={true} 
+          deliveryStatus="Doručíme dnes"
+          storeAvailability="Ihned na prodejně"
         />
       );
       

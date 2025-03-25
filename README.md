@@ -13,7 +13,7 @@ yarn add @antixuser/antix-ui
 ## Basic Usage
 
 ```jsx
-import { Button } from "@antixuser/antix-ui";
+import { Button, ProductCard } from "@antixuser/antix-ui";
 
 function App() {
   return (
@@ -25,6 +25,14 @@ function App() {
       >
         Click me
       </Button>
+
+      <ProductCard
+        title="Sample Product"
+        price="$99.99"
+        image="product-image.jpg"
+        badges={["New", "Sale"]}
+        onAddToCart={() => console.log("Adding to cart...")}
+      />
     </div>
   );
 }
@@ -35,10 +43,37 @@ function App() {
 The library currently includes the following components:
 
 - **[Button](src/components/Button/docs/README.md)** - Button with various variants and styles
+- **[ProductCard](src/components/ProductCard/docs/README.md)** - Product card component with customizable layout and badges
+
+## Features
+
+- 🎨 Modern and customizable design
+- 🌐 Built-in i18n support
+- 🎯 TypeScript support
+- 📦 Tree-shakeable
+- 🔧 Easy to customize with CSS variables
 
 ## Customization
 
 The library uses CSS variables for easy appearance customization. For more information, see the [styles documentation](src/styles/docs/README.md).
+
+### Internationalization
+
+The library supports i18n out of the box using i18next. You can provide your own translations:
+
+```jsx
+import { i18n } from "@antixuser/antix-ui";
+
+// Add your translations
+i18n.addResourceBundle('en', 'translation', {
+  productCard: {
+    addToCart: 'Add to Cart'
+  }
+});
+
+// Change language
+i18n.changeLanguage('en');
+```
 
 ## Examples
 
@@ -51,19 +86,37 @@ Example usage of components can be found in the [`examples/`](examples) director
 The project follows the following structure:
 
 ```
-src/
-  ├── components/     # Individual components
-  │   ├── ComponentName/  # Component directory
-  │   │   ├── ComponentName.tsx              # Component implementation
-  │   │   ├── ComponentName.module.css       # Component styles
-  │   │   ├── index.ts                   # Component export
-  │   │   └── docs/                      # Component documentation
-  │   │       └── README.md              # Usage description and examples
-  ├── styles/         # Shared styles
-  │   ├── variables.css                  # CSS variables
-  │   └── docs/                          # Styles documentation
-  └── types/          # Shared types
-      └── common.ts                      # Common TypeScript types
+antix-ui/
+├── dist/                # Build output
+├── dist-examples/       # Examples build output
+├── examples/            # Example implementations
+│   ├── ButtonDemo/      # Button component demo
+│   ├── ProductCardDemo/ # ProductCard component demo
+│   └── ...
+├── src/
+    ├── components/      # Individual components
+    │   ├── ComponentName/   # Component directory
+    │   │   ├── __tests__/      # Component tests
+    │   │   │   ├── ComponentName.test.tsx
+    │   │   │   └── ComponentName.snapshot.test.tsx
+    │   │   │   └── README.md
+    │   │   ├── docs/           # Component documentation
+    │   │   │   └── README.md   # Usage and examples
+    │   │   ├── ComponentName.tsx        # Implementation
+    │   │   ├── ComponentName.module.css  # Styles
+    ├── styles/          # Shared styles
+    │   ├── foundations/ # Core styles (colors, typography, etc.)
+    │   │   ├── borders.css
+    │   │   ├── colors.css
+    │   │   ├── typography.css
+    │   │   └── ...
+    │   └── docs/       # Styles documentation
+    ├── translations/    # i18n translations
+    │   ├── locales/    # Language files
+    │   │   ├── cs/     # Czech translations
+    │   │   └── en/     # English translations
+    │   └── i18n.ts     # i18next configuration
+    └── types/          # Shared TypeScript types
 ```
 
 ### Releasing New Versions
@@ -96,4 +149,6 @@ For more information about project conventions and rules, see the [project rules
 
 ## License
 
-MIT
+Copyright (c) [2025] ANT Studio s.r.o. All rights reserved.
+
+This software is proprietary and confidential. Unauthorized copying, distribution, modification, public display, public performance, or creating derivative works of the Software is strictly prohibited. The Software can only be used in accordance with the agreement with ANT Studio s.r.o.

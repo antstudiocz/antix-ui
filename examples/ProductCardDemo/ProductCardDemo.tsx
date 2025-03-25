@@ -25,8 +25,8 @@ export const ProductCardDemo: React.FC = () => {
             { text: 'Novinka' },
             { text: 'Akce', backgroundColor: '#d13037', textColor: '#ffffff' }
           ]}
-          isDeliveryToday={true}
-          isInStore={true}
+          deliveryStatus='Doručíme dnes'
+          storeAvailability='Ihned na prodejně'
           onAddToCart={handleAddToCart}
         />
 
@@ -38,7 +38,7 @@ export const ProductCardDemo: React.FC = () => {
             { text: 'Novinka' },
             { text: 'Akce', backgroundColor: '#d13037', textColor: '#ffffff' }
           ]}
-          isDeliveryToday={true}
+          deliveryStatus='Doručíme dnes'
           onAddToCart={handleAddToCart}
         />
 
@@ -50,7 +50,17 @@ export const ProductCardDemo: React.FC = () => {
             { text: 'Novinka' },
             { text: 'Akce', backgroundColor: '#d13037', textColor: '#ffffff' }
           ]}
-          isInStore={true}
+          storeAvailability='Ihned na prodejně'
+          onAddToCart={handleAddToCart}
+        />
+
+        {/* Example with custom availability texts */}
+        <ProductCard
+          imageUrl="https://placehold.co/253x180"
+          title="Produkt s vlastními texty dostupnosti"
+          currentPrice={formatPrice(199.00)}
+          deliveryStatus="Doručení do 2 dnů"
+          storeAvailability="Dostupné na 3 prodejnách"
           onAddToCart={handleAddToCart}
         />
       </div>

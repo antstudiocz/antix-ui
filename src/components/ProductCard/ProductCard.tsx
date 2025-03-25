@@ -23,10 +23,10 @@ export interface ProductCardProps {
   currentPrice: string;
   /** Array of badges to display */
   badges?: Badge[];
-  /** Whether the product is available for delivery today */
-  isDeliveryToday?: boolean;
-  /** Whether the product is available in store */
-  isInStore?: boolean;
+  /** Custom delivery status text. If undefined, no delivery status will be shown */
+  deliveryStatus?: string;
+  /** Custom store availability text. If undefined, no store availability will be shown */
+  storeAvailability?: string;
   /** Callback when add to cart button is clicked */
   onAddToCart?: () => void;
   /** Translation namespace for the component */
@@ -39,8 +39,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   originalPrice,
   currentPrice,
   badges = [],
-  isDeliveryToday = false,
-  isInStore = false,
+  deliveryStatus,
+  storeAvailability,
   onAddToCart,
   translationNamespace = "productCard",
 }) => {
@@ -80,7 +80,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className={styles.bottomContainer}>
         <div className={styles.availabilityContainer}>
-          {isDeliveryToday && (
+          {deliveryStatus && (
             <div className={styles.availabilityItem}>
               <svg
                 width="16"
@@ -97,10 +97,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{t("deliveryToday")}</span>
+              <span>{deliveryStatus}</span>
             </div>
           )}
-          {isInStore && (
+          {storeAvailability && (
             <div className={styles.availabilityItem}>
               <svg
                 width="12"
@@ -117,7 +117,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{t("inStore")}</span>
+              <span>{storeAvailability}</span>
             </div>
           )}
         </div>

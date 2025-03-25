@@ -1,8 +1,5 @@
 {
   "productCard": {
-    "deliveryToday": "Delivery today",
-    "inStore": "Available in store",
-    "addToCart": "Add to cart",
-    "newBadge": "New"
+    "addToCart": "Add to cart"
   }
 } 
