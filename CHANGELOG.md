@@ -1,13 +1,25 @@
 # Changelog
 
-Všechny významné změny v tomto projektu budou dokumentovány v tomto souboru.
+All notable changes to this project will be documented in this file.
 
-Formát je založen na [Keep a Changelog](https://keepachangelog.com/cs/1.0.0),
-a tento projekt dodržuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [0.0.2] - 2024-03-25
 
-## [0.0.1] - 2024-03-26
+### Changed
+- 🔒 Package published as private
+- 🏗️ Updated package.json version
+- 📦 Initial private package release
 
-### Přidáno
+## [0.0.1] - 2024-03-25
+
+### Added
+- 🎉 Initial release
+- 🎨 Basic component library setup
+- 📚 Documentation and examples
+- 🧪 Testing infrastructure
+- 🌐 i18n support
+- 🎯 Core components:
+  - Button
+  - ProductCard
 - 🎨 Button komponenta s podporou variant a stylů
 - 🎨 ProductCard komponenta s podporou dynamických štítků
 - 🌐 Podpora i18next pro lokalizaci
