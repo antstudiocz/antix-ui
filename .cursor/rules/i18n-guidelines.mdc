@@ -1,6 +1,7 @@
 ---
 description: Pravidla pro lokalizaci a internacionalizaci
-globs: ['**/translations/**/*', '**/i18n*', '**/*.tsx']
+globs: 
+alwaysApply: false
 ---
 # Antix UI - Internacionalizace a lokalizace 🌐
 

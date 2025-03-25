@@ -5,82 +5,78 @@
 
   /* Section Headers */
   --font-odkazy-sekce-size: 20px;
-  --font-odkazy-sekce-line-height: 100%;
-
-  /* Product */
-  --font-product-headline-size: 18px;
-  --font-product-headline-line-height: 120%;
+  --font-odkazy-sekce-line-height: 1;
 
   /* Headers */
   --font-h1-size: 54px;
-  --font-h1-line-height: 110%;
+  --font-h1-line-height: 1.1;
 
   --font-h2-size: 42px;
-  --font-h2-line-height: 110%;
+  --font-h2-line-height: 1.1;
 
   --font-h3-size: 36px;
-  --font-h3-line-height: 110%;
+  --font-h3-line-height: 1.1;
   --font-h3-alt-size: 20px;
-  --font-h3-alt-line-height: 120%;
+  --font-h3-alt-line-height: 1.2;
 
   --font-h4-size: 18px;
-  --font-h4-line-height: 120%;
+  --font-h4-line-height: 1.2;
 
   --font-h5-size: 16px;
-  --font-h5-line-height: 120%;
+  --font-h5-line-height: 1.2;
 
   --font-h6-size: 14px;
-  --font-h6-line-height: 120%;
+  --font-h6-line-height: 1.2;
 
   /* Body Text */
   --font-body-l-size: 18px;
-  --font-body-l-line-height: 150%;
+  --font-body-l-line-height: 1.5;
 
   --font-body-m-size: 16px;
-  --font-body-m-line-height: 150%;
+  --font-body-m-line-height: 1.5;
 
   --font-body-s-size: 14px;
-  --font-body-s-line-height: 150%;
+  --font-body-s-line-height: 1.5;
 
   --font-body-xs-size: 12px;
-  --font-body-xs-line-height: 150%;
+  --font-body-xs-line-height: 1.5;
 
   /* Labels */
   --font-label-semibold-size: 14px;
-  --font-label-semibold-line-height: 100%;
+  --font-label-semibold-line-height: 1;
 
   --font-label-medium-size: 12px;
-  --font-label-medium-line-height: 100%;
+  --font-label-medium-line-height: 1;
 
   --font-label-small-size: 10px;
-  --font-label-small-line-height: 100%;
+  --font-label-small-line-height: 1;
 
   /* Buttons and Info */
   --font-button1-size: 16px;
-  --font-button1-line-height: 110%;
+  --font-button1-line-height: 1.1;
 
   --font-button2-size: 14px;
-  --font-button2-line-height: 110%;
+  --font-button2-line-height: 1.1;
 
   --font-button3-size: 12px;
-  --font-button3-line-height: 110%;
+  --font-button3-line-height: 1.1;
 
   --font-info1-size: 16px;
-  --font-info1-line-height: 110%;
+  --font-info1-line-height: 1.1;
 
   --font-info2-size: 14px;
-  --font-info2-line-height: 110%;
+  --font-info2-line-height: 1.1;
 
   --font-info3-size: 12px;
-  --font-info3-line-height: 110%;
+  --font-info3-line-height: 1.1;
 
   /* Specials */
   --font-footer-size: 16px;
-  --font-footer-line-height: 140%;
+  --font-footer-line-height: 1.4;
 
   --font-menu-size: 16px;
-  --font-menu-line-height: 110%;
+  --font-menu-line-height: 1.1;
 
   --font-usp-size: 24px;
-  --font-usp-line-height: 100%;
+  --font-usp-line-height: 1;
 }

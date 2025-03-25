@@ -135,19 +135,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </Button>
       </div>
 
-      {badges.map((badge, index) => (
-        <div
-          key={`${badge.text}-${index}`}
-          className={styles.badge}
-          style={{
-            backgroundColor: badge.backgroundColor || '#000000',
-            color: badge.textColor || '#FFFFFF',
-            top: `${20 + (index * 32)}px`,
-          }}
-        >
-          {badge.text}
+      {badges.length > 0 && (
+        <div className={styles.badgesWrapper}>
+          {badges.map((badge, index) => (
+            <div
+              key={`${badge.text}-${index}`}
+              className={styles.badge}
+              style={{
+                backgroundColor: badge.backgroundColor || '#000000',
+                color: badge.textColor || '#FFFFFF'
+              }}
+            >
+              {badge.text}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 };

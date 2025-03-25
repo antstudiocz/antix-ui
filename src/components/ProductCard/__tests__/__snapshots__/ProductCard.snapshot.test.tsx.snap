@@ -287,16 +287,20 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
       </button>
     </div>
     <div
-      class="badge"
-      style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); top: 20px;"
+      class="badgesWrapper"
     >
-      Novinka
-    </div>
-    <div
-      class="badge"
-      style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); top: 52px;"
-    >
-      Akce
+      <div
+        class="badge"
+        style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"
+      >
+        Novinka
+      </div>
+      <div
+        class="badge"
+        style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"
+      >
+        Akce
+      </div>
     </div>
   </div>
 </div>
@@ -363,16 +367,20 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
       </button>
     </div>
     <div
-      class="badge"
-      style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); top: 20px;"
+      class="badgesWrapper"
     >
-      Novinka
-    </div>
-    <div
-      class="badge"
-      style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); top: 52px;"
-    >
-      Akce
+      <div
+        class="badge"
+        style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"
+      >
+        Novinka
+      </div>
+      <div
+        class="badge"
+        style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"
+      >
+        Akce
+      </div>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ export const ProductCardDemo: React.FC = () => {
       <div className={styles.cardGrid}>
         <ProductCard
           imageUrl="https://placehold.co/253x180"
-          title="Nadpis karty produkty"
+          title="Nadpis karty produkty asddas das asdasddas das ads s a"
           originalPrice={formatPrice(44.90)}
           currentPrice={formatPrice(559.00)}
           badges={[
