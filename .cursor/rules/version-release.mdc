@@ -13,6 +13,21 @@ Knihovna Antix UI dodržuje standardy sémantického verzování (SemVer), což 
 2. **MINOR verze (0.x.0)** - obsahuje nové funkce, které jsou zpětně kompatibilní
 3. **PATCH verze (0.0.x)** - obsahuje zpětně kompatibilní opravy chyb
 
+## Vytváření nových verzí
+
+Pro vydání nové verze knihovny máš k dispozici následující příkazy:
+
+```bash
+# Vydání s navýšením patch verze (1.1.3 -> 1.1.4)
+npm run release:patch
+
+# Vydání s navýšením minor verze (1.1.3 -> 1.2.0)
+npm run release:minor
+
+# Vydání s navýšením major verze (1.1.3 -> 2.0.0)
+npm run release:major
+```
+
 ## Changelog
 
 Všechny významné změny v knihovně musí být zdokumentovány v souboru `CHANGELOG.md`. Do changelogu se zapisují pouze MAJOR a MINOR verze. PATCH verze se zapisují pouze jako souhrn při vydání další MINOR verze.
