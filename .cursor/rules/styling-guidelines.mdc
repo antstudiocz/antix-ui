@@ -1,0 +1,269 @@
+---
+description: Pravidla pro stylování komponent
+globs: 
+alwaysApply: false
+---
+# Antix UI - Stylování komponent 🎨
+
+## CSS Moduly
+
+Veškeré styly pro komponenty musí využívat CSS moduly s příponou `.module.css`. Tím zajistíme izolaci stylů a zabráníme konfliktům.
+
+```css
+/* ComponentName.module.css */
+.container {
+  display: flex;
+  padding: 16px;
+}
+
+.title {
+  font-size: var(--font-h3-size);
+  color: var(--color-primary-500);
+}
+```
+
+## Konvence pojmenování
+
+1. **CSS soubory a třídy**
+   - Soubory: `ComponentName.module.css`
+   - CSS třídy uvnitř souborů: kebab-case
+     ```css
+     /* V CSS souborech používat kebab-case */
+     .main-container {
+       display: flex;
+     }
+     
+     .button-primary {
+       background: var(--color-primary-500);
+     }
+     ```
+   
+   - V TSX/JSX souborech používejte camelCase
+     ```tsx
+     // V JSX/TSX souborech používat camelCase
+     <div className={styles.mainContainer}>
+       <button className={styles.buttonPrimary}>
+         {children}
+       </button>
+     </div>
+     ```
+
+2. **Specifické stavy**
+   - Používejte modifikátory s prefixem:
+     ```css
+     .button {
+       /* Základní styl */
+     }
+     
+     .button-primary {
+       /* Pro primární variantu */
+     }
+     
+     .button-disabled {
+       /* Pro zakázané tlačítko */
+     }
+     ```
+
+## Design System
+
+### Systém CSS proměnných
+
+1. **Globální proměnné**
+   - Umístění: `src/styles/foundations/*.css`
+   - Kategorie proměnných:
+     - Barvy: `colors.css`
+     - Typografie: `typography.css`
+     - Mezery a okraje: `spacing.css`
+     - Stíny: `shadows.css`
+     - Zaoblení: `borders.css` 
+
+2. **Komponentové proměnné**
+   - Umístění: v CSS modulu dané komponenty
+   - Prefixované názvem komponenty:
+     ```css
+     /* V Button.module.css */
+     :root {
+       --button-padding: 8px 16px;
+       --button-border-radius: var(--border-radius-md);
+       --button-font-size: var(--font-button1-size);
+     }
+     ```
+
+### Foundations
+
+1. **Barvy**
+   - Primární paleta: `--color-primary-{100-900}`
+   - Sekundární paleta: `--color-secondary-{100-900}`
+   - Neutrální barvy: `--color-neutral-{00-900}`
+   - Konverzní barvy: `--color-conversion-{100-900}`
+   - Sémantické barvy:
+     - Úspěch: `--color-success`
+     - Varování: `--color-warning`
+     - Chyba: `--color-error`
+     - Informace: `--color-info`
+
+2. **Typografie**
+   - Fonty:
+     - `--font-primary`: primární font pro nadpisy
+     - `--font-secondary`: sekundární font pro texty
+   
+   - Velikosti:
+     - Nadpisy: `--font-h1-size` až `--font-h6-size`
+     - Text: `--font-body-l-size`, `--font-body-m-size`, `--font-body-s-size`
+     - Tlačítka: `--font-button1-size`, `--font-button2-size`, `--font-button3-size`
+   
+   - Výšky řádků:
+     - `--font-h1-line-height` až `--font-h6-line-height`
+     - `--font-body-l-line-height`, `--font-body-m-line-height`, `--font-body-s-line-height`
+     - `--font-button1-line-height`, `--font-button2-line-height`, `--font-button3-line-height`
+
+3. **Spacing**
+   - Základní jednotka: 4px
+   - Proměnné pro mezery: `--spacing-xs`, `--spacing-sm`, `--spacing-md`, `--spacing-lg`, `--spacing-xl`
+
+4. **Rozměry a zaoblení**
+   - Zaoblení rohů: `--border-radius-sm`, `--border-radius-md`, `--border-radius-lg`, `--border-radius-xl`
+   - Šířky rámečků: `--border-width-thin`, `--border-width-regular`, `--border-width-thick`
+
+5. **Stíny**
+   - Úrovně stínů: `--shadow-sm`, `--shadow-md`, `--shadow-lg`
+   - Speciální stíny: `--shadow-focus`, `--shadow-hover`
+
+## Responzivní design
+
+1. **Breakpointy**
+   - Definice v `foundations/common.css`:
+     ```css
+     :root {
+       --breakpoint-xs: 480px;
+       --breakpoint-sm: 768px;
+       --breakpoint-md: 992px;
+       --breakpoint-lg: 1200px;
+       --breakpoint-xl: 1440px;
+     }
+     ```
+
+2. **Media Queries**
+   - Používejte standardní breakpointy definované v proměnných:
+     ```css
+     @media (min-width: var(--breakpoint-sm)) {
+       .container {
+         padding: 24px;
+       }
+     }
+     
+     @media (min-width: var(--breakpoint-lg)) {
+       .container {
+         padding: 32px;
+       }
+     }
+     ```
+
+## Stav a interakce
+
+1. **Stavy komponent**
+   - Hover: preferujte pseudotřídy
+     ```css
+     .button:hover {
+       background-color: var(--color-primary-700);
+     }
+     ```
+   
+   - Aktivní stav:
+     ```css
+     .button:active {
+       transform: translateY(1px);
+     }
+     ```
+   
+   - Focus:
+     ```css
+     .button:focus-visible {
+       box-shadow: 0 0 0 2px var(--color-primary-300);
+     }
+     ```
+
+2. **Animace a přechody**
+   - Používejte tranzice pro plynulé přechody:
+     ```css
+     .button {
+       transition: background-color 0.2s ease, transform 0.1s ease;
+     }
+     ```
+   
+   - Pro komplexnější animace používejte keyframes:
+     ```css
+     @keyframes fadeIn {
+       from { opacity: 0; }
+       to { opacity: 1; }
+     }
+     
+     .notification {
+       animation: fadeIn 0.3s ease-in-out;
+     }
+     ```
+
+## CSS Zanořování
+
+Používejte nativní CSS zanořování pro lepší čitelnost a organizaci kódu:
+
+```css
+.card {
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  
+  & .card-title {
+    font-size: var(--font-h3-size);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  & .card-content {
+    color: var(--color-neutral-700);
+    
+    & p {
+      margin-bottom: var(--spacing-xs);
+    }
+  }
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+```
+
+Výhody zanořování:
+- Lepší čitelnost - jednodušší hierarchie
+- Jednodušší udržitelnost - méně duplicitního kódu
+- Jasnější kontext - vidíte, kam styly patří
+
+## Redukce pohybu
+
+Respektujte uživatelské preference:
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+## Best Practices
+
+1. **CSS Reset/Normalize**
+   - Používejte normalizované styly napříč prohlížeči
+
+2. **Flexbox / Grid**
+   - Upřednostňujte flexbox a grid pro layout
+
+3. **Vyhněte se Inline Stylům**
+   - Veškeré styly udržujte v CSS modulech
+
+4. **Specificita**
+   - Udržujte nízkou specificitu selektorů
+   - Vyhněte se používání `!important`
+
+5. **Komponentně specifické proměnné**
+   - Proměnné specifické pro komponentu definujte v jejím CSS modulu
+   - Pro sdílené hodnoty používejte globální proměnné z foundations 

@@ -1,0 +1,173 @@
+---
+description: Pravidla pro vývoj komponent
+globs: 
+alwaysApply: false
+---
+# Antix UI - Vývoj komponent 🧩
+
+## Základní struktura komponenty
+
+Každá komponenta by měla následovat tuto strukturu:
+
+```typescript
+import React from 'react';
+import styles from './ComponentName.module.css';
+
+export interface ComponentNameProps {
+  /** Dokumentační komentář pro prop */
+  prop1: string;
+  /** Dokumentační komentář pro volitelný prop */
+  prop2?: number;
+}
+
+/**
+ * Dokumentační komentář popisující komponentu
+ */
+export const ComponentName: React.FC<ComponentNameProps> = ({
+  prop1,
+  prop2 = 10, // Výchozí hodnota pro volitelný prop
+}) => {
+  // Logika komponenty
+  
+  return (
+    <div className={styles.container}>
+      {/* Implementace UI */}
+    </div>
+  );
+};
+
+export default ComponentName;
+```
+
+## TypeScript konvence
+
+1. **Props Interface**
+   - Vždy pojmenujte interface pro props jako `{ComponentName}Props`
+   - Interface vždy exportujte pro znovupoužití
+   - Každý prop by měl mít dokumentační komentář, pokud z názvu není patrné jeho účel
+   - Nepovinné props označte otazníkem: `prop?: type`
+
+2. **Typování**
+   - Používejte explicitní typování: `const value: string = 'value'`
+   - Používejte React.FC pro funkcionální komponenty: `React.FC<Props>`
+   - Používejte generické typy, kde je to vhodné: `Array<Item>`
+   - Pro event handlery: `React.MouseEvent<HTMLButtonElement>`
+
+3. **Exporty**
+   - Vždy exportujte jak named, tak default export
+   - Typy se exportují pouze jako named export
+
+## State management
+
+1. **Hooks**
+   - Používejte React hooks pro state management
+   - Složitou logiku extrahujte do custom hooks
+
+```typescript
+// Příklad custom hooku
+function useComponentState(initialValue: number) {
+  const [value, setValue] = React.useState(initialValue);
+  
+  const increment = React.useCallback(() => {
+    setValue(prev => prev + 1);
+  }, []);
+  
+  return { value, increment };
+}
+```
+
+2. **Memoizace**
+   - Používejte `useMemo` pro výpočetně náročné operace
+   - Používejte `useCallback` pro funkce předávané jako props
+
+## Práce s i18n
+
+1. **Použití překladů**
+   - Importujte `useTranslation` a požívejte funkci `t()` pro překlady
+   - Konstantní texty nikdy nepoužívejte přímo v komponentě
+
+```typescript
+import { useTranslation } from 'react-i18next';
+
+export const ComponentName: React.FC = () => {
+  const { t } = useTranslation('namespace');
+  
+  return <button>{t('button.label')}</button>;
+};
+```
+
+2. **Organizace překladů**
+   - Překlady organizujte v souborech podle komponenty
+   - Pro sdílené překlady vytvořte separátní namespace
+   - Vždy poskytněte překlady pro všechny podporované jazyky
+
+## Oddělenost zájmů
+
+1. **Oddělení logiky od UI**
+   - Oddělujte business logiku od UI renderování
+   - Používejte custom hooks pro komplexní logiku
+
+2. **Kompozice komponent**
+   - Vytvářejte malé, znovupoužitelné komponenty
+   - Složitější komponenty skládejte z menších částí
+   - Používejte React children pro flexibilní kompozici
+
+## Zpětná kompatibilita
+
+1. **Breaking Changes**
+   - Vyhýbejte se breaking changes
+   - Pokud jsou nevyhnutelné, jasně je dokumentujte
+   - Preferujte přidávání nových props nad změnou stávajících
+
+2. **Deprecated Props**
+   - Před odstraněním označte prop jako deprecated
+   - Poskytněte jasnou dokumentaci o alternativách
+
+```typescript
+interface ComponentProps {
+  /** @deprecated Použijte místo toho 'newProp' */
+  oldProp?: string;
+  
+  /** Nová vlastnost nahrazující 'oldProp' */
+  newProp?: string;
+}
+```
+
+## Výkon a optimalizace
+
+1. **Memoizace**
+   - Používejte React.memo pro komponenty, které se často překreslují
+   - Používejte useMemo a useCallback pro optimalizaci
+
+2. **Lazy Loading**
+   - Pro větší komponenty využívejte lazy loading s React.lazy
+   - Rozdělte velké komponenty na menší části
+
+3. **Minimalizace překreslení**
+   - Vyhněte se zbytečným překreslením
+   - Používejte React.memo, useMemo, useCallback
+   - Vyhněte se inline funkcím v props, kde je to možné
+
+## Přístupnost (a11y)
+
+1. **Základní pravidla**
+   - Používejte sémantické HTML tagy
+   - Přidávejte ARIA atributy, kde je to nutné
+   - Zajistěte, že komponenty fungují s klávesnicí
+   - Poskytujte textové alternativy pro netextový obsah
+
+2. **Komponenty formulářů**
+   - Vždy spojujte labely s inputy
+   - Poskytujte zpětnou vazbu pro chyby
+   - Používejte vhodné inputy pro různé typy dat
+
+## Responsive design
+
+1. **Flexibilní komponenty**
+   - Komponenty by měly být použitelné v různých velikostech
+   - Používejte relativní jednotky (%, em, rem) místo pixelů
+   - Implementujte responzivní chování pomocí CSS
+
+2. **Media Queries**
+   - Používejte standardní breakpointy definované v projektu
+   - Testujte komponenty na různých velikostech obrazovky

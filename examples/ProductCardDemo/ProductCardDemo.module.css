@@ -1,0 +1,17 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  margin-bottom: 24px;
+  color: var(--color-secondary-800);
+  font-family: var(--font-secondary);
+  font-size: var(--font-h4-size);
+  font-weight: 600;
+}
+
+.cardGrid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+} 

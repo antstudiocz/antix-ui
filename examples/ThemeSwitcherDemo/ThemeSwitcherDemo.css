@@ -1,0 +1,119 @@
+/* Výchozí téma */
+:root.default-theme,
+:root {
+  --color-conversion-500: #e63d3d;
+  --color-conversion-900: #b21a1a;
+  --color-primary-500: #1c552c;
+  --color-primary-700: #0e3f1b;
+  --color-secondary-300: #f2ead8;
+  --color-neutral-00: #ffffff;
+  --text-color: #333333;
+  --bg-color: #f9f9f9;
+  --pre-bg-color: #f5f5f5;
+}
+
+/* Modré téma */
+:root.blue-theme {
+  --color-conversion-500: #3498db;
+  --color-conversion-900: #2980b9;
+  --color-primary-500: #2c3e50;
+  --color-primary-700: #1a2530;
+  --color-secondary-300: #ecf0f1;
+  --color-neutral-00: #ffffff;
+  --text-color: #333333;
+  --bg-color: #f0f8ff;
+  --pre-bg-color: #e8f4ff;
+}
+
+/* Tmavé téma */
+:root.dark-theme {
+  --color-conversion-500: #e74c3c;
+  --color-conversion-900: #c0392b;
+  --color-primary-500: #34495e;
+  --color-primary-700: #2c3e50;
+  --color-secondary-300: #7f8c8d;
+  --color-neutral-00: #2c3e50;
+  --text-color: #ecf0f1;
+  --bg-color: #121a23;
+  --pre-bg-color: #1e2a38;
+}
+
+/* Styly pro stránku ukázky */
+.customization-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-selector {
+  margin-bottom: 30px;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.default-button {
+  background-color: #1c552c;
+  color: white;
+}
+
+.blue-button {
+  background-color: #3498db;
+  color: white;
+}
+
+.dark-button {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.theme-button.active {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.demo-section {
+  margin-bottom: 40px;
+}
+
+.buttons-demo {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.code-block {
+  background-color: var(--pre-bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  color: var(--text-color);
+}
+
+pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}

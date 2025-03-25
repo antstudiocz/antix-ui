@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Snapshots matches snapshot for button with additional text 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Button with Text
+    </span>
+    <span
+      class="additionalText"
+    >
+      Additional Info
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for button with icon 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md withIconSm iconLeft minContent"
+  >
+    <span
+      class="icon"
+    >
+      <span>
+        🔍
+      </span>
+    </span>
+    <span
+      class="buttonText"
+    >
+      Button with Icon
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for button with right icon 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md withIconSm iconRight minContent"
+  >
+    <span
+      class="icon"
+    >
+      <span>
+        🔍
+      </span>
+    </span>
+    <span
+      class="buttonText"
+    >
+      Button with Right Icon
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for different sizes 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion sm minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Small Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for different sizes 2`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Medium Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for different sizes 3`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion lg minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Large Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for disabled state 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md minContent disabled"
+    disabled=""
+  >
+    <span
+      class="buttonText"
+    >
+      Disabled Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for full width button 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md fullWidth minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Full Width Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for outlined variant 1`] = `
+<div>
+  <button
+    class="button variantOutlined colorConversion md minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Outlined Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for solid variant 1`] = `
+<div>
+  <button
+    class="button variantSolid colorConversion md minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Solid Button
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button Snapshots matches snapshot for text variant 1`] = `
+<div>
+  <button
+    class="button variantText colorConversion md minContent"
+  >
+    <span
+      class="buttonText"
+    >
+      Text Button
+    </span>
+  </button>
+</div>
+`;

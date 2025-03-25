@@ -1,0 +1,382 @@
+---
+description: Pravidla pro dokumentaci komponent a kódu
+globs: 
+alwaysApply: false
+---
+# Antix UI - Dokumentace 📚
+
+## Struktura dokumentace
+
+Dokumentace v projektu Antix UI je organizována v několika úrovních:
+
+1. **Projektová dokumentace** - informace o celém projektu
+2. **Komponentová dokumentace** - informace o každé komponentě
+3. **API dokumentace** - detailní popis API každé komponenty
+4. **Uživatelská dokumentace** - návody a příklady pro uživatele knihovny
+
+### Adresářová struktura dokumentace
+
+```
+antix-ui/
+├── README.md           # Hlavní dokumentace projektu
+├── CHANGELOG.md        # Historie změn
+├── src/
+│   ├── components/
+│   │   ├── Button/
+│   │   │   ├── docs/
+│   │   │   │   └── README.md  # Dokumentace komponenty
+│   │   │   └── ...
+│   │   └── ...
+│   ├── styles/
+│   │   ├── docs/
+│   │   │   └── README.md  # Dokumentace stylů
+│   │   └── ...
+│   └── ...
+└── examples/           # Ukázkové implementace
+    ├── README.md       # Dokumentace příkladů
+    └── ...
+```
+
+## Jazyk dokumentace
+
+**Veškerá dokumentace v projektu musí být psána anglicky**. To zahrnuje:
+- README soubory
+- Komentáře v kódu
+- Dokumentační soubory
+- Popisky v příkladech
+- Commit messages (ty mohou obsahovat také emotikony)
+
+## Projektová dokumentace
+
+### README.md
+
+Hlavní soubor README.md v kořenu projektu by měl obsahovat:
+
+1. **Title and logo** - název a identita projektu
+2. **Description** - stručný popis knihovny a jejího účelu
+3. **Installation** - instrukce pro instalaci
+4. **Quick start** - jednoduchý příklad použití
+5. **Main features** - seznam klíčových funkcí a komponent
+6. **Documentation** - odkazy na podrobnější dokumentaci
+7. **License** - informace o licenci
+
+Příklad:
+
+```markdown
+# Antix UI 🎨
+
+> Modern React UI library for fast development
+
+## Installation
+
+```bash
+npm install @antixuser/antix-ui
+```
+
+## Quick start
+
+```tsx
+import { Button } from '@antixuser/antix-ui';
+
+function App() {
+  return <Button variant="primary">Click me</Button>;
+}
+```
+
+## Main components
+
+- Button - flexible button with many variants
+- ProductCard - product card with i18n support
+
+## Documentation
+
+For more detailed documentation, see [docs](mdc:docs).
+
+## License
+
+MIT
+```
+
+### CHANGELOG.md
+
+Soubor CHANGELOG.md musí dodržovat formát popsaný v [pravidlech verzování](mdc:version-release.mdc).
+
+## Komponentová dokumentace
+
+Každá komponenta by měla mít vlastní dokumentaci v adresáři `docs/`.
+
+### Struktura dokumentace komponenty
+
+Soubor `components/ComponentName/docs/README.md` by měl obsahovat:
+
+1. **Title and description** - jméno komponenty a její účel
+2. **Import** - ukázka importu
+3. **Basic usage** - základní příklady
+4. **Props** - popis všech props
+5. **Variants** - popis různých variant komponenty
+6. **Advanced usage** - složitější příklady
+7. **Accessibility** - informace o a11y
+8. **Notes** - další relevantní informace
+
+Příklad:
+
+```markdown
+# Button
+
+Button component provides a flexible button with various variants and sizes.
+
+## Import
+
+```tsx
+import { Button } from '@antixuser/antix-ui';
+```
+
+## Basic usage
+
+```tsx
+<Button variant="solid" color="primary">Click me</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|-----|---------|-------|
+| variant | 'solid' \| 'outlined' \| 'text' | 'solid' | Button variant |
+| color | 'primary' \| 'secondary' \| 'conversion' | 'conversion' | Button color |
+| size | 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Button size |
+| fullWidth | boolean | false | Whether the button should fill the full width |
+| icon | ReactNode | - | Button icon |
+| iconPosition | 'left' \| 'right' | 'left' | Icon position |
+| disabled | boolean | false | Whether the button is disabled |
+| onClick | () => void | - | Function called when the button is clicked |
+
+## Variants
+
+### Solid
+
+```tsx
+<Button variant="solid" color="primary">Solid Button</Button>
+```
+
+### Outlined
+
+```tsx
+<Button variant="outlined" color="primary">Outlined Button</Button>
+```
+
+### Text
+
+```tsx
+<Button variant="text" color="primary">Text Button</Button>
+```
+
+## Advanced usage
+
+### With icon
+
+```tsx
+<Button
+  variant="solid"
+  color="primary"
+  icon={<IconComponent />}
+  iconPosition="left"
+>
+  Button with Icon
+</Button>
+```
+
+## Accessibility
+
+Button component is fully accessible and supports keyboard navigation.
+```
+
+## API dokumentace
+
+### TypeScript typy
+
+Všechny komponenty a jejich props by měly být pečlivě typovány pomocí TypeScript. Tyto typy slouží jako API dokumentace:
+
+```typescript
+export interface ButtonProps {
+  variant?: 'solid' | 'outlined' | 'text';
+  color?: 'primary' | 'secondary' | 'conversion';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  // ... other props
+}
+```
+
+## Uživatelská dokumentace
+
+### Příklady
+
+Pro každou komponentu by měl existovat příklad v adresáři `examples/`:
+
+```tsx
+// examples/ButtonDemo/ButtonVariantsDemo.tsx
+import React from 'react';
+import { Button } from '../../src/components';
+import styles from './ButtonVariantsDemo.module.css';
+
+export const ButtonVariantsDemo: React.FC = () => {
+  return (
+    <div className={styles.container}>
+      <h2>Button Variants</h2>
+      
+      <div className={styles.section}>
+        <h3>Solid Buttons</h3>
+        <div className={styles.buttonRow}>
+          <Button variant="solid" color="primary">Primary</Button>
+          <Button variant="solid" color="secondary">Secondary</Button>
+          <Button variant="solid" color="conversion">Conversion</Button>
+        </div>
+      </div>
+      
+      <div className={styles.section}>
+        <h3>Outlined Buttons</h3>
+        <div className={styles.buttonRow}>
+          <Button variant="outlined" color="primary">Primary</Button>
+          <Button variant="outlined" color="secondary">Secondary</Button>
+          <Button variant="outlined" color="conversion">Conversion</Button>
+        </div>
+      </div>
+      
+      <div className={styles.section}>
+        <h3>Text Buttons</h3>
+        <div className={styles.buttonRow}>
+          <Button variant="text" color="primary">Primary</Button>
+          <Button variant="text" color="secondary">Secondary</Button>
+          <Button variant="text" color="conversion">Conversion</Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+### Návody
+
+Složitější návody mohou být umístěny v hlavní dokumentaci:
+
+```markdown
+# How to use i18n with Antix UI
+
+This library supports localization using i18next.
+
+## Step 1: Setup i18n
+
+First, set up i18next in your application:
+
+```tsx
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: {
+        translation: {
+          // your translations
+        }
+      }
+    },
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false
+    }
+  });
+
+export default i18n;
+```
+
+## Step 2: Use in components
+
+Now you can use components with localization:
+
+```tsx
+import { ProductCard } from '@antixuser/antix-ui';
+
+<ProductCard
+  title="Product title"
+  // additional props
+/>
+```
+```
+
+## Systém dokumentace
+
+### Aktualizace dokumentace
+
+1. **Při vývoji nové komponenty**
+   - Vytvořte dokumentaci zároveň s komponentou
+   - Přidejte příklady pro komponenty
+   - Aktualizujte hlavní README.md
+
+2. **Při změnách existující komponenty**
+   - Aktualizujte dokumentaci komponenty
+   - Aktualizujte příklady
+
+3. **Při vydání nové verze**
+   - Aktualizujte CHANGELOG.md
+   - Aktualizujte hlavní README.md
+   - Ověřte, že všechny změny jsou zdokumentovány
+
+### Formátování Markdown
+
+1. **Nadpisy**
+   - Používejte správnou hierarchii nadpisů (# pro hlavní nadpis, ## pro sekce, atd.)
+   - Nadpisy by měly být stručné a výstižné
+
+2. **Seznamy**
+   - Používejte odrážkové seznamy pro položky bez pořadí
+   - Používejte číslované seznamy pro kroky nebo prioritizované položky
+
+3. **Kód**
+   - Používejte odsazení kódu (```) s označením jazyka
+   - Pro inline kód používejte jednoduché zpětné apostrofy (`)
+
+4. **Tabulky**
+   - Používejte tabulky pro strukturované informace
+   - Vždy zahrňte hlavičku tabulky
+
+5. **Zvýraznění**
+   - Používejte **tučný text** pro důležité informace
+   - Používejte *kurzívu* pro zdůraznění
+   - Používejte `kód` pro názvy proměnných, props, atd.
+
+6. **Odkazy**
+   - Používejte relativní odkazy na soubory v repozitáři
+   - Používejte absolutní URL pro externí odkazy
+
+### Obrázky a diagramy
+
+1. **Screenshoty**
+   - Přidávejte screenshoty pro zobrazení UI
+   - Optimalizujte velikost obrázků
+
+2. **Diagramy**
+   - Používejte diagramy pro vysvětlení složitějších konceptů
+   - Preferujte vektorové formáty (SVG) pro diagramy
+
+## Best Practices
+
+1. **Aktuální dokumentace**
+   - Dokumentace by měla být vždy aktuální
+   - Neaktuální dokumentace je horší než žádná dokumentace
+
+2. **Jednoduchost**
+   - Pište jednoduše a srozumitelně
+   - Vyhněte se složitým technickým termínům, kde to není nutné
+
+3. **Příklady**
+   - Vždy doplňte dokumentaci příklady
+   - Ukažte základní i pokročilé použití
+
+4. **Cílová skupina**
+   - Pište dokumentaci s ohledem na vývojáře, kteří budou knihovnu používat
+   - Předpokládejte základní znalost Reactu, ale ne nutně znalost interní implementace knihovny
+
+5. **Formát**
+   - Dodržujte konzistentní formát dokumentace napříč projektem
+   - Používejte šablony pro novou dokumentaci 

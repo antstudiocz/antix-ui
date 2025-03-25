@@ -1,0 +1,138 @@
+/* Product Card specific variables */
+:root {
+  --product-card-width: 269px;
+  --product-card-padding: 8px 8px 32px;
+  --product-card-radius: var(--border-radius-xl);
+  --product-card-image-height: 180px;
+  --product-card-image-radius: var(--border-radius-lg);
+  --product-card-shadow: 0px 1px 3px 0px var(--shadow-color-light), 0px 1px 2px 0px var(--input-shadow-color);
+  
+  /* Font sizes for product card */
+  --font-product-title-size: var(--font-product-headline-size);
+  --font-product-title-line-height: var(--font-product-headline-line-height);
+  --font-product-price-size: var(--font-button1-size);
+  --font-product-price-line-height: var(--font-button1-line-height);
+  --font-product-badge-size: var(--font-label-medium-size);
+  --font-product-badge-line-height: var(--font-label-medium-line-height);
+}
+
+.card {
+  width: var(--product-card-width);
+  padding: var(--product-card-padding);
+  position: relative;
+  background: var(--color-neutral-00);
+  border-radius: var(--product-card-radius);
+  box-shadow: var(--product-card-shadow);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.image {
+  align-self: stretch;
+  height: var(--product-card-image-height);
+  border-radius: var(--product-card-image-radius);
+  object-fit: cover;
+}
+
+.title {
+  align-self: stretch;
+  text-align: center;
+  color: var(--color-secondary-800);
+  font-family: var(--font-secondary);
+  font-size: var(--font-product-title-size);
+  font-weight: 600;
+  line-height: var(--font-product-title-line-height);
+  margin: 0;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.priceOriginal {
+  align-self: stretch;
+  text-align: center;
+  color: var(--color-conversion-500);
+  font-family: var(--font-secondary);
+  font-size: var(--font-button2-size);
+  font-weight: 600;
+  line-height: var(--font-button2-line-height);
+  text-decoration: line-through;
+}
+
+.priceCurrent {
+  align-self: stretch;
+  text-align: center;
+  color: var(--color-secondary-800);
+  font-family: var(--font-secondary);
+  font-size: var(--font-product-price-size);
+  font-weight: 700;
+  line-height: var(--font-product-price-line-height);
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+
+.availabilityContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.availabilityItem {
+  padding: 4px;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.availabilityItem span {
+  color: var(--color-success);
+  font-family: var(--font-secondary);
+  font-size: var(--font-button2-size);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.availabilityItem svg {
+  color: var(--color-success);
+}
+
+.badge {
+  padding: 4px 6px;
+  position: absolute;
+  left: 20px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: var(--border-radius-sm);
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: hidden;
+  font-family: var(--font-secondary);
+  font-size: var(--font-product-badge-size);
+  font-weight: 600;
+  line-height: var(--font-product-badge-line-height);
+  z-index: 1;
+}
+
+.addToCartButton {
+  width: 100%;
+}

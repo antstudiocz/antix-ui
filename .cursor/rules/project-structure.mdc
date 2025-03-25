@@ -1,0 +1,112 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Antix UI - Struktura projektu 🧱
+
+## Adresářová struktura
+
+```
+antix-ui/
+├── .cursor/             # Cursor IDE konfigurace a pravidla
+├── .husky/              # Git hooks
+├── dist/                # Build výstup (generovaný)
+├── dist-examples/       # Build ukázek (generovaný)
+├── examples/            # Ukázkové implementace komponent
+│   ├── ButtonDemo/      # Demo pro Button komponentu
+│   │   ├── ButtonDemo.module.css
+│   │   └── ButtonDemo.tsx
+│   ├── ProductCardDemo/ # Demo pro ProductCard komponentu
+│   │   ├── ProductCardDemo.module.css
+│   │   └── ProductCardDemo.tsx
+│   └── ...
+├── src/                 # Zdrojový kód knihovny
+│   ├── components/      # UI komponenty
+│   │   ├── Button/      # Button komponenta
+│   │   │   ├── __tests__/  # Testy
+│   │   │   ├── docs/       # Dokumentace
+│   │   │   ├── Button.module.css
+│   │   │   └── Button.tsx
+│   │   ├── ProductCard/ # ProductCard komponenta
+│   │   │   ├── __tests__/  # Testy
+│   │   │   ├── docs/       # Dokumentace
+│   │   │   ├── ProductCard.module.css
+│   │   │   └── ProductCard.tsx
+│   │   └── index.ts     # Exporty všech komponent
+│   ├── styles/          # Sdílené styly
+│   │   ├── foundations/ # Základní styly (barvy, typografie, apod.)
+│   │   │   ├── borders.css
+│   │   │   ├── colors.css
+│   │   │   ├── common.css
+│   │   │   ├── fonts.css
+│   │   │   └── typography.css
+│   │   ├── docs/        # Dokumentace stylů
+│   │   └── index.css    # Vstupní bod pro styly
+│   ├── translations/    # Překlady pro i18n
+│   │   ├── locales/     # Jazykové mutace
+│   │   │   ├── cs/      # Čeština
+│   │   │   └── en/      # Angličtina
+│   │   └── i18n.ts      # Konfigurace i18next
+│   ├── types/           # TypeScript definice
+│   └── index.ts         # Hlavní vstupní bod knihovny
+```
+
+## Pravidla organizace souborů
+
+1. **Komponenty**
+   - Každá komponenta musí být ve vlastním adresáři v `src/components/`
+   - Název adresáře je v PascalCase a shoduje se s názvem komponenty
+   - Každá komponenta musí obsahovat:
+     - `ComponentName.tsx` - hlavní implementace (včetně exportů)
+     - `ComponentName.module.css` - styly (CSS moduly)
+   - Testy se umísťují do adresáře `__tests__/`
+   - Dokumentace se umísťuje do adresáře `docs/`
+
+2. **Styly**
+   - Základní styly jsou v `src/styles/foundations/` a exportují se v `src/styles/index.css`
+   - CSS proměnné jsou v příslušných souborech podle kategorie
+   - Pro komponenty používáme CSS moduly s názvem `ComponentName.module.css`
+   - Komponentně specifické CSS proměnné jsou definované v CSS modulu dané komponenty
+   
+3. **Překlady**
+   - Překlady jsou organizované podle jazyka v `src/translations/locales/`
+   - Každá komponenta má své překlady v samostatném souboru
+
+4. **Ukázky**
+   - Každá komponenta by měla mít ukázkovou implementaci v `examples/`
+   - Ukázky používají stejnou strukturu jako komponenty
+
+5. **Buildování**
+   - Výstupní adresáře `dist/` a `dist-examples/` nejsou verzované
+   - Konfigurační soubory pro build jsou v kořenovém adresáři
+
+## Import a Export konvence
+
+1. **Export komponent**
+   ```typescript
+   // src/components/Button/Button.tsx
+   export interface ButtonProps { ... }
+   export const Button = ({ ... }) => { ... };
+   
+   // src/components/index.ts
+   export * from './Button/Button';
+   export * from './ProductCard/ProductCard';
+   ```
+
+2. **Import komponent**
+   ```typescript
+   // Preferovaný způsob importu
+   import { Button } from '../../src/components';
+   
+   // Alternativní způsob
+   import { Button } from '../../src/components/Button/Button';
+   ```
+
+## Doporučení
+
+1. **Izolace souborů**: Udržujte logické celky pohromadě v jedné složce.
+2. **Znovupoužitelnost**: Nevytvářejte duplicity, využívejte sdílených komponent a stylů.
+3. **Modularita**: Komponenty vytvářejte s ohledem na znovupoužití napříč projekty.
+4. **Dokumentace**: Každá složka by měla obsahovat README.md s vysvětlením účelu a použití.
+5. **Konzistence**: Dodržujte jednotnou strukturu napříč projektem.

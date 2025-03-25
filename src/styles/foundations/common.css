@@ -1,0 +1,14 @@
+:root {
+  /* Shadow colors - keeping these as they're unique calculations */
+  --shadow-color: rgba(179, 141, 93, 0.5);
+  --shadow-color-light: rgba(179, 141, 93, 0.15);
+  --shadow-color-lighter: rgba(179, 141, 93, 0.1);
+  --input-shadow-color: rgba(179, 141, 93, 0.12);
+  
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+}

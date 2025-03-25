@@ -1,0 +1,197 @@
+---
+description: Pravidla pro verzování a vydávání nových verzí
+globs: 
+alwaysApply: false
+---
+# Antix UI - Verzování a vydávání releasů 📦
+
+## Sémantické verzování
+
+Knihovna Antix UI dodržuje standardy sémantického verzování (SemVer), což znamená, že verze jsou ve formátu `MAJOR.MINOR.PATCH`:
+
+1. **MAJOR verze (x.0.0)** - obsahuje zpětně nekompatibilní změny v API
+2. **MINOR verze (0.x.0)** - obsahuje nové funkce, které jsou zpětně kompatibilní
+3. **PATCH verze (0.0.x)** - obsahuje zpětně kompatibilní opravy chyb
+
+## Changelog
+
+Všechny významné změny v knihovně musí být zdokumentovány v souboru `CHANGELOG.md`. Do changelogu se zapisují pouze MAJOR a MINOR verze. PATCH verze se zapisují pouze jako souhrn při vydání další MINOR verze.
+
+### Formát changelogu
+
+Používáme formát [Keep a Changelog](mdc:https:/keepachangelog.com/cs/1.0.0) pro konzistentní a přehlednou dokumentaci změn:
+
+```markdown
+# Changelog
+
+Všechny významné změny v tomto projektu budou dokumentovány v tomto souboru.
+
+Formát je založen na [Keep a Changelog](mdc:https:/keepachangelog.com/cs/1.0.0),
+a tento projekt dodržuje [Semantic Versioning](mdc:https:/semver.org/spec/v2.0.0.html).
+
+## [1.2.0] - 2024-03-25
+
+### Přidáno
+- ✨ ProductCard komponenta s podporou i18n
+- 🌐 Přidána podpora pro i18next
+- 🔤 Přidány překlady pro všechny komponenty
+- 🎨 CSS moduly pro všechny demo komponenty
+
+### Změněno
+- 🏗️ Refaktoring CSS organizace - lepší struktura Design Systému
+- 🚀 Optimalizace importu stylů
+- 🔄 Jednotný styl pojmenování CSS tříd (camelCase)
+- 📁 Komponentně specifické proměnné přesunuty do jejich modulů
+
+### Patch Releases
+- 1.2.1 - 1.2.3: Opravy chyb v překladech a přístupnosti
+- 1.2.4: Optimalizace výkonu
+- 1.2.5: Aktualizace závislostí
+
+## [1.0.0] - 2024-03-20
+
+### Přidáno
+- 🎨 Button komponenta s podporou různých variant a stylů
+- 📚 Kompletní dokumentace pro Button komponentu
+- 🎯 TypeScript podpora
+- 🎨 CSS moduly pro izolaci stylů
+- 📦 NPM balíček pro snadnou instalaci
+
+### Změněno
+- 🏗️ Inicializace projektu s moderní architekturou
+- 📝 Aktualizace dokumentace podle nových standardů
+
+### Odstraněno
+- 🗑️ Odstraněna podpora pro CSS.d.ts soubory
+```
+
+### Pravidla pro changelog
+
+1. **Aktuální verze nahoře** - nejnovější verze je vždy uvedena nahoře
+2. **Pouze MAJOR a MINOR verze** - PATCH verze se zapisují jako souhrn v sekci "Patch Releases"
+3. **Kategorie změn** - změny rozdělujte do kategorií:
+   - **Added / Přidáno** - nové funkce
+   - **Changed / Změněno** - změny ve stávajících funkcích
+   - **Deprecated / Zastaralé** - funkce, které budou v budoucnu odstraněny
+   - **Removed / Odstraněno** - odstraněné funkce
+   - **Fixed / Opraveno** - opravy chyb
+   - **Security / Zabezpečení** - bezpečnostní opravy
+   - **Patch Releases** - souhrn patch verzí od poslední MINOR verze
+4. **Emotikony** - používejte emotikony pro lepší vizuální rozlišení:
+   - ✨ - nové funkce
+   - 🐛 - opravy chyb
+   - 🔄 - změny
+   - 🗑️ - odstranění
+   - 📚 - dokumentace
+   - 🏗️ - refaktoring
+   - 🚀 - optimalizace
+   - 🔒 - bezpečnost
+5. **Detaily změn** - poskytněte dostatečné detaily o změnách
+6. **Reference na issues** - odkazujte na relevantní issues
+
+## Proces vydání nové verze
+
+### 1. Příprava releasu
+
+1. **Aktualizace changelogu**
+   - Pro MAJOR a MINOR verze přidejte novou sekci
+   - Pro PATCH verze pouze poznamenejte změny pro pozdější souhrn
+   - Sepište všechny změny do příslušných kategorií
+   - Přidejte datum vydání
+
+2. **Update verzí závislostí**
+   - Zkontrolujte a aktualizujte verze závislostí v `package.json`
+   - Otestujte kompatibilitu s novými verzemi
+
+3. **Code freeze**
+   - Proveďte code freeze před vydáním
+   - Nové funkce by neměly být přidávány po code freeze
+
+### 2. Testování před vydáním
+
+1. **Spuštění testů**
+   - Ujistěte se, že všechny testy procházejí: `npm test`
+   - Zkontrolujte pokrytí testy: `npm run test:coverage`
+
+2. **Manuální testování**
+   - Otestujte klíčové komponenty
+   - Zkontrolujte příklady v `examples/`
+   - Proveďte cross-browser testování
+
+3. **Lint a typová kontrola**
+   - Ujistěte se, že kód prochází linterem: `npm run lint`
+   - Zkontrolujte typy: `tsc --noEmit`
+
+### 3. Vydání nové verze
+
+Použijte příslušný skript podle typu vydání:
+
+```bash
+# Pro patch verzi (opravy chyb)
+npm run release:patch
+
+# Pro minor verzi (nové funkce)
+npm run release:minor
+
+# Pro major verzi (breaking changes)
+npm run release:major
+```
+
+Tyto skripty automaticky:
+1. Spustí build knihovny
+2. Aktualizují číslo verze v `package.json`
+3. Vytvoří git tag s novou verzí
+4. Publikují balíček na npm
+5. Pushnou změny a tagy do repozitáře
+6. Vytvoří GitHub release s poznámkami k vydání
+
+### 4. Po vydání
+
+1. **Ověření publikování**
+   - Zkontrolujte, že balíček byl správně publikován na npm
+   - Ověřte, že GitHub release byl vytvořen
+
+2. **Oznámení**
+   - Oznámte novou verzi uživatelům
+   - Zdůrazněte hlavní nové funkce a změny
+
+3. **Dokumentace**
+   - Ujistěte se, že dokumentace je aktualizována pro novou verzi
+   - Aktualizujte README.md s informacemi o nové verzi
+
+## Zpětná kompatibilita
+
+### Breaking changes
+
+1. **Identifikace breaking changes**
+   - Změny v API komponent
+   - Odstranění funkcí nebo props
+   - Změny v chování, které mohou rozbít existující použití
+
+2. **Dokumentace breaking changes**
+   - Jasně označte breaking changes v changelogu
+   - Poskytnete migrační průvodce pro významné změny
+
+3. **Deprecation proces**
+   - Označte funkce jako deprecated před jejich odstraněním
+   - Poskytněte alternativy a čas na migraci
+
+### Migrace mezi verzemi
+
+Pro major verze poskytněte migrační průvodce:
+
+## Migrace z verze 1.x na 2.0
+
+### Změny v Button komponentě
+
+#### Před (v1.x):
+```tsx
+<Button type="primary">Text</Button>
+```
+
+#### Po (v2.0):
+```tsx
+<Button variant="primary">Text</Button>
+```
+
+Důvod: Prop `type` byl přejmenován na `variant` pro konzistenci napříč komponentami.
