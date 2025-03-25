@@ -92,7 +92,7 @@ Each release command performs the following steps:
 
 ### Conventions
 
-For more information about project conventions and rules, see the [project rules file](.cursor/rules/instructions.mdc).
+For more information about project conventions and rules, see the [project rules file](.cursor/rules).
 
 ## License
 

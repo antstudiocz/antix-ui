@@ -4,6 +4,8 @@ Components use CSS variables for styling that you can override in your applicati
 
 ## CSS Variables
 
+For complete list of CSS variables, see the [foundations](../foundations) folder.
+
 ```css
 :root {
   /* Font sizes */
@@ -13,40 +15,7 @@ Components use CSS variables for styling that you can override in your applicati
   --font-button2-line-height: 20px;
   --font-button3-size: 12px;
   --font-button3-line-height: 16px;
-
-  /* Font families */
-  --font-secondary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-  /* Colors */
-  --color-neutral-00: #ffffff;
-
-  --color-conversion-500: #e63d3d;
-  --color-conversion-900: #b21a1a;
-
-  --color-primary-500: #1c552c;
-  --color-primary-700: #0e3f1b;
-
-  --color-secondary-300: #f2ead8;
-
-  --color-highlight-300: #72ad59;
-
-  /* Spacing and padding */
-  --spacing-button-icon: 8px;
-  --spacing-button-text: 16px;
-  --spacing-button-additional: 4px;
-
-  /* Icon sizes */
-  --icon-size-sm: 16px;
-  --icon-size-md: 20px;
-  --icon-size-lg: 24px;
-  --icon-size-xl: 32px;
-
-  /* Border radius */
-  --border-radius-sm: 4px;
-  --border-radius-md: 6px;
-  --border-radius-lg: 8px;
-  --border-radius-xl: 12px;
+  ...
 }
 ```
 
