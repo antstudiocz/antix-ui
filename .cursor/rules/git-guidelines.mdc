@@ -1,1 +1,291 @@
- 
+---
+description: Pokyny pro Git workflow a konvence commitů
+globs: 
+alwaysApply: false
+---
+# Antix UI - Git Workflow Guidelines 🌳
+
+## Branch Strategy
+
+We use a simplified Git Flow with two main branches:
+
+1. **main** - Production-ready code
+   - Always stable and deployable
+   - Protected branch - requires PR review
+   - Tagged with version numbers
+
+2. **development** - Development branch
+   - Integration branch for features
+   - Base for feature branches
+   - Must pass all tests before merging to main
+
+### Feature Branches
+
+Create feature branches from development:
+```bash
+git checkout development
+git pull origin development
+git checkout -b feature/component-name
+```
+
+Branch naming conventions:
+- `feature/*` - New features or enhancements
+- `fix/*` - Bug fixes
+- `docs/*` - Documentation updates
+- `refactor/*` - Code refactoring
+- `test/*` - Test additions or updates
+
+## Commit Guidelines
+
+### Commit Message Format
+
+```
+<type>(<scope>): <emoji> <subject>
+
+[optional body]
+
+[optional footer]
+```
+
+### Types
+
+- `feat` - New features
+- `fix` - Bug fixes
+- `docs` - Documentation changes
+- `style` - Code style changes (formatting, etc)
+- `refactor` - Code refactoring
+- `test` - Adding or updating tests
+- `chore` - Maintenance tasks
+
+### Scopes
+
+- Component names (e.g., Button, ProductCard)
+- Config areas (e.g., build, deps)
+- Documentation sections
+
+### Emojis
+
+- ✨ New features
+- 🐛 Bug fixes
+- 📚 Documentation
+- 🎨 Style/UI
+- ♻️ Refactoring
+- ✅ Tests
+- 🚀 Performance
+- 🔧 Configuration
+- 📦 Dependencies
+
+### Examples
+
+```bash
+feat(Button): ✨ Add new variant prop
+fix(ProductCard): 🐛 Fix price formatting
+docs: 📚 Update component guidelines
+style: 🎨 Format code with prettier
+refactor(Button): ♻️ Migrate to Tailwind CSS
+test(ProductCard): ✅ Add snapshot tests
+```
+
+## Pull Request Process
+
+1. **Create PR**
+   - Use PR template
+   - Link related issues
+   - Add meaningful description
+
+2. **Review Requirements**
+   - All tests passing
+   - Code follows style guide
+   - Documentation updated
+   - No merge conflicts
+
+3. **Merge Strategy**
+   - Squash and merge to keep history clean
+   - Delete feature branch after merge
+
+## Synchronization with Main
+
+When merging development into main, always follow these steps:
+
+1. **Prepare Development Branch**
+   ```bash
+   git checkout development
+   git pull origin development
+   ```
+
+2. **Merge to Main and Release**
+   ```bash
+   git checkout main
+   git pull origin main
+   git merge development
+   
+   # Choose appropriate release type based on changes
+   npm run release:patch  # For bug fixes
+   npm run release:minor  # For new features
+   npm run release:major  # For breaking changes
+   ```
+
+3. **Rebase Development on Main**
+   ```bash
+   git checkout development
+   git fetch origin
+   git reset --hard origin/main
+   git push --force origin development
+   ```
+
+> **Note:** Never create tags manually. Tags are created automatically during the release process.
+
+## Release Process
+
+The release process is automated through npm scripts:
+
+```bash
+# For bug fixes
+npm run release:patch
+
+# For new features
+npm run release:minor
+
+# For breaking changes
+npm run release:major
+```
+
+These scripts will:
+1. Build the project
+2. Bump version in package.json
+3. Publish to npm
+4. Push changes to git
+5. Create git tags
+6. Generate GitHub release notes
+
+Choose the appropriate release type based on your changes:
+- `patch` (1.0.0 -> 1.0.1) - Bug fixes and minor changes
+- `minor` (1.0.0 -> 1.1.0) - New features, non-breaking changes
+- `major` (1.0.0 -> 2.0.0) - Breaking changes
+
+## Git Commands Reference
+
+### Daily Workflow
+
+```bash
+# Update branches
+git fetch --all
+git pull origin development
+
+# Create feature branch
+git checkout -b feature/new-component
+
+# Stage and commit
+git add .
+git commit -m "feat(component): ✨ Add new feature"
+
+# Push changes
+git push origin feature/new-component
+```
+
+### Code Review Changes
+
+```bash
+# Update feature branch
+git checkout feature/new-component
+git fetch origin
+git merge origin/development
+
+# Add review fixes
+git add .
+git commit -m "fix(component): 🐛 Address review comments"
+git push origin feature/new-component
+```
+
+### Clean Up
+
+```bash
+# Delete local branch
+git branch -d feature/old-component
+
+# Delete remote branch
+git push origin --delete feature/old-component
+
+# Clean up merged branches
+git fetch -p
+```
+
+## Best Practices
+
+1. **Commit Often**
+   - Make small, focused commits
+   - Each commit should be a logical unit
+   - Use meaningful commit messages
+
+2. **Keep Branches Updated**
+   - Regularly sync with development
+   - Resolve conflicts early
+
+3. **Clean History**
+   - Squash commits before merging
+   - Use rebase to keep history linear
+   - Write clear commit messages
+
+4. **Protected Branches**
+   - Never force push to main
+   - Always create PR for changes
+   - Keep main stable
+
+5. **Code Review**
+   - Review all changes before merge
+   - Use PR templates
+   - Address all comments
+
+## Git Hooks
+
+We use Husky for Git hooks:
+
+1. **pre-commit**
+   - Runs linting
+   - Runs tests
+   - Checks types
+
+2. **commit-msg**
+   - Validates commit message format
+   - Ensures emoji usage
+   - Checks scope format
+
+## Troubleshooting
+
+### Reset to Main
+
+If development gets out of sync:
+
+```bash
+git checkout development
+git fetch origin
+git reset --hard origin/main
+git push --force origin development
+```
+
+### Fix Wrong Branch
+
+If you committed to wrong branch:
+
+```bash
+# Save changes
+git stash
+
+# Switch to correct branch
+git checkout correct-branch
+
+# Apply changes
+git stash pop
+```
+
+### Undo Last Commit
+
+If you need to undo last commit:
+
+```bash
+# Undo commit but keep changes
+git reset --soft HEAD^
+
+# Undo commit and discard changes
+git reset --hard HEAD^
+```
