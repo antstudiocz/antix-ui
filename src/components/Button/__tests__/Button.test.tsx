@@ -32,11 +32,11 @@ describe("Button", () => {
   it("applies different colors correctly", () => {
     const { rerender } = render(<Button color="conversion">Conversion</Button>);
     const conversionButton = screen.getByText("Conversion").closest("button");
-    expect(conversionButton).toHaveClass("text-conversion-500");
+    expect(conversionButton).toHaveClass("bg-conversion-500");
 
     rerender(<Button color="primary">Primary</Button>);
     const primaryButton = screen.getByText("Primary").closest("button");
-    expect(primaryButton).toHaveClass("text-primary-500");
+    expect(primaryButton).toHaveClass("to-primary-500");
 
     rerender(<Button color="secondary">Secondary</Button>);
     const secondaryButton = screen.getByText("Secondary").closest("button");

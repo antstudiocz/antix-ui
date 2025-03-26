@@ -11,7 +11,7 @@ export type ButtonIconPosition = "left" | "right";
 
 // Base button styling with accurate values from the original .button
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px]",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current",
   {
     variants: {
       variant: {
@@ -21,15 +21,15 @@ const buttonVariants = cva(
         text: "bg-transparent p-[2px] *:decoration-current",
       },
       size: {
-        sm: "px-3.5 py-2 text-button-md",
-        md: "px-3.5 py-3 text-button-lg",
-        lg: "px-6 py-3.5 text-button-xl",
-        xl: "px-7 py-4.5 text-button-xl",
+        sm: "px-3.5 py-2",
+        md: "px-3.5 py-3",
+        lg: "px-6 py-3.5",
+        xl: "px-7 py-4.5",
       },
       color: {
-        conversion: "text-conversion-500 stroke-conversion-500",
-        primary: "text-primary-500 stroke-primary-500",
-        secondary: "text-primary-500 stroke-primary-500",
+        conversion: "text-conversion-500",
+        primary: "text-primary-500",
+        secondary: "text-primary-500",
       },
       iconPosition: {
         left: "flex-row",
@@ -50,6 +50,23 @@ const buttonVariants = cva(
     },
     // Complex variant combinations using conditional classes
     compoundVariants: [
+      // Size specific text styles
+      {
+        size: "sm",
+        className: "text-button-sm",
+      },
+      {
+        size: "md",
+        className: "text-button-md",
+      },
+      {
+        size: "lg",
+        className: "text-button-lg",
+      },
+      {
+        size: "xl",
+        className: "text-button-xl",
+      },
       // Solid variant specific styles by color
       {
         variant: "solid",

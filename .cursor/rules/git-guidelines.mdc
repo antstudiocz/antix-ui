@@ -86,6 +86,42 @@ refactor(Button): ♻️ Migrate to Tailwind CSS
 test(ProductCard): ✅ Add snapshot tests
 ```
 
+### Multiline Commit Messages
+
+For commits with more complex changes, use multiline commit messages:
+
+1. **Create temporary file**
+   ```bash
+   # Create commit message file
+   echo "<type>(<scope>): <emoji> <subject>
+
+- First change description
+- Second change description
+- Third change description" > commit-message.txt
+
+   # Commit using the file
+   git commit -F commit-message.txt
+
+   # Clean up
+   rm commit-message.txt
+   ```
+
+2. **Using git commit directly**
+   ```bash
+   git commit
+   ```
+   This will open your default editor where you can write a multiline message:
+   ```
+   feat(ProductCard): ✨ Enhance component styling
+
+   - 🎨 Update text styling classes
+   - 🔄 Replace inline SVG with icon component
+   - 💅 Improve status indicators styling
+   - 🎯 Refactor color handling
+   ```
+
+> **Note:** Always clean up temporary files after committing.
+
 ## Pull Request Process
 
 1. **Create PR**
@@ -289,3 +325,30 @@ git reset --soft HEAD^
 # Undo commit and discard changes
 git reset --hard HEAD^
 ```
+
+### Failed Snapshot Tests
+
+If your commit fails due to snapshot test failures:
+
+1. **Update snapshots**
+   ```bash
+   # Update all snapshots
+   npm test -- -u
+   ```
+
+2. **Stage and commit updated snapshots**
+   ```bash
+   # Stage snapshot updates
+   git add '**/*.snap'
+
+   # Amend your previous commit to include snapshot updates
+   git commit --amend --no-edit
+   ```
+
+3. **Push changes**
+   ```bash
+   # Push the amended commit
+   git push origin your-branch-name
+   ```
+
+> **Important:** Never ignore snapshot test failures. Always review the changes to ensure they are expected and include them in your commit.

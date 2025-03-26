@@ -14,11 +14,13 @@
   --text-product-title: 18px;
   --text-product-title--line-height: 1.2;
 
-  --text-product-price-sale: 14px;
-  --text-product-price-sale--line-height: 1;
+  --text-product-price-original: 14px;
+  --text-product-price-original--line-height: 1;
+  --text-product-price-original--font-weight: 600;
 
-  --text-product-price-original: 16px;
-  --text-product-price-original--line-height: 1.1;
+  --text-product-price-current: 16px;
+  --text-product-price-current--line-height: 1.1;
+  --text-product-price-current--font-weight: 700;
 
   --text-product-badge: 14px;
   --text-product-badge--line-height: 1;

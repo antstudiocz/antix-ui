@@ -9,6 +9,7 @@
 @import "./foundations/typography.css";
 @import "tw-animate-css";
 
+@import "./components/button.css";
 @import "./components/product-card.css";
 
 @custom-variant dark (&:is(.dark *));

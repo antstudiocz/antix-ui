@@ -42,19 +42,7 @@
   --text-body-xs: 12px;
   --text-body-xs--line-height: 1.5;
 
-  /* Buttons and Info */
-  --text-button-xl: 16px;
-  --text-button-xl--line-height: 1.1;
-  --text-button-xl--font-weight: 700;
-
-  --text-button-lg: 14px;
-  --text-button-lg--line-height: 1.1;
-  --text-button-lg--font-weight: 700;
-
-  --text-button-md: 12px;
-  --text-button-md--line-height: 1.1;
-  --text-button-md--font-weight: 700;
-
+  /* Info */
   --text-info-xl: 16px;
   --text-info-xl--line-height: 1.1;
   --text-info-xl--font-weight: 600;
