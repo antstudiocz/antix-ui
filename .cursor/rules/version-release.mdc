@@ -15,7 +15,7 @@ Knihovna Antix UI dodržuje standardy sémantického verzování (SemVer), což 
 
 ## Vytváření nových verzí
 
-Pro vydání nové verze knihovny máš k dispozici následující příkazy:
+Pro vydání nové verze knihovny máš k dispozici následující příkazy definované v `package.json`:
 
 ```bash
 # Vydání s navýšením patch verze (1.1.3 -> 1.1.4)
@@ -27,6 +27,15 @@ npm run release:minor
 # Vydání s navýšením major verze (1.1.3 -> 2.0.0)
 npm run release:major
 ```
+
+Každý release skript provede automaticky následující kroky:
+1. Build knihovny a ukázek: `npm run build`
+2. Navýšení verze: `npm version [patch|minor|major]`
+3. Publikace na npm: `npm publish`
+4. Push změn do gitu: `git push && git push --tags`
+5. Vytvoření GitHub release s poznámkami: `gh release create v$(...)` s automaticky generovanými poznámkami
+
+> **Poznámka:** Pro vytváření GitHub releases potřebuješ mít nainstalovaný GitHub CLI (`gh`) a být přihlášený pomocí `gh auth login`.
 
 ## Changelog
 
@@ -50,13 +59,13 @@ a tento projekt dodržuje [Semantic Versioning](mdc:https:/semver.org/spec/v2.0.
 - ✨ ProductCard komponenta s podporou i18n
 - 🌐 Přidána podpora pro i18next
 - 🔤 Přidány překlady pro všechny komponenty
-- 🎨 CSS moduly pro všechny demo komponenty
+- 🎨 Tailwind CSS konfigurace pro všechny komponenty
 
 ### Změněno
-- 🏗️ Refaktoring CSS organizace - lepší struktura Design Systému
+- 🏗️ Refaktoring CSS organizace - migrace na Tailwind a CVA
 - 🚀 Optimalizace importu stylů
-- 🔄 Jednotný styl pojmenování CSS tříd (camelCase)
-- 📁 Komponentně specifické proměnné přesunuty do jejich modulů
+- 🔄 Přechod z CSS modulů na Tailwind
+- 📁 Komponentně specifické proměnné přesunuty do CSS
 
 ### Patch Releases
 - 1.2.1 - 1.2.3: Opravy chyb v překladech a přístupnosti
@@ -69,7 +78,7 @@ a tento projekt dodržuje [Semantic Versioning](mdc:https:/semver.org/spec/v2.0.
 - 🎨 Button komponenta s podporou různých variant a stylů
 - 📚 Kompletní dokumentace pro Button komponentu
 - 🎯 TypeScript podpora
-- 🎨 CSS moduly pro izolaci stylů
+- 🎨 Tailwind CSS pro stylování komponent
 - 📦 NPM balíček pro snadnou instalaci
 
 ### Změněno
@@ -152,22 +161,16 @@ npm run release:minor
 npm run release:major
 ```
 
-Tyto skripty automaticky:
-1. Spustí build knihovny
-2. Aktualizují číslo verze v `package.json`
-3. Vytvoří git tag s novou verzí
-4. Publikují balíček na npm
-5. Pushnou změny a tagy do repozitáře
-6. Vytvoří GitHub release s poznámkami k vydání
+Tyto skripty automaticky provedou všechny potřebné kroky uvedené výše.
 
 ### 4. Po vydání
 
 1. **Ověření publikování**
    - Zkontrolujte, že balíček byl správně publikován na npm
-   - Ověřte, že GitHub release byl vytvořen
+   - Ověřte, že GitHub release byl vytvořen s poznámkami
 
 2. **Oznámení**
-   - Oznámte novou verzi uživatelům
+   - Oznámte novou verzi uživatelům knihovny
    - Zdůrazněte hlavní nové funkce a změny
 
 3. **Dokumentace**
@@ -210,3 +213,10 @@ Pro major verze poskytněte migrační průvodce:
 ```
 
 Důvod: Prop `type` byl přejmenován na `variant` pro konzistenci napříč komponentami.
+
+## NPM scope a přístup
+
+Knihovna je publikována na npm pod scope `@antixuser`. Pro publikování potřebujete:
+
+1. Být přihlášeni v npm: `npm login`
+2. Mít oprávnění pro publikování pod scope `@antixuser`

@@ -1,82 +1,79 @@
-:root {
+@theme {
   /* Font Families */
   --font-primary: "EB Garamond", serif;
   --font-secondary: "Montserrat", sans-serif;
 
   /* Section Headers */
-  --font-odkazy-sekce-size: 20px;
-  --font-odkazy-sekce-line-height: 1;
+  --text-odkazySekce: 20px;
+  --text-odkazySekce--line-height: 1;
 
   /* Headers */
-  --font-h1-size: 54px;
-  --font-h1-line-height: 1.1;
+  --text-h1: 54px;
+  --text-h1--line-height: 1.1;
 
-  --font-h2-size: 42px;
-  --font-h2-line-height: 1.1;
+  --text-h2: 42px;
+  --text-h2--line-height: 1.1;
 
-  --font-h3-size: 36px;
-  --font-h3-line-height: 1.1;
-  --font-h3-alt-size: 20px;
-  --font-h3-alt-line-height: 1.2;
+  --text-h3: 36px;
+  --text-h3--line-height: 1.1;
 
-  --font-h4-size: 18px;
-  --font-h4-line-height: 1.2;
+  --text-h3-alt: 20px;
+  --text-h3-alt--line-height: 1.2;
 
-  --font-h5-size: 16px;
-  --font-h5-line-height: 1.2;
+  --text-h4: 18px;
+  --text-h4--line-height: 1.2;
 
-  --font-h6-size: 14px;
-  --font-h6-line-height: 1.2;
+  --text-h5: 16px;
+  --text-h5--line-height: 1.2;
+
+  --text-h6: 14px;
+  --text-h6--line-height: 1.2;
 
   /* Body Text */
-  --font-body-l-size: 18px;
-  --font-body-l-line-height: 1.5;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.5;
 
-  --font-body-m-size: 16px;
-  --font-body-m-line-height: 1.5;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.5;
 
-  --font-body-s-size: 14px;
-  --font-body-s-line-height: 1.5;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.5;
 
-  --font-body-xs-size: 12px;
-  --font-body-xs-line-height: 1.5;
-
-  /* Labels */
-  --font-label-semibold-size: 14px;
-  --font-label-semibold-line-height: 1;
-
-  --font-label-medium-size: 12px;
-  --font-label-medium-line-height: 1;
-
-  --font-label-small-size: 10px;
-  --font-label-small-line-height: 1;
+  --text-body-xs: 12px;
+  --text-body-xs--line-height: 1.5;
 
   /* Buttons and Info */
-  --font-button1-size: 16px;
-  --font-button1-line-height: 1.1;
+  --text-button-xl: 16px;
+  --text-button-xl--line-height: 1.1;
+  --text-button-xl--font-weight: 700;
 
-  --font-button2-size: 14px;
-  --font-button2-line-height: 1.1;
+  --text-button-lg: 14px;
+  --text-button-lg--line-height: 1.1;
+  --text-button-lg--font-weight: 700;
 
-  --font-button3-size: 12px;
-  --font-button3-line-height: 1.1;
+  --text-button-md: 12px;
+  --text-button-md--line-height: 1.1;
+  --text-button-md--font-weight: 700;
 
-  --font-info1-size: 16px;
-  --font-info1-line-height: 1.1;
+  --text-info-xl: 16px;
+  --text-info-xl--line-height: 1.1;
+  --text-info-xl--font-weight: 600;
 
-  --font-info2-size: 14px;
-  --font-info2-line-height: 1.1;
+  --text-info-lg: 14px;
+  --text-info-lg--line-height: 1.1;
+  --text-info-lg--font-weight: 600;
 
-  --font-info3-size: 12px;
-  --font-info3-line-height: 1.1;
+  --text-info-md: 12px;
+  --text-info-md--line-height: 1.1;
+  --text-info-md--font-weight: 600;
 
   /* Specials */
-  --font-footer-size: 16px;
-  --font-footer-line-height: 1.4;
+  --text-footer: 16px;
+  --text-footer--line-height: 1.4;
 
-  --font-menu-size: 16px;
-  --font-menu-line-height: 1.1;
+  --text-menu: 16px;
+  --text-menu--line-height: 1.1;
 
-  --font-usp-size: 24px;
-  --font-usp-line-height: 1;
+  --text-usp: 24px;
+  --text-usp--line-height: 1;
 }

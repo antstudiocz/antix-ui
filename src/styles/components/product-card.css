@@ -1,0 +1,32 @@
+/* Product Card specific variables */
+@theme {
+  --product-card-width: 269px;
+  --product-card-height: 434px;
+  --product-card-padding: 8px 8px 32px;
+  --product-card-radius: var(--radius-xl);
+  --product-card-image-height: 180px;
+  --product-card-image-radius: var(--radius-lg);
+  --product-card-shadow:
+    0px 1px 3px 0px var(--shadow-color-light),
+    0px 1px 2px 0px var(--input-shadow-color);
+
+  /* Font sizes for product card */
+  --text-product-title: 18px;
+  --text-product-title--line-height: 1.2;
+
+  --text-product-price-sale: 14px;
+  --text-product-price-sale--line-height: 1;
+
+  --text-product-price-original: 16px;
+  --text-product-price-original--line-height: 1.1;
+
+  --text-product-badge: 14px;
+  --text-product-badge--line-height: 1;
+
+  /* Product card title */
+  --product-card-title-line-clamp: 1;
+  --product-card-title-min-height: calc(
+    var(--text-product-title) * var(--product-card-title-line-clamp) *
+      var(--text-product-title--line-height)
+  );
+}

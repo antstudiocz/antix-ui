@@ -3,15 +3,15 @@
 exports[`Button Snapshots matches snapshot for button with additional text 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Button with Text
     </span>
     <span
-      class="additionalText"
+      class="text-button3 font-bold"
     >
       Additional Info
     </span>
@@ -22,17 +22,17 @@ exports[`Button Snapshots matches snapshot for button with additional text 1`] =
 exports[`Button Snapshots matches snapshot for button with icon 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md withIconSm iconLeft minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-1.5"
   >
     <span
-      class="icon"
+      class="icon inline-flex items-center justify-center"
     >
       <span>
         🔍
       </span>
     </span>
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Button with Icon
     </span>
@@ -43,17 +43,17 @@ exports[`Button Snapshots matches snapshot for button with icon 1`] = `
 exports[`Button Snapshots matches snapshot for button with right icon 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md withIconSm iconRight minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row-reverse bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-1.5"
   >
     <span
-      class="icon"
+      class="icon inline-flex items-center justify-center"
     >
       <span>
         🔍
       </span>
     </span>
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Button with Right Icon
     </span>
@@ -64,10 +64,10 @@ exports[`Button Snapshots matches snapshot for button with right icon 1`] = `
 exports[`Button Snapshots matches snapshot for different sizes 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion sm minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-2 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Small Button
     </span>
@@ -78,10 +78,10 @@ exports[`Button Snapshots matches snapshot for different sizes 1`] = `
 exports[`Button Snapshots matches snapshot for different sizes 2`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Medium Button
     </span>
@@ -92,10 +92,10 @@ exports[`Button Snapshots matches snapshot for different sizes 2`] = `
 exports[`Button Snapshots matches snapshot for different sizes 3`] = `
 <div>
   <button
-    class="button variantSolid colorConversion lg minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Large Button
     </span>
@@ -106,11 +106,11 @@ exports[`Button Snapshots matches snapshot for different sizes 3`] = `
 exports[`Button Snapshots matches snapshot for disabled state 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md minContent disabled"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
     disabled=""
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Disabled Button
     </span>
@@ -121,10 +121,10 @@ exports[`Button Snapshots matches snapshot for disabled state 1`] = `
 exports[`Button Snapshots matches snapshot for full width button 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md fullWidth minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Full Width Button
     </span>
@@ -135,10 +135,10 @@ exports[`Button Snapshots matches snapshot for full width button 1`] = `
 exports[`Button Snapshots matches snapshot for outlined variant 1`] = `
 <div>
   <button
-    class="button variantOutlined colorConversion md minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] bg-transparent outline-[1.67px] outline-offset-[-1.67px] outline-current px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row hover:bg-conversion-900 hover:outline-conversion-900 hover:*:text-neutral-00 hover:*:stroke-neutral-00"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Outlined Button
     </span>
@@ -149,10 +149,10 @@ exports[`Button Snapshots matches snapshot for outlined variant 1`] = `
 exports[`Button Snapshots matches snapshot for solid variant 1`] = `
 <div>
   <button
-    class="button variantSolid colorConversion md minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Solid Button
     </span>
@@ -163,10 +163,10 @@ exports[`Button Snapshots matches snapshot for solid variant 1`] = `
 exports[`Button Snapshots matches snapshot for text variant 1`] = `
 <div>
   <button
-    class="button variantText colorConversion md minContent"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] bg-transparent p-[2px] *:decoration-current px-3.5 py-3 text-conversion-500 stroke-conversion-500 flex-row hover:text-conversion-900 hover:stroke-conversion-900 *:underline hover:*:no-underline"
   >
     <span
-      class="buttonText"
+      class="inline-block whitespace-nowrap overflow-visible"
     >
       Text Button
     </span>

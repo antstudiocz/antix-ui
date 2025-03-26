@@ -14,7 +14,7 @@ Dokumentace v projektu Antix UI je organizována v několika úrovních:
 3. **API dokumentace** - detailní popis API každé komponenty
 4. **Uživatelská dokumentace** - návody a příklady pro uživatele knihovny
 
-### Adresářová struktura dokumentace
+#ura dokumentace
 
 ```
 antix-ui/
@@ -62,7 +62,7 @@ Hlavní soubor README.md v kořenu projektu by měl obsahovat:
 
 Příklad:
 
-```markdown
+````markdown
 # Antix UI 🎨
 
 > Modern React UI library for fast development
@@ -79,7 +79,7 @@ npm install @antixuser/antix-ui
 import { Button } from '@antixuser/antix-ui';
 
 function App() {
-  return <Button variant="primary">Click me</Button>;
+  return <Button variant="solid" color="primary">Click me</Button>;
 }
 ```
 
@@ -92,10 +92,10 @@ function App() {
 
 For more detailed documentation, see [docs](mdc:docs).
 
-## License
+## Li
 
 MIT
-```
+````
 
 ### CHANGELOG.md
 
@@ -120,10 +120,10 @@ Soubor `components/ComponentName/docs/README.md` by měl obsahovat:
 
 Příklad:
 
-```markdown
+````markdown
 # Button
 
-Button component provides a flexible button with various variants and sizes.
+Button component provides a flexible button with various variants, colors, and sizes.
 
 ## Import
 
@@ -144,11 +144,14 @@ import { Button } from '@antixuser/antix-ui';
 | variant | 'solid' \| 'outlined' \| 'text' | 'solid' | Button variant |
 | color | 'primary' \| 'secondary' \| 'conversion' | 'conversion' | Button color |
 | size | 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Button size |
-| fullWidth | boolean | false | Whether the button should fill the full width |
 | icon | ReactNode | - | Button icon |
 | iconPosition | 'left' \| 'right' | 'left' | Icon position |
+| additionalText | string | - | Additional text below main content |
+| asChild | boolean | false | Whether to merge props onto child |
+| className | string | - | Additional CSS classes |
 | disabled | boolean | false | Whether the button is disabled |
 | onClick | () => void | - | Function called when the button is clicked |
+| ...rest | ButtonHTMLAttributes<HTMLButtonElement> | - | Native button attributes |
 
 ## Variants
 
@@ -170,6 +173,26 @@ import { Button } from '@antixuser/antix-ui';
 <Button variant="text" color="primary">Text Button</Button>
 ```
 
+## Colors
+
+### Primary
+
+```tsx
+<Button variant="solid" color="primary">Primary Button</Button>
+```
+
+### Secondary
+
+```tsx
+<Button variant="solid" color="secondary">Secondary Button</Button>
+```
+
+### Conversion
+
+```tsx
+<Button variant="solid" color="conversion">Conversion Button</Button>
+```
+
 ## Advanced usage
 
 ### With icon
@@ -178,17 +201,33 @@ import { Button } from '@antixuser/antix-ui';
 <Button
   variant="solid"
   color="primary"
-  icon={<IconComponent />}
+  icon={<SearchIcon />}
   iconPosition="left"
 >
-  Button with Icon
+  Search
+</Button>
+```
+
+### With additional text
+
+```tsx
+<Button
+  variant="solid"
+  color="conversion"
+  additionalText="Free shipping"
+>
+  Add to cart
 </Button>
 ```
 
 ## Accessibility
 
-Button component is fully accessible and supports keyboard navigation.
-```
+The Button component is fully accessible:
+- Uses native `<button>` element
+- Supports keyboard navigation
+- Appropriate ARIA attributes
+- Focus states with visible outlines
+````
 
 ## API dokumentace
 
@@ -197,13 +236,122 @@ Button component is fully accessible and supports keyboard navigation.
 Všechny komponenty a jejich props by měly být pečlivě typovány pomocí TypeScript. Tyto typy slouží jako API dokumentace:
 
 ```typescript
-export interface ButtonProps {
-  variant?: 'solid' | 'outlined' | 'text';
-  color?: 'primary' | 'secondary' | 'conversion';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  // ... other props
+export type ButtonVariant = "solid" | "outlined" | "text";
+export type ButtonColor = "conversion" | "primary" | "secondary";
+export type ButtonSize = "xl" | "lg" | "md" | "sm";
+export type ButtonIconPosition = "left" | "right";
+
+export interface ButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color">,
+    Omit<VariantProps<typeof buttonVariants>, "className" | "withIcon"> {
+  /** Allows the button to be rendered as a different element */
+  asChild?: boolean;
+  /** Icon element to be displayed alongside the button text */
+  icon?: React.ReactNode;
+  /** Additional text to be displayed below the main button text */
+  additionalText?: string;
+  /** Additional CSS classes to be applied to the button */
+  className?: string;
 }
 ```
+
+### JSDoc Komentáře
+
+Používejte JSDoc komentáře pro dokumentaci funkcí, komponent a složitějších logických bloků:
+
+```typescript
+/**
+ * Button component with multiple variants, sizes, and colors
+ *
+ * @param variant - Visual style of the button ("solid", "outlined", "text")
+ * @param size - Size of the button ("xl", "lg", "md", "sm")
+ * @param color - Color scheme of the button ("conversion", "primary", "secondary")
+ * @param iconPosition - Position of the icon relative to text ("left", "right")
+ * @param asChild - Whether to render the button as a child component
+ * @param icon - Icon element to display
+ * @param additionalText - Secondary text to display below main text
+ * @param children - Primary content of the button
+ * @param disabled - Whether the button is disabled
+ */
+export const Button = ({
+  // props
+}: ButtonProps) => {
+  // implementation
+};
+```
+
+## Dokumentace stylů
+
+### Tailwind a CVA
+
+Dokumentujte používání Tailwind CSS a CVA v komponentách:
+
+````markdown
+# Styling System
+
+## Tailwind CSS
+
+Antix UI uses Tailwind CSS for styling components. This provides consistent design patterns and simplifies development.
+
+## Class Variance Authority (CVA)
+
+For components with multiple variants, we use CVA to define variant styles:
+
+```tsx
+const buttonVariants = cva(
+  // Base classes applied to all buttons
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden cursor-pointer",
+  {
+    variants: {
+      variant: {
+        solid: "",
+        outlined: "bg-transparent outline outline-[1.67px] outline-offset-[-1.67px]",
+        text: "bg-transparent p-[2px]",
+      },
+      size: {
+        sm: "px-3.5 py-2 text-button-md",
+        md: "px-3.5 py-3 text-button-lg",
+        lg: "px-6 py-3.5 text-button-xl",
+        xl: "px-7 py-4.5 text-button-xl",
+      },
+      // Additional variants...
+    },
+    defaultVariants: {
+      variant: "solid",
+      size: "md",
+      // Default values for other variants...
+    },
+    compoundVariants: [
+      // Combinations of variants
+      {
+        variant: "solid",
+        color: "primary",
+        className: "bg-gradient-to-r to-primary-500 from-highlight-300 hover:before:opacity-100",
+      },
+      // Additional combinations...
+    ],
+  }
+);
+```
+
+## CSS Variables
+
+We use CSS variables for foundational design tokens:
+
+- Colors: `--color-primary-500`, `--color-secondary-300`, etc.
+- Typography: `--font-button-xl`, `--font-body-l`, etc.
+- Component-specific: `--product-card-width`, `--button-border-radius`, etc.
+
+## Dark Mode
+
+Components support dark mode through Tailwind's `dark:` variant:
+
+```tsx
+<div className="bg-neutral-00 text-secondary-800 dark:bg-neutral-900 dark:text-neutral-100">
+  Content with dark mode support
+</div>
+```
+````
 
 ## Uživatelská dokumentace
 
@@ -215,34 +363,33 @@ Pro každou komponentu by měl existovat příklad v adresáři `examples/`:
 // examples/ButtonDemo/ButtonVariantsDemo.tsx
 import React from 'react';
 import { Button } from '../../src/components';
-import styles from './ButtonVariantsDemo.module.css';
 
 export const ButtonVariantsDemo: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <h2>Button Variants</h2>
+    <div className="space-y-8">
+      <h2 className="text-2xl font-bold">Button Variants</h2>
       
-      <div className={styles.section}>
-        <h3>Solid Buttons</h3>
-        <div className={styles.buttonRow}>
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold">Solid Buttons</h3>
+        <div className="flex flex-wrap gap-4">
           <Button variant="solid" color="primary">Primary</Button>
           <Button variant="solid" color="secondary">Secondary</Button>
           <Button variant="solid" color="conversion">Conversion</Button>
         </div>
       </div>
       
-      <div className={styles.section}>
-        <h3>Outlined Buttons</h3>
-        <div className={styles.buttonRow}>
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold">Outlined Buttons</h3>
+        <div className="flex flex-wrap gap-4">
           <Button variant="outlined" color="primary">Primary</Button>
           <Button variant="outlined" color="secondary">Secondary</Button>
           <Button variant="outlined" color="conversion">Conversion</Button>
         </div>
       </div>
       
-      <div className={styles.section}>
-        <h3>Text Buttons</h3>
-        <div className={styles.buttonRow}>
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold">Text Buttons</h3>
+        <div className="flex flex-wrap gap-4">
           <Button variant="text" color="primary">Primary</Button>
           <Button variant="text" color="secondary">Secondary</Button>
           <Button variant="text" color="conversion">Conversion</Button>
@@ -253,130 +400,28 @@ export const ButtonVariantsDemo: React.FC = () => {
 };
 ```
 
-### Návody
-
-Složitější návody mohou být umístěny v hlavní dokumentaci:
-
-```markdown
-# How to use i18n with Antix UI
-
-This library supports localization using i18next.
-
-## Step 1: Setup i18n
-
-First, set up i18next in your application:
-
-```tsx
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: {
-        translation: {
-          // your translations
-        }
-      }
-    },
-    lng: 'en',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false
-    }
-  });
-
-export default i18n;
-```
-
-## Step 2: Use in components
-
-Now you can use components with localization:
-
-```tsx
-import { ProductCard } from '@antixuser/antix-ui';
-
-<ProductCard
-  title="Product title"
-  // additional props
-/>
-```
-```
-
-## Systém dokumentace
+## Maintanence
 
 ### Aktualizace dokumentace
 
-1. **Při vývoji nové komponenty**
-   - Vytvořte dokumentaci zároveň s komponentou
-   - Přidejte příklady pro komponenty
-   - Aktualizujte hlavní README.md
+- Dokumentace musí být aktualizována při každé změně API
+- Před vydáním nové verze zkontrolujte, že dokumentace je aktuální
+- Hlavní README.md by měl ukazovat na aktuální verzi knihovny
 
-2. **Při změnách existující komponenty**
-   - Aktualizujte dokumentaci komponenty
-   - Aktualizujte příklady
+### Jazyková správnost
 
-3. **Při vydání nové verze**
-   - Aktualizujte CHANGELOG.md
-   - Aktualizujte hlavní README.md
-   - Ověřte, že všechny změny jsou zdokumentovány
+- Dokumentace musí být gramaticky správná
+- Používejte konzistentní terminologii napříč dokumentací
+- Udržujte konzistentní formátování a styly
 
-### Formátování Markdown
+## Automatické generování dokumentace
 
-1. **Nadpisy**
-   - Používejte správnou hierarchii nadpisů (# pro hlavní nadpis, ## pro sekce, atd.)
-   - Nadpisy by měly být stručné a výstižné
+Pro generování API dokumentace z TypeScript typů a JSDoc komentářů lze použít nástroje jako TypeDoc, ale v současné době se nepoužívají. Veškerá dokumentace se vytváří a udržuje ručně.
 
-2. **Seznamy**
-   - Používejte odrážkové seznamy pro položky bez pořadí
-   - Používejte číslované seznamy pro kroky nebo prioritizované položky
+## Příklady dobré dokumentace
 
-3. **Kód**
-   - Používejte odsazení kódu (```) s označením jazyka
-   - Pro inline kód používejte jednoduché zpětné apostrofy (`)
-
-4. **Tabulky**
-   - Používejte tabulky pro strukturované informace
-   - Vždy zahrňte hlavičku tabulky
-
-5. **Zvýraznění**
-   - Používejte **tučný text** pro důležité informace
-   - Používejte *kurzívu* pro zdůraznění
-   - Používejte `kód` pro názvy proměnných, props, atd.
-
-6. **Odkazy**
-   - Používejte relativní odkazy na soubory v repozitáři
-   - Používejte absolutní URL pro externí odkazy
-
-### Obrázky a diagramy
-
-1. **Screenshoty**
-   - Přidávejte screenshoty pro zobrazení UI
-   - Optimalizujte velikost obrázků
-
-2. **Diagramy**
-   - Používejte diagramy pro vysvětlení složitějších konceptů
-   - Preferujte vektorové formáty (SVG) pro diagramy
-
-## Best Practices
-
-1. **Aktuální dokumentace**
-   - Dokumentace by měla být vždy aktuální
-   - Neaktuální dokumentace je horší než žádná dokumentace
-
-2. **Jednoduchost**
-   - Pište jednoduše a srozumitelně
-   - Vyhněte se složitým technickým termínům, kde to není nutné
-
-3. **Příklady**
-   - Vždy doplňte dokumentaci příklady
-   - Ukažte základní i pokročilé použití
-
-4. **Cílová skupina**
-   - Pište dokumentaci s ohledem na vývojáře, kteří budou knihovnu používat
-   - Předpokládejte základní znalost Reactu, ale ne nutně znalost interní implementace knihovny
-
-5. **Formát**
-   - Dodržujte konzistentní formát dokumentace napříč projektem
-   - Používejte šablony pro novou dokumentaci 
+- Jasné a stručné popisy
+- Příklady použití pro každou komponentu
+- Ukázky všech variant a možností
+- Informace o přístupnosti
+- Odkazy na související komponenty a koncepty

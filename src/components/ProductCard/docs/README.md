@@ -1,6 +1,6 @@
 # Product Card
 
-Product Card component displays product information in a standardized format with customizable features.
+Product Card component displays product information in a standardized format with customizable features. This component now uses Tailwind CSS for styling and shadcn/ui Badge component for badges.
 
 ## Import
 
@@ -29,11 +29,22 @@ import { ProductCard } from '@antixuser/antix-ui';
 | title | string | - | Product title |
 | currentPrice | string | - | Current price of the product (formatted) |
 | originalPrice | string | - | Original price of the product, if on sale (formatted) |
-| badges | Badge[] | [] | Array of badge objects to display |
+| badges | ProductBadge[] | [] | Array of badge objects to display |
 | deliveryStatus | string | - | Custom delivery status text. If undefined, no delivery status will be shown |
 | storeAvailability | string | - | Custom store availability text. If undefined, no store availability will be shown |
 | onAddToCart | () => void | - | Function called when the add to cart button is clicked |
 | translationNamespace | string | "productCard" | Translation namespace for i18n |
+| className | string | - | Additional CSS classes to apply to the component |
+
+## Badge Type
+
+```tsx
+interface ProductBadge {
+  text: string;
+  backgroundColor?: string;
+  textColor?: string;
+}
+```
 
 ## Variants
 
@@ -69,6 +80,18 @@ import { ProductCard } from '@antixuser/antix-ui';
   currentPrice="399.00 Kč / pc"
   deliveryStatus="Doručení do 2 dnů"
   storeAvailability="Dostupné na 3 prodejnách"
+  onAddToCart={() => console.log('Product added to cart')}
+/>
+```
+
+### Product with Custom CSS Class
+
+```tsx
+<ProductCard
+  imageUrl="https://example.com/product-image.jpg"
+  title="Custom Width Product"
+  currentPrice="399.00 Kč / pc"
+  className="w-full max-w-sm"
   onAddToCart={() => console.log('Product added to cart')}
 />
 ```

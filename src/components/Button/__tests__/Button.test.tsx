@@ -18,47 +18,43 @@ describe("Button", () => {
   it("applies different variants correctly", () => {
     const { rerender } = render(<Button variant="solid">Solid</Button>);
     const solidButton = screen.getByText("Solid").closest("button");
-    expect(solidButton).toHaveClass("variantSolid");
+    expect(solidButton).toHaveClass("bg-conversion-500");
 
     rerender(<Button variant="outlined">Outlined</Button>);
     const outlinedButton = screen.getByText("Outlined").closest("button");
-    expect(outlinedButton).toHaveClass("variantOutlined");
+    expect(outlinedButton).toHaveClass("outline-current");
 
     rerender(<Button variant="text">Text</Button>);
     const textButton = screen.getByText("Text").closest("button");
-    expect(textButton).toHaveClass("variantText");
+    expect(textButton).toHaveClass("*:underline");
   });
 
   it("applies different colors correctly", () => {
     const { rerender } = render(<Button color="conversion">Conversion</Button>);
     const conversionButton = screen.getByText("Conversion").closest("button");
-    expect(conversionButton).toHaveClass("colorConversion");
+    expect(conversionButton).toHaveClass("text-conversion-500");
 
     rerender(<Button color="primary">Primary</Button>);
     const primaryButton = screen.getByText("Primary").closest("button");
-    expect(primaryButton).toHaveClass("colorPrimary");
+    expect(primaryButton).toHaveClass("text-primary-500");
 
     rerender(<Button color="secondary">Secondary</Button>);
     const secondaryButton = screen.getByText("Secondary").closest("button");
-    expect(secondaryButton).toHaveClass("colorSecondary");
+    expect(secondaryButton).toHaveClass("bg-secondary-300");
   });
 
   it("applies different sizes correctly", () => {
     const { rerender } = render(<Button size="sm">Small</Button>);
     const smallButton = screen.getByText("Small").closest("button");
-    expect(smallButton).toHaveClass("sm");
+    expect(smallButton).toHaveClass("py-2");
 
     rerender(<Button size="md">Medium</Button>);
     const mediumButton = screen.getByText("Medium").closest("button");
-    expect(mediumButton).toHaveClass("md");
+    expect(mediumButton).toHaveClass("py-3");
 
     rerender(<Button size="lg">Large</Button>);
     const largeButton = screen.getByText("Large").closest("button");
-    expect(largeButton).toHaveClass("lg");
-
-    rerender(<Button size="xl">XLarge</Button>);
-    const xlargeButton = screen.getByText("XLarge").closest("button");
-    expect(xlargeButton).toHaveClass("xl");
+    expect(largeButton).toHaveClass("py-3.5");
   });
 
   it("disables button when disabled prop is true", () => {

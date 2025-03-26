@@ -3,44 +3,45 @@
 exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceOriginal"
+        class="self-stretch text-center text-conversion-500 font-secondary text-button2 font-semibold line-through"
       >
         <span>
           399.00 Kč / pc
         </span>
       </div>
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       >
         <div
-          class="availabilityItem"
+          class="p-1 inline-flex justify-start items-center gap-1 overflow-hidden"
         >
           <svg
+            class="text-success"
             fill="none"
             height="12"
             viewBox="0 0 16 12"
@@ -55,12 +56,14 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
               stroke-width="1.33333"
             />
           </svg>
-          <span>
+          <span
+            class="text-success font-secondary text-button2 font-semibold"
+          >
             Doručíme dnes
           </span>
         </div>
         <div
-          class="availabilityItem"
+          class="p-1 inline-flex justify-start items-center gap-1 overflow-hidden"
         >
           <svg
             fill="none"
@@ -77,17 +80,19 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
               stroke-width="1.33333"
             />
           </svg>
-          <span>
+          <span
+            class="text-success font-secondary text-button2 font-semibold"
+          >
             Ihned na prodejně
           </span>
         </div>
       </div>
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -106,27 +111,29 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>
       </button>
     </div>
     <div
-      class="badgesWrapper"
+      class="absolute left-5 top-5 flex flex-col gap-1.5 z-10"
     >
-      <div
-        class="badge"
+      <span
+        class="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90 font-secondary !text-product-badge font-semibold"
+        data-slot="badge"
         style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"
       >
         Novinka
-      </div>
-      <div
-        class="badge"
+      </span>
+      <span
+        class="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90 font-secondary !text-product-badge font-semibold"
+        data-slot="badge"
         style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"
       >
         Akce
-      </div>
+      </span>
     </div>
   </div>
 </div>
@@ -135,39 +142,39 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
 exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       />
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -186,27 +193,29 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>
       </button>
     </div>
     <div
-      class="badgesWrapper"
+      class="absolute left-5 top-5 flex flex-col gap-1.5 z-10"
     >
-      <div
-        class="badge"
+      <span
+        class="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90 font-secondary !text-product-badge font-semibold"
+        data-slot="badge"
         style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"
       >
         Novinka
-      </div>
-      <div
-        class="badge"
+      </span>
+      <span
+        class="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90 font-secondary !text-product-badge font-semibold"
+        data-slot="badge"
         style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"
       >
         Akce
-      </div>
+      </span>
     </div>
   </div>
 </div>
@@ -215,37 +224,38 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
 exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       >
         <div
-          class="availabilityItem"
+          class="p-1 inline-flex justify-start items-center gap-1 overflow-hidden"
         >
           <svg
+            class="text-success"
             fill="none"
             height="12"
             viewBox="0 0 16 12"
@@ -260,17 +270,19 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
               stroke-width="1.33333"
             />
           </svg>
-          <span>
+          <span
+            class="text-success font-secondary text-button2 font-semibold"
+          >
             Doručíme dnes
           </span>
         </div>
       </div>
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -289,7 +301,7 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>
@@ -302,39 +314,39 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
 exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       />
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -353,7 +365,7 @@ exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>
@@ -366,46 +378,46 @@ exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
 exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceOriginal"
+        class="self-stretch text-center text-conversion-500 font-secondary text-button2 font-semibold line-through"
       >
         <span>
           399.00 Kč / pc
         </span>
       </div>
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       />
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -424,7 +436,7 @@ exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>
@@ -437,35 +449,35 @@ exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
 exports[`ProductCard Snapshots matches snapshot with store availability only 1`] = `
 <div>
   <div
-    class="card"
+    class="w-[var(--product-card-width)] max-h-[var(--product-card-height)] p-2 pb-8 relative bg-neutral-00 rounded-xl shadow-sm flex flex-col items-center gap-3 overflow-hidden"
   >
     <img
       alt="Test Product"
-      class="image"
+      class="self-stretch h-[var(--product-card-image-height)] rounded-lg object-cover flex-shrink-0"
       src="https://example.com/product-image.jpg"
     />
-    <h3
-      class="title"
+    <h4
+      class="self-stretch text-center text-secondary-800 font-secondary text-product-title font-semibold m-0 min-h-[var(--product-card-title-min-height)] line-clamp-[var(--product-card-title-line-clamp)] overflow-hidden"
     >
       Test Product
-    </h3>
+    </h4>
     <div
-      class="priceContainer"
+      class="flex flex-col justify-start items-center gap-1 flex-shrink-0 w-full"
     >
       <div
-        class="priceCurrent"
+        class="self-stretch text-center text-secondary-800 font-secondary text-button1 font-bold"
       >
         299.00 Kč / pc
       </div>
     </div>
     <div
-      class="bottomContainer"
+      class="flex flex-col justify-start items-center gap-6 w-full mt-auto"
     >
       <div
-        class="availabilityContainer"
+        class="flex flex-col justify-start items-center"
       >
         <div
-          class="availabilityItem"
+          class="p-1 inline-flex justify-start items-center gap-1 overflow-hidden"
         >
           <svg
             fill="none"
@@ -482,17 +494,19 @@ exports[`ProductCard Snapshots matches snapshot with store availability only 1`]
               stroke-width="1.33333"
             />
           </svg>
-          <span>
+          <span
+            class="text-success font-secondary text-button2 font-semibold"
+          >
             Ihned na prodejně
           </span>
         </div>
       </div>
       <button
         aria-label="Do košíku"
-        class="button variantSolid colorConversion lg withIcon iconLeft minContent addToCartButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer tracking-[0.2px] px-6 py-3.5 text-conversion-500 stroke-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
       >
         <span
-          class="icon"
+          class="icon inline-flex items-center justify-center"
         >
           <svg
             fill="none"
@@ -511,7 +525,7 @@ exports[`ProductCard Snapshots matches snapshot with store availability only 1`]
           </svg>
         </span>
         <span
-          class="buttonText"
+          class="inline-block whitespace-nowrap overflow-visible"
         >
           Do košíku
         </span>

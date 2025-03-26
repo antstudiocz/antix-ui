@@ -39,8 +39,7 @@ src/
         │   ├── Button.test.tsx         # Jednotkové testy
         │   ├── Button.snapshot.test.tsx # Snapshot testy
         │   └── README.md               # Dokumentace testů
-        ├── Button.tsx
-        └── Button.module.css
+        └── Button.tsx
 ```
 
 ### Popis testů
@@ -77,7 +76,7 @@ describe('Button', () => {
 
 ```typescript
 import { render, screen, fireEvent } from '@testing-library/react';
-import Button from '../Button';
+import { Button } from '../Button';
 
 describe('Button', () => {
   it('renders children correctly', () => {
@@ -108,31 +107,35 @@ it('handles click events', () => {
 });
 ```
 
-3. **Testování různých stavů**
-   - Testujte různé stavy komponenty
-   - Používejte `rerender` pro testování změn props
+3. **Testování různých variant**
+   - Testujte všechny varianty komponenty definované pomocí CVA
+   - Ověřte správnou aplikaci tříd nebo stylů
 
 ```typescript
-it('applies different variants correctly', () => {
-  const { rerender } = render(<Button variant="solid">Solid</Button>);
-  const solidButton = screen.getByText('Solid').closest('button');
-  expect(solidButton).toHaveClass('variantSolid');
+it('applies primary variant correctly', () => {
+  render(<Button variant="solid" color="primary">Primary Button</Button>);
   
-  rerender(<Button variant="outlined">Outlined</Button>);
-  const outlinedButton = screen.getByText('Outlined').closest('button');
-  expect(outlinedButton).toHaveClass('variantOutlined');
+  const button = screen.getByText('Primary Button');
+  expect(button).toHaveClass('bg-gradient-to-r');
+  expect(button).toHaveClass('to-primary-500');
 });
 ```
 
-4. **Testování dostupnosti**
-   - Testujte přístupnost komponent
-   - Používejte role-based queries: `getByRole`
+4. **Testování přístupnosti**
+   - Testujte přístupnost komponent pomocí role-based queries
+   - Ověřte správné atributy ARIA
    - Testujte focus management a klávesové ovládání
 
 ```typescript
 it('is accessible', () => {
   render(<Button>Accessible Button</Button>);
-  expect(screen.getByRole('button')).toBeInTheDocument();
+  
+  const button = screen.getByRole('button', { name: 'Accessible Button' });
+  expect(button).toBeInTheDocument();
+  
+  // Test klávesových událostí
+  fireEvent.keyDown(button, { key: 'Enter' });
+  // Očekávaný výsledek
 });
 ```
 
@@ -143,16 +146,16 @@ it('is accessible', () => {
 
 ```typescript
 import { render } from '@testing-library/react';
-import Button from '../Button';
+import { Button } from '../Button';
 
 describe('Button Snapshots', () => {
   it('matches snapshot for solid variant', () => {
-    const { container } = render(<Button variant="solid">Solid Button</Button>);
+    const { container } = render(<Button variant="solid" color="primary">Solid Button</Button>);
     expect(container).toMatchSnapshot();
   });
   
   it('matches snapshot for outlined variant', () => {
-    const { container } = render(<Button variant="outlined">Outlined Button</Button>);
+    const { container } = render(<Button variant="outlined" color="primary">Outlined Button</Button>);
     expect(container).toMatchSnapshot();
   });
 });
@@ -186,26 +189,58 @@ const handleClick = jest.fn();
 
 ```typescript
 // testUtils.tsx
-import { render } from '@testing-library/react';
+import { render, RenderOptions } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../../translations/i18nForTests';
+import i18n from '../../translations/i18n';
 
-export const renderWithI18n = (ui: React.ReactElement) => {
-  return render(
-    <I18nextProvider i18n={i18n}>{ui}</I18nextProvider>
+// Testovací i18n instance
+i18n.changeLanguage('cs');
+
+const AllTheProviders = ({ children }) => {
+  return (
+    <I18nextProvider i18n={i18n}>
+      {children}
+    </I18nextProvider>
   );
 };
+
+export const renderWithI18n = (ui: React.ReactElement, options?: RenderOptions) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
 
 // V testech
 import { renderWithI18n } from '../../testUtils';
 
 it('renders translated text', () => {
-  renderWithI18n(<MyComponent />);
-  expect(screen.getByText('Translated Text')).toBeInTheDocument();
+  renderWithI18n(<ProductCard />);
+  expect(screen.getByText('Do košíku')).toBeInTheDocument();
 });
 ```
 
-## Testování async kódu
+## Testování s Tailwind a CVA
+
+- Testujte správnou aplikaci tříd při různých variantách a stavech
+- Použijte `getComputedStyle` pro testování skutečných stylů, pokud je to nutné
+
+```typescript
+it('applies correct Tailwind classes based on props', () => {
+  render(<Button variant="solid" color="primary" size="lg">Large Button</Button>);
+  
+  const button = screen.getByText('Large Button');
+  expect(button).toHaveClass('px-6');
+  expect(button).toHaveClass('py-3.5');
+});
+
+it('combines classes correctly using cn utility', () => {
+  render(<Button className="custom-class">Custom Button</Button>);
+  
+  const button = screen.getByText('Custom Button');
+  expect(button).toHaveClass('custom-class');
+  // Ověření, že původní třídy z CVA jsou stále aplikovány
+  expect(button).toHaveClass('inline-flex');
+});
+```
+
+## Testování asynchronního kódu
 
 - Používejte `async/await` pro testování asynchronního kódu
 - Používejte `waitFor` nebo `findBy*` metody pro čekání na asynchronní změny
@@ -223,54 +258,79 @@ it('loads data asynchronously', async () => {
 });
 ```
 
-## Testování chybových stavů
+## Testování s více stavebními bloky
 
-- Testujte chybové stavy a zpracování chyb
-- Používejte reálné objekty chyb
-- Testujte rendery pro chybové stavy
+- Používejte kompoziční wrappery pro opakované setupy
 
 ```typescript
-it('handles error state correctly', async () => {
-  // Mock API vrací chybu
-  apiMock.fetchData.mockRejectedValueOnce(new Error('Network error'));
-  
-  render(<DataComponent />);
-  
-  // Čekání na chybovou zprávu
-  const errorMessage = await screen.findByText('Error: Network error');
-  expect(errorMessage).toBeInTheDocument();
-});
+// Kombinovaný wrapper pro i18n, theme, apod.
+const AllProviders = ({ children }) => (
+  <I18nextProvider i18n={i18n}>
+    <ThemeProvider theme={theme}>
+      {children}
+    </ThemeProvider>
+  </I18nextProvider>
+);
+
+const customRender = (ui, options) =>
+  render(ui, { wrapper: AllProviders, ...options });
 ```
 
-## Testování CSS modulů
+## Konfigurace Jest
 
-- Testujte aplikaci CSS tříd a stylů
-- V testech importujte skutečný CSS modul (jest je správně konfigurován)
+- Projekt je nakonfigurován s Jest a Testing Library
+- CSS moduly a další assety jsou správně mockované
+- Snapshot testy jsou povolené a optimalizované
 
-```typescript
-it('applies the correct CSS class', () => {
-  render(<Button variant="solid">Test Button</Button>);
-  const button = screen.getByText('Test Button');
-  expect(button).toHaveClass('variantSolid');
-});
+```javascript
+// jest.config.cjs
+module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  moduleNameMapper: {
+    "\\.module\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
+  collectCoverageFrom: [
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/*.stories.{ts,tsx}",
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  },
+};
 ```
 
-## Dokumentace testů
+## Continuous Integration (CI)
 
-- Každá složka s testy musí obsahovat `README.md` s informacemi o:
-  - Jaké testovací scénáře pokrývá
-  - Jak spustit testy
-  - Jak přidat nové testy
-  - Specifické implementační detaily
+- Testy se spouští automaticky při každém push nebo pull requestu
+- Kontroluje se pokrytí testy
+- Pull requesty s neprošlými testy nebo nedostatečným pokrytím nemohou být mergovány
 
-## Rozšířené techniky
+## Best Practices
 
-1. **Test Custom Hooks**
-   - Používejte `renderHook` z `@testing-library/react-hooks` pro testování custom hooks
-   
-2. **Test Performance**
-   - Používejte `@testing-library/react-hooks` pro testování performance optimizací
-   
-3. **Test Pokrytí**
-   - Používejte `npm run test:coverage` pro generování reportu pokrytí testy
-   - Analyzujte pokrytí a identifikujte nepokryté části kódu
+1. **Izolované testy**
+   - Každý test by měl být nezávislý na ostatních
+   - Cleanup po testech pomocí `afterEach`
+
+2. **Přístupnost**
+   - Testujte komponenty z pohledu uživatele
+   - Používejte role-based queries místo testID nebo selektorů
+
+3. **Kvalita testů**
+   - Jeden test by měl testovat jednu věc
+   - Testy by měly být čitelné a udržovatelné
+   - Používejte popisné názvy testů
+
+4. **Integrace v workflow**
+   - Spouštějte testy před commitem pomocí git hooks
+   - Pravidelně kontrolujte pokrytí testy

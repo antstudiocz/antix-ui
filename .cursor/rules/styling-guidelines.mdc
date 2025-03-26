@@ -5,66 +5,122 @@ alwaysApply: false
 ---
 # Antix UI - Stylování komponent 🎨
 
-## CSS Moduly
+## Tailwind CSS
 
-Veškeré styly pro komponenty musí využívat CSS moduly s příponou `.module.css`. Tím zajistíme izolaci stylů a zabráníme konfliktům.
+Antix UI používá Tailwind CSS pro stylování komponent. To poskytuje konzistentní design systém a výrazně zjednodušuje vývoj komponent.
 
-```css
-/* ComponentName.module.css */
-.container {
-  display: flex;
-  padding: 16px;
-}
+### Základní použití
 
-.title {
-  font-size: var(--font-h3-size);
-  color: var(--color-primary-500);
-}
+```tsx
+// Příklad komponenty s Tailwind třídami
+export const Card = ({ children, className }) => {
+  return (
+    <div className={cn(
+      "w-full p-4 rounded-lg bg-neutral-00 shadow-sm",
+      className
+    )}>
+      {children}
+    </div>
+  );
+};
 ```
 
-## Konvence pojmenování
+### Helper funkce cn()
 
-1. **CSS soubory a třídy**
-   - Soubory: `ComponentName.module.css`
-   - CSS třídy uvnitř souborů: kebab-case
-     ```css
-     /* V CSS souborech používat kebab-case */
-     .main-container {
-       display: flex;
-     }
-     
-     .button-primary {
-       background: var(--color-primary-500);
-     }
-     ```
-   
-   - V TSX/JSX souborech používejte camelCase
-     ```tsx
-     // V JSX/TSX souborech používat camelCase
-     <div className={styles.mainContainer}>
-       <button className={styles.buttonPrimary}>
-         {children}
-       </button>
-     </div>
-     ```
+Pro kombinování Tailwind tříd a podmíněné aplikování stylů používejte funkci `cn()`:
 
-2. **Specifické stavy**
-   - Používejte modifikátory s prefixem:
-     ```css
-     .button {
-       /* Základní styl */
-     }
-     
-     .button-primary {
-       /* Pro primární variantu */
-     }
-     
-     .button-disabled {
-       /* Pro zakázané tlačítko */
-     }
-     ```
+```tsx
+import { cn } from "@/lib/utils";
 
-## Design System
+export const Badge = ({ variant = "default", className, ...props }) => {
+  return (
+    <div
+      className={cn(
+        "px-2 py-1 text-xs font-medium rounded-full",
+        variant === "primary" && "bg-primary-500 text-neutral-00",
+        variant === "secondary" && "bg-secondary-300 text-primary-500",
+        className
+      )}
+      {...props}
+    />
+  );
+};
+```
+
+## Class Variance Authority (CVA)
+
+Pro komponenty s více variantami používejte CVA, který poskytuje typově bezpečný způsob definice variant komponent.
+
+### Základní použití CVA
+
+```tsx
+import { cva, type VariantProps } from "class-variance-authority";
+
+const buttonVariants = cva(
+  // Základní třídy, které jsou vždy aplikovány
+  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary-500 text-neutral-00 hover:bg-primary-700",
+        secondary: "bg-secondary-300 text-primary-500 hover:bg-secondary-400",
+        outline: "border border-input bg-transparent hover:bg-accent",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 px-3",
+        lg: "h-11 px-8",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  // Další vlastnosti...
+}
+
+export const Button = ({ variant, size, className, ...props }: ButtonProps) => {
+  return (
+    <button
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+};
+```
+
+### Compound Variants
+
+Pro definování stylů, které se aplikují pouze v určitých kombinacích variant:
+
+```tsx
+const buttonVariants = cva(
+  "základní-třídy",
+  {
+    variants: {
+      variant: { solid: "", outlined: "" },
+      color: { primary: "", danger: "" },
+    },
+    compoundVariants: [
+      // Styles aplikované pouze když variant="solid" a color="danger"
+      {
+        variant: "solid",
+        color: "danger",
+        className: "bg-red-500 text-white hover:bg-red-700",
+      },
+      // Další compound varianty...
+    ],
+  }
+);
+```
+
+## CSS proměnné a Design System
 
 ### Systém CSS proměnných
 
@@ -74,196 +130,127 @@ Veškeré styly pro komponenty musí využívat CSS moduly s příponou `.module
      - Barvy: `colors.css`
      - Typografie: `typography.css`
      - Mezery a okraje: `spacing.css`
-     - Stíny: `shadows.css`
-     - Zaoblení: `borders.css` 
+     - Fonty: `fonts.css`
 
 2. **Komponentové proměnné**
-   - Umístění: v CSS modulu dané komponenty
-   - Prefixované názvem komponenty:
+   - Používejte CSS proměnné pro hodnoty, které jsou specifické pro komponentu
+   - Definujte je v globálních stylech:
      ```css
-     /* V Button.module.css */
+     /* src/styles/index.css nebo src/styles/components/button.css */
      :root {
-       --button-padding: 8px 16px;
-       --button-border-radius: var(--border-radius-md);
-       --button-font-size: var(--font-button1-size);
+       --button-border-radius: 8px;
+       --button-font-size: 14px;
+       --product-card-width: 280px;
+       --product-card-height: 420px;
+       --product-card-image-height: 180px;
      }
      ```
 
-### Foundations
+## Konvence pojmenování
 
-1. **Barvy**
-   - Primární paleta: `--color-primary-{100-900}`
-   - Sekundární paleta: `--color-secondary-{100-900}`
-   - Neutrální barvy: `--color-neutral-{00-900}`
-   - Konverzní barvy: `--color-conversion-{100-900}`
-   - Sémantické barvy:
-     - Úspěch: `--color-success`
-     - Varování: `--color-warning`
-     - Chyba: `--color-error`
-     - Informace: `--color-info`
+1. **Tailwind třídy v komponentách**
+   - Používejte výhradně Tailwind třídy
+   - Pro složitější komponenty rozdělte třídy do logických skupin:
+     ```tsx
+     <div className={cn(
+       // Layout
+       "flex flex-col items-center",
+       // Rozměry
+       "w-full max-w-md",
+       // Vizuální styl
+       "bg-neutral-00 rounded-lg shadow-sm",
+       // Spacing
+       "p-4 gap-2",
+       // Předané třídy
+       className
+     )}>
+     ```
 
-2. **Typografie**
-   - Fonty:
-     - `--font-primary`: primární font pro nadpisy
-     - `--font-secondary`: sekundární font pro texty
-   
-   - Velikosti:
-     - Nadpisy: `--font-h1-size` až `--font-h6-size`
-     - Text: `--font-body-l-size`, `--font-body-m-size`, `--font-body-s-size`
-     - Tlačítka: `--font-button1-size`, `--font-button2-size`, `--font-button3-size`
-   
-   - Výšky řádků:
-     - `--font-h1-line-height` až `--font-h6-line-height`
-     - `--font-body-l-line-height`, `--font-body-m-line-height`, `--font-body-s-line-height`
-     - `--font-button1-line-height`, `--font-button2-line-height`, `--font-button3-line-height`
-
-3. **Spacing**
-   - Základní jednotka: 4px
-   - Proměnné pro mezery: `--spacing-xs`, `--spacing-sm`, `--spacing-md`, `--spacing-lg`, `--spacing-xl`
-
-4. **Rozměry a zaoblení**
-   - Zaoblení rohů: `--border-radius-sm`, `--border-radius-md`, `--border-radius-lg`, `--border-radius-xl`
-   - Šířky rámečků: `--border-width-thin`, `--border-width-regular`, `--border-width-thick`
-
-5. **Stíny**
-   - Úrovně stínů: `--shadow-sm`, `--shadow-md`, `--shadow-lg`
-   - Speciální stíny: `--shadow-focus`, `--shadow-hover`
+2. **Sdílené styly**
+   - Pro opakující se kombinace tříd vytvořte utility:
+     ```tsx
+     // src/lib/utils.ts
+     export const buttonStyles = {
+       base: "rounded-md transition-colors",
+       primary: "bg-primary-500 text-white hover:bg-primary-700",
+       secondary: "bg-neutral-100 text-primary-800 hover:bg-neutral-200",
+     };
+     
+     // V komponentě
+     <button className={cn(buttonStyles.base, buttonStyles.primary)}>
+       Tlačítko
+     </button>
+     ```
 
 ## Responzivní design
 
 1. **Breakpointy**
-   - Definice v `foundations/common.css`:
-     ```css
-     :root {
-       --breakpoint-xs: 480px;
-       --breakpoint-sm: 768px;
-       --breakpoint-md: 992px;
-       --breakpoint-lg: 1200px;
-       --breakpoint-xl: 1440px;
-     }
-     ```
+   - Používejte standardní Tailwind breakpointy:
+     - `sm`: 640px a výše
+     - `md`: 768px a výše
+     - `lg`: 1024px a výše
+     - `xl`: 1280px a výše
+     - `2xl`: 1536px a výše
 
-2. **Media Queries**
-   - Používejte standardní breakpointy definované v proměnných:
-     ```css
-     @media (min-width: var(--breakpoint-sm)) {
-       .container {
-         padding: 24px;
-       }
-     }
-     
-     @media (min-width: var(--breakpoint-lg)) {
-       .container {
-         padding: 32px;
-       }
-     }
+2. **Responzivní třídy**
+   - Používejte Tailwind prefix pro různé breakpointy:
+     ```tsx
+     <div className="
+       w-full        // Mobile first (výchozí)
+       sm:w-1/2      // 640px a výše
+       lg:w-1/3      // 1024px a výše
+     ">
      ```
 
 ## Stav a interakce
 
 1. **Stavy komponent**
-   - Hover: preferujte pseudotřídy
-     ```css
-     .button:hover {
-       background-color: var(--color-primary-700);
-     }
-     ```
-   
-   - Aktivní stav:
-     ```css
-     .button:active {
-       transform: translateY(1px);
-     }
-     ```
-   
-   - Focus:
-     ```css
-     .button:focus-visible {
-       box-shadow: 0 0 0 2px var(--color-primary-300);
-     }
+   - Používejte Tailwind modifikátory pro stavy:
+     ```tsx
+     <button className="
+       bg-primary-500                // Výchozí
+       hover:bg-primary-700          // Při najetí myší
+       focus:ring-2                  // Při focusu
+       active:translate-y-0.5        // Při stisku
+       disabled:opacity-50           // Při disabled
+     ">
+       Tlačítko
+     </button>
      ```
 
 2. **Animace a přechody**
-   - Používejte tranzice pro plynulé přechody:
-     ```css
-     .button {
-       transition: background-color 0.2s ease, transform 0.1s ease;
-     }
+   - Používejte Tailwind třídy pro animace:
+     ```tsx
+     <div className="
+       transition-all           // Aktivuje animace
+       duration-300             // Trvání 300ms
+       ease-in-out              // Timing funkce
+     ">
+       Animovaný prvek
+     </div>
      ```
-   
-   - Pro komplexnější animace používejte keyframes:
-     ```css
-     @keyframes fadeIn {
-       from { opacity: 0; }
-       to { opacity: 1; }
-     }
-     
-     .notification {
-       animation: fadeIn 0.3s ease-in-out;
-     }
-     ```
-
-## CSS Zanořování
-
-Používejte nativní CSS zanořování pro lepší čitelnost a organizaci kódu:
-
-```css
-.card {
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
-  
-  & .card-title {
-    font-size: var(--font-h3-size);
-    margin-bottom: var(--spacing-sm);
-  }
-  
-  & .card-content {
-    color: var(--color-neutral-700);
-    
-    & p {
-      margin-bottom: var(--spacing-xs);
-    }
-  }
-  
-  &:hover {
-    box-shadow: var(--shadow-md);
-  }
-}
-```
-
-Výhody zanořování:
-- Lepší čitelnost - jednodušší hierarchie
-- Jednodušší udržitelnost - méně duplicitního kódu
-- Jasnější kontext - vidíte, kam styly patří
 
 ## Redukce pohybu
 
-Respektujte uživatelské preference:
-```css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+Respektujte uživatelské preference pomocí Tailwind:
+
+```tsx
+<div className="
+  motion-safe:transition-opacity motion-safe:duration-300
+  motion-reduce:transition-none
+">
+  Obsah s podmíněnými animacemi
+</div>
 ```
 
-## Best Practices
+## Integrace s UI knihovnami
 
-1. **CSS Reset/Normalize**
-   - Používejte normalizované styly napříč prohlížeči
+Při používání shadcn/ui nebo jiných komponent:
 
-2. **Flexbox / Grid**
-   - Upřednostňujte flexbox a grid pro layout
+1. **Úpravy existujících komponent**
+   - Používejte `className` prop pro předání vlastních tříd
+   - Pro strukturální změny vytvořte vlastní komponentu
 
-3. **Vyhněte se Inline Stylům**
-   - Veškeré styly udržujte v CSS modulech
-
-4. **Specificita**
-   - Udržujte nízkou specificitu selektorů
-   - Vyhněte se používání `!important`
-
-5. **Komponentně specifické proměnné**
-   - Proměnné specifické pro komponentu definujte v jejím CSS modulu
-   - Pro sdílené hodnoty používejte globální proměnné z foundations 
+2. **Konzistence**
+   - Udržujte konzistentní vzhled napříč vlastními a knihovními komponentami
+   - Dodržujte stejné principy designu

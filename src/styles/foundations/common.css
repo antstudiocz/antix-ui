@@ -1,4 +1,4 @@
-:root {
+@theme {
   /* Shadow colors - keeping these as they're unique calculations */
   --shadow-color: rgba(179, 141, 93, 0.5);
   --shadow-color-light: rgba(179, 141, 93, 0.15);

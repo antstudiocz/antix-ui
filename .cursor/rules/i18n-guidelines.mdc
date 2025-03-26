@@ -3,11 +3,11 @@ description: Pravidla pro lokalizaci a internacionalizaci
 globs: 
 alwaysApply: false
 ---
-# Antix UI - Internacionalizace a lokalizace 🌐
+# Antix UI - Internacionalizace a lokalizaci 🌐
 
 ## Základní principy
 
-Antix UI používá knihovnu `i18next` pro internacionalizaci (i18n) a lokalizaci (l10n) komponent. Tento přístup zajišťuje, že komponenty mohou být snadno použity v různých jazykových verzích a lze je přizpůsobit různým kulturním zvyklostem.
+Antix UI používá knihovnu `i18next` a `react-i18next` pro internacionalizaci (i18n) a lokalizaci (l10n) komponent. Tento přístup zajišťuje, že komponenty mohou být snadno použity v různých jazykových verzích a lze je přizpůsobit různým kulturním zvyklostem.
 
 ## Struktura i18n
 
@@ -20,10 +20,10 @@ src/
     └── locales/             # Adresář pro překlady
         ├── cs/              # Čeština
         │   ├── common.json  # Sdílené překlady
-        │   └── button.json  # Překlady specifické pro Button
+        │   └── componentName.json  # Překlady pro konkrétní komponentu
         └── en/              # Angličtina
             ├── common.json  # Sdílené překlady
-            └── button.json  # Překlady specifické pro Button
+            └── componentName.json  # Překlady pro konkrétní komponentu
 ```
 
 ### Konfigurační soubor i18n.ts
@@ -35,34 +35,47 @@ Základní konfigurace i18next:
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// Importy překladů
-import csCommon from './locales/cs/common.json';
-import csButton from './locales/cs/button.json';
-import enCommon from './locales/en/common.json';
-import enButton from './locales/en/button.json';
+// Import default translations
+import csProductCard from './locales/cs/productCard.json';
+import enProductCard from './locales/en/productCard.json';
 
-// Nastavení i18next
+type TranslationObject = {
+  [key: string]: string | TranslationObject;
+};
+
+// Default translations
+const resources = {
+  cs: {
+    ...csProductCard,
+  },
+  en: {
+    ...enProductCard,
+  },
+};
+
 i18n
   .use(initReactI18next)
   .init({
-    resources: {
-      cs: {
-        common: csCommon,
-        button: csButton,
-      },
-      en: {
-        common: enCommon,
-        button: enButton,
-      },
-    },
-    lng: 'cs', // Výchozí jazyk
-    fallbackLng: 'en', // Záložní jazyk
+    resources,
+    lng: 'cs', // default language
+    fallbackLng: 'cs',
     interpolation: {
-      escapeValue: false, // Není potřeba escapovat hodnoty v Reactu
+      escapeValue: false,
     },
-    defaultNS: 'common', // Výchozí namespace
-    keySeparator: '.', // Oddělovač klíčů v hierarchii
   });
+
+// Function to add or update translations
+export const updateTranslations = (
+  language: string,
+  namespace: string,
+  translations: TranslationObject
+) => {
+  if (!i18n.hasResourceBundle(language, namespace)) {
+    i18n.addResourceBundle(language, namespace, translations);
+  } else {
+    i18n.addResourceBundle(language, namespace, translations, true, true);
+  }
+};
 
 export default i18n;
 ```
@@ -71,64 +84,49 @@ export default i18n;
 
 ### Struktura překladových souborů
 
-Překlady by měly být rozděleny do logických celků (namespaces):
-
-1. **common.json** - sdílené a obecné překlady
-2. **[componentName].json** - překlady specifické pro danou komponentu
+Překlady jsou organizovány podle namespace, který odpovídá názvu komponenty:
 
 ```json
-// src/translations/locales/cs/button.json
+// src/translations/locales/cs/productCard.json
 {
-  "text": "Tlačítko",
-  "loading": "Načítání...",
-  "submit": "Potvrdit",
-  "cancel": "Zrušit",
-  "variants": {
-    "primary": "Primární",
-    "secondary": "Sekundární",
-    "text": "Textové"
+  "productCard": {
+    "addToCart": "Do košíku"
   }
 }
 ```
 
 ```json
-// src/translations/locales/en/button.json
+// src/translations/locales/en/productCard.json
 {
-  "text": "Button",
-  "loading": "Loading...",
-  "submit": "Submit",
-  "cancel": "Cancel",
-  "variants": {
-    "primary": "Primary",
-    "secondary": "Secondary",
-    "text": "Text"
+  "productCard": {
+    "addToCart": "Add to cart"
   }
 }
 ```
 
 ### Konvence pojmenování klíčů
 
-1. **Hierarchie** - používejte tečkovou notaci pro hierarchii:
+1. **Namespace** - používejte název komponenty jako namespace:
    ```json
    {
-     "nav": {
-       "home": "Domů",
-       "about": "O nás",
-       "contact": "Kontakt"
+     "componentName": {
+       "key": "value"
      }
    }
    ```
 
-2. **Specifičnost** - klíče by měly být dostatečně specifické, aby se předešlo konfliktům:
+2. **Hierarchie** - používejte tečkovou notaci pro hierarchii:
    ```json
    {
-     "button": {
-       "submit": "Potvrdit",
-       "cancel": "Zrušit"
-     },
      "form": {
-       "submit": "Odeslat",
-       "cancel": "Zrušit formulář"
+       "inputs": {
+         "name": "Jméno",
+         "email": "E-mail"
+       },
+       "buttons": {
+         "submit": "Odeslat",
+         "cancel": "Zrušit"
+       }
      }
    }
    ```
@@ -144,7 +142,7 @@ Překlady by měly být rozděleny do logických celků (namespaces):
    }
    ```
 
-## Používání překladů v komponentách
+## Použití překladů v komponentách
 
 ### Základní použití
 
@@ -153,32 +151,48 @@ Použití `useTranslation` hooku:
 ```tsx
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './Button.module.css';
 
-export const Button: React.FC<ButtonProps> = (props) => {
-  // Použití pro konkrétní namespace
-  const { t } = useTranslation('button');
+export interface ComponentProps {
+  // Ostatní props...
+  translationNamespace?: string;
+}
+
+export const Component: React.FC<ComponentProps> = ({ 
+  translationNamespace = 'componentName',
+  // Ostatní props...
+}) => {
+  const { t } = useTranslation(translationNamespace);
   
   return (
-    <button className={styles.button}>
-      {t('text')}
+    <button>
+      {t('submit')}
     </button>
   );
 };
 ```
 
-### Používání namespaces
+### Namespace jako prop
 
-Pro lepší organizaci používejte namespaces odpovídající komponentám:
+Pro větší flexibilitu a znovupoužitelnost komponent poskytněte možnost přepsání výchozího namespace:
 
 ```tsx
-// Základní namespace
-const { t } = useTranslation('common');
-t('actions.save'); // -> "Uložit"
+export interface ProductCardProps {
+  // ...ostatní props
+  translationNamespace?: string;
+}
 
-// Komponentový namespace
-const { t } = useTranslation('button');
-t('submit'); // -> "Potvrdit"
+export const ProductCard: React.FC<ProductCardProps> = ({
+  // ...ostatní props
+  translationNamespace = 'productCard',
+}) => {
+  const { t } = useTranslation(translationNamespace);
+  
+  return (
+    <Button onClick={onAddToCart}>
+      {t('addToCart')}
+    </Button>
+  );
+};
 ```
 
 ### Interpolace hodnot
@@ -195,7 +209,7 @@ t('welcome', { name: 'Jan' }); // -> "Vítejte, Jan!"
 
 ### Pluralizace
 
-Podpora plurálů:
+Podpora plurálů - v češtině můžeme potřebovat až tři formy:
 
 ```json
 // cs.json
@@ -213,146 +227,90 @@ t('items', { count: 3 }); // -> "3 položky"
 t('items', { count: 5 }); // -> "5 položek"
 ```
 
-## Komponentní přístup
+## Dynamické přidávání překladů
 
-### Předávání namespace
-
-```tsx
-export interface ProductCardProps {
-  // ...ostatní props
-  translationNamespace?: string;
-}
-
-export const ProductCard: React.FC<ProductCardProps> = ({
-  // ...ostatní props
-  translationNamespace = 'productCard',
-}) => {
-  const { t } = useTranslation(translationNamespace);
-  
-  return (
-    // ...implementace využívající t() funkci
-  );
-};
-```
-
-### Trans komponenta pro komplexní překlady
-
-Pro složitější překlady obsahující JSX:
+Překlady lze přidat dynamicky pomocí funkce `updateTranslations`:
 
 ```tsx
-import { Trans } from 'react-i18next';
+import { updateTranslations } from '@/translations/i18n';
 
-// V překladu:
-// "agreement": "Souhlasím s <link>podmínkami</link> služby"
-
-const MyComponent = () => {
-  return (
-    <Trans i18nKey="agreement" ns="form">
-      Souhlasím s <a href="/terms">podmínkami</a> služby
-    </Trans>
-  );
-};
-```
-
-## Dynamické načítání překladů
-
-Pro větší aplikace je vhodné načítat překlady dynamicky:
-
-```typescript
-// src/translations/i18n.ts
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-
-i18n
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: 'cs',
-    fallbackLng: 'en',
-    backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
-    },
-    // další konfigurace
-  });
-
-export default i18n;
-```
-
-## Integrace a11y (přístupnosti)
-
-Používejte správné atributy pro přístupnost:
-
-```tsx
-<button 
-  aria-label={t('button.ariaLabels.close')} 
-  title={t('button.tooltips.close')}
->
-  <CloseIcon />
-</button>
-```
-
-## Testování s i18n
-
-### Setup pro testy
-
-```typescript
-// src/testUtils.tsx
-import React from 'react';
-import { render } from '@testing-library/react';
-import { I18nextProvider } from 'react-i18next';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-
-// Inicializace testovací instance i18n
-i18n
-  .use(initReactI18next)
-  .init({
-    lng: 'cs',
-    fallbackLng: 'en',
-    resources: {
-      cs: {
-        common: require('./translations/locales/cs/common.json'),
-        button: require('./translations/locales/cs/button.json'),
-      },
-      en: {
-        common: require('./translations/locales/en/common.json'),
-        button: require('./translations/locales/en/button.json'),
-      },
-    },
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-
-// Custom render s I18nextProvider
-export const renderWithI18n = (ui: React.ReactElement) => {
-  return render(
-    <I18nextProvider i18n={i18n}>{ui}</I18nextProvider>
-  );
-};
-```
-
-### Použití v testech
-
-```typescript
-import { renderWithI18n } from '../../testUtils';
-import Button from '../Button';
-
-describe('Button', () => {
-  it('displays translated text', () => {
-    const { getByText } = renderWithI18n(<Button />);
-    expect(getByText('Tlačítko')).toBeInTheDocument();
-  });
+// Přidání nových překladů
+updateTranslations('cs', 'newComponent', {
+  newComponent: {
+    title: 'Nový titulek',
+    description: 'Nový popis'
+  }
 });
+```
+
+## Překlady v demo příkladech
+
+Pro demo příklady je možné nastavit výchozí jazyk nebo povolit změnu jazyka:
+
+```tsx
+import { useTranslation } from 'react-i18next';
+
+export const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    <div>
+      <button onClick={() => changeLanguage('cs')}>CS</button>
+      <button onClick={() => changeLanguage('en')}>EN</button>
+    </div>
+  );
+};
 ```
 
 ## Best Practices
 
-1. **Separace textu** - všechny texty by měly být v překladových souborech, nikoli hardcoded v komponentách
-2. **Konzistence** - používejte konzistentní klíče napříč aplikací
-3. **Kontextové informace** - přidávejte komentáře pro překladatele v překladových souborech
-4. **Výchozí překlady** - vždy poskytněte překlady alespoň v jednom jazyce (ideálně v angličtině) jako výchozí
-5. **Komplexní fráze** - pro složité fráze používejte Trans komponentu místo interpolace
-6. **Testování** - testujte komponenty s různými jazykovými verzemi
-7. **Formátování** - pro formátování dat, čísel a měn používejte lokalizační funkce 
+1. **Vyhnout se hardcoded textům**
+   - Všechny texty v UI by měly být lokalizovatelné
+   - Nepoužívejte hardcoded texty přímo v komponentách
+
+2. **Znovupoužitelnost překladů**
+   - Kategorizujte překlady do namespaces podle komponent
+   - Globální nebo sdílené překlady umístěte do `common.json`
+
+3. **Poskytování kontextu**
+   - Pokud je potřeba poskytnout více kontextu pro překladatele, použijte komentáře:
+     ```json
+     {
+       "key": "value", // Kontext: Toto se používá v konkrétní situaci
+     }
+     ```
+
+4. **Standardní formátování**
+   - Pro data použijte https://date-fns.org/ s příslušnou lokalizací
+   - Pro čísla a měny použijte `Intl.NumberFormat` API
+
+5. **Testování**
+   - Testujte komponenty s různými jazyky
+   - Ujistěte se, že UI správně funguje s různě dlouhými texty
+
+6. **Dokumentace**
+   - Dokumentujte všechny překladové klíče
+   - Poskytněte ukázky použití pro překladatele
+
+## Přístupnost a internacionalizace
+
+1. **Směr textu**
+   - Podporujte RTL (right-to-left) jazyky, pokud je to potřeba
+   - Používejte CSS vlastnost `direction` a HTML atribut `dir`
+
+2. **Jazykové atributy**
+   - Nastavte HTML atribut `lang` na kořenovém elementu
+   - Aktualizujte atribut při změně jazyka:
+     ```tsx
+     useEffect(() => {
+       document.documentElement.lang = i18n.language;
+     }, [i18n.language]);
+     ```
+
+3. **Formátování čísel a dat**
+   - Používejte lokalizované formáty pro čísla a data
+   - Respektujte kulturní rozdíly (např. oddělovače tisíců, formát data) 

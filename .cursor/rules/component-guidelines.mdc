@@ -10,31 +10,69 @@ alwaysApply: false
 Každá komponenta by měla následovat tuto strukturu:
 
 ```typescript
-import React from 'react';
-import styles from './ComponentName.module.css';
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
-export interface ComponentNameProps {
+// Definice variant pomocí CVA
+const componentVariants = cva(
+  "základní-tailwind-třídy", 
+  {
+    variants: {
+      variant: {
+        primary: "třídy-pro-primary-variantu",
+        secondary: "třídy-pro-secondary-variantu",
+      },
+      size: {
+        sm: "třídy-pro-malou-velikost",
+        md: "třídy-pro-střední-velikost",
+        lg: "třídy-pro-velkou-velikost",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
+  }
+);
+
+export interface ComponentNameProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof componentVariants> {
   /** Dokumentační komentář pro prop */
-  prop1: string;
+  customProp?: string;
   /** Dokumentační komentář pro volitelný prop */
-  prop2?: number;
+  asChild?: boolean;
 }
 
 /**
  * Dokumentační komentář popisující komponentu
  */
-export const ComponentName: React.FC<ComponentNameProps> = ({
-  prop1,
-  prop2 = 10, // Výchozí hodnota pro volitelný prop
-}) => {
+export const ComponentName = React.forwardRef<
+  HTMLDivElement, 
+  ComponentNameProps
+>(({
+  className,
+  variant,
+  size,
+  customProp,
+  asChild = false,
+  ...props
+}, ref) => {
   // Logika komponenty
-  
+
   return (
-    <div className={styles.container}>
+    <div 
+      ref={ref}
+      className={cn(componentVariants({ variant, size }), className)}
+      {...props}
+    >
       {/* Implementace UI */}
     </div>
   );
-};
+});
+
+ComponentName.displayName = "ComponentName";
 
 export default ComponentName;
 ```
@@ -46,16 +84,94 @@ export default ComponentName;
    - Interface vždy exportujte pro znovupoužití
    - Každý prop by měl mít dokumentační komentář, pokud z názvu není patrné jeho účel
    - Nepovinné props označte otazníkem: `prop?: type`
+   - Pro varianty použijte interface rozšiřující `VariantProps` z CVA
 
 2. **Typování**
    - Používejte explicitní typování: `const value: string = 'value'`
-   - Používejte React.FC pro funkcionální komponenty: `React.FC<Props>`
-   - Používejte generické typy, kde je to vhodné: `Array<Item>`
+   - Komponenty vytvářejte pomocí `React.forwardRef` pro podporu ref
    - Pro event handlery: `React.MouseEvent<HTMLButtonElement>`
+   - Exportujte typy variant: `export type ComponentVariant = "primary" | "secondary";`
 
 3. **Exporty**
-   - Vždy exportujte jak named, tak default export
-   - Typy se exportují pouze jako named export
+   - Vždy exportujte named export pro komponentu: `export const Button = ...`
+   - Vždy exportujte default export: `export default Button;`
+   - Exportujte všechny typy, které by mohly být užitečné pro uživatele
+
+## Tailwind a CVA
+
+1. **Základní principy**
+   - Používejte Tailwind třídy pro styly
+   - Používejte CVA (class-variance-authority) pro definování variant komponent
+   - Používejte `cn` helper pro spojování tříd
+
+2. **Organizace variant**
+   - Rozdělte varianty do logických skupin:
+     ```typescript
+     variants: {
+       intent: { primary, secondary, danger },
+       size: { sm, md, lg },
+       withIcon: { true, false },
+     }
+     ```
+   - Používejte compound varianty pro kombinace:
+     ```typescript
+     compoundVariants: [
+       {
+         intent: "primary",
+         size: "lg",
+         className: "extra-třídy-pro-kombinaci"
+       }
+     ]
+     ```
+
+3. **CSS proměnné**
+   - Pro barvy, mezery atd. používejte CSS proměnné z foundations
+   - Složité hodnoty definujte jako CSS proměnné v globálních stylech
+
+## Komponenty bez variant
+
+Ne všechny komponenty musí nutně využívat CVA pro definici variant. Pro jednodušší komponenty nebo komponenty bez variant (jako je například ProductCard) je možné použít standardní přístup s Tailwind třídami a `cn` helper:
+
+```typescript
+import React from "react";
+import { cn } from "@/lib/utils";
+
+export interface SimpleCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Title text */
+  title: string;
+  /** Content text */
+  content: string;
+}
+
+export const SimpleCard: React.FC<SimpleCardProps> = ({
+  title,
+  content,
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(
+        "p-4 bg-neutral-00 rounded-lg shadow-sm",
+        "flex flex-col gap-2",
+        className
+      )}
+      {...props}
+    >
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p>{content}</p>
+    </div>
+  );
+};
+
+export default SimpleCard;
+```
+
+V těchto případech se zaměřte na:
+- Správné typování props pomocí TypeScript interfaces
+- Dokumentační komentáře pro jednotlivé props
+- Používání `cn` pro kombinování základních a předávaných tříd
+- Konzistentní strukturu exportů (named + default)
 
 ## State management
 
@@ -85,32 +201,90 @@ function useComponentState(initialValue: number) {
 1. **Použití překladů**
    - Importujte `useTranslation` a požívejte funkci `t()` pro překlady
    - Konstantní texty nikdy nepoužívejte přímo v komponentě
+   - Překlady by měly mít namespace odpovídající názvu komponenty
 
 ```typescript
 import { useTranslation } from 'react-i18next';
 
-export const ComponentName: React.FC = () => {
-  const { t } = useTranslation('namespace');
+export const ComponentName: React.FC<ComponentNameProps> = ({ 
+  translationNamespace = 'componentName',
+  ...props 
+}) => {
+  const { t } = useTranslation(translationNamespace);
   
   return <button>{t('button.label')}</button>;
 };
 ```
 
-2. **Organizace překladů**
-   - Překlady organizujte v souborech podle komponenty
-   - Pro sdílené překlady vytvořte separátní namespace
-   - Vždy poskytněte překlady pro všechny podporované jazyky
+## Komponenty shadcn/ui
 
-## Oddělenost zájmů
+1. **Použití základních komponent**
+   - Pro běžné UI elementy používejte komponenty ze složky `ui/`
+   - Tyto komponenty jsou založené na shadcn/ui a lze je přizpůsobit
 
-1. **Oddělení logiky od UI**
-   - Oddělujte business logiku od UI renderování
-   - Používejte custom hooks pro komplexní logiku
+2. **Vytváření nových komponent**
+   - Nové komponenty vytvářejte nad existujícími ui komponenty
+   - Dodržujte stejnou strukturu a vzory jako shadcn/ui
 
-2. **Kompozice komponent**
-   - Vytvářejte malé, znovupoužitelné komponenty
-   - Složitější komponenty skládejte z menších částí
-   - Používejte React children pro flexibilní kompozici
+```typescript
+import { Button } from "@/components/ui/button";
+
+export const CustomButton = ({
+  children,
+  ...props
+}) => {
+  return (
+    <Button {...props}>
+      {children}
+    </Button>
+  );
+};
+```
+
+3. **Instalace nových komponent ze shadcn/ui**
+   - Pokud potřebujete novou základní komponentu, můžete ji nainstalovat přímo ze shadcn CLI
+   - Použijte příkaz `npx shadcn-ui@latest add [component-name]`
+   - Například: `npx shadcn-ui@latest add dialog`
+   - Nově nainstalované komponenty se umístí do složky `src/components/ui/`
+   - Vždy zkontrolujte nově nainstalované komponenty a přizpůsobte je designu Antix UI
+
+4. **Přizpůsobení shadcn/ui komponent**
+   - Nainstalované komponenty můžete podle potřeby upravit
+   - Respektujte jejich strukturu a varianty
+   - Udržujte konzistenci s ostatními Antix UI komponentami
+
+## Přístupnost (a11y)
+
+1. **Základní pravidla**
+   - Používejte sémantické HTML tagy
+   - Přidávejte ARIA atributy, kde je to nutné
+   - Zajistěte, že komponenty fungují s klávesnicí
+   - Poskytujte textové alternativy pro netextový obsah
+
+2. **Formulářové komponenty**
+   - Používejte `id` a `htmlFor` pro spojení labelů s inputy
+   - Poskytujte zpětnou vazbu pro chyby
+   - Používejte vhodné inputy pro různé typy dat
+
+## Ikonky
+
+1. **Použití ikon**
+   - Ikony importujte z `@/icons`
+   - Ikony jsou implementovány jako React komponenty
+   - Velikost a barvu ikon řiďte pomocí Tailwind tříd
+
+```typescript
+import SearchIcon from "@/icons/SearchIcon";
+
+export const SearchButton = () => {
+  return (
+    <Button>
+      <SearchIcon className="w-4 h-4 mr-2" />
+      Hledat
+    </Button>
+  );
+};
+```
 
 ## Zpětná kompatibilita
 
@@ -147,27 +321,3 @@ interface ComponentProps {
    - Vyhněte se zbytečným překreslením
    - Používejte React.memo, useMemo, useCallback
    - Vyhněte se inline funkcím v props, kde je to možné
-
-## Přístupnost (a11y)
-
-1. **Základní pravidla**
-   - Používejte sémantické HTML tagy
-   - Přidávejte ARIA atributy, kde je to nutné
-   - Zajistěte, že komponenty fungují s klávesnicí
-   - Poskytujte textové alternativy pro netextový obsah
-
-2. **Komponenty formulářů**
-   - Vždy spojujte labely s inputy
-   - Poskytujte zpětnou vazbu pro chyby
-   - Používejte vhodné inputy pro různé typy dat
-
-## Responsive design
-
-1. **Flexibilní komponenty**
-   - Komponenty by měly být použitelné v různých velikostech
-   - Používejte relativní jednotky (%, em, rem) místo pixelů
-   - Implementujte responzivní chování pomocí CSS
-
-2. **Media Queries**
-   - Používejte standardní breakpointy definované v projektu
-   - Testujte komponenty na různých velikostech obrazovky

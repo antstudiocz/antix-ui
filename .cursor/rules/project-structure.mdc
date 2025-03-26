@@ -15,34 +15,39 @@ antix-ui/
 ├── dist-examples/       # Build ukázek (generovaný)
 ├── examples/            # Ukázkové implementace komponent
 │   ├── ButtonDemo/      # Demo pro Button komponentu
-│   │   ├── ButtonDemo.module.css
-│   │   └── ButtonDemo.tsx
+│   │   ├── ButtonVariantsDemo.tsx
 │   ├── ProductCardDemo/ # Demo pro ProductCard komponentu
-│   │   ├── ProductCardDemo.module.css
-│   │   └── ProductCardDemo.tsx
+│   │   ├── ProductCardDemo.tsx
+│   ├── LibraryDemo.tsx  # Hlavní demo aplikace
+│   ├── main.tsx         # Vstupní bod pro demo
+│   ├── index.html       # HTML šablona pro demo
 │   └── ...
 ├── src/                 # Zdrojový kód knihovny
 │   ├── components/      # UI komponenty
 │   │   ├── Button/      # Button komponenta
 │   │   │   ├── __tests__/  # Testy
 │   │   │   ├── docs/       # Dokumentace
-│   │   │   ├── Button.module.css
-│   │   │   └── Button.tsx
+│   │   │   └── Button.tsx  # Implementace komponenty
 │   │   ├── ProductCard/ # ProductCard komponenta
 │   │   │   ├── __tests__/  # Testy
 │   │   │   ├── docs/       # Dokumentace
-│   │   │   ├── ProductCard.module.css
-│   │   │   └── ProductCard.tsx
+│   │   │   └── ProductCard.tsx # Implementace komponenty
+│   │   ├── ui/          # Základní UI elementy (shadcn)
+│   │   │   ├── badge.tsx
+│   │   │   └── ...
 │   │   └── index.ts     # Exporty všech komponent
+│   ├── icons/           # SVG ikony jako React komponenty
+│   ├── lib/             # Pomocné funkce a utility
+│   │   └── utils.ts     # Obecné utility
 │   ├── styles/          # Sdílené styly
 │   │   ├── foundations/ # Základní styly (barvy, typografie, apod.)
-│   │   │   ├── borders.css
+│   │   │   ├── typography.css
 │   │   │   ├── colors.css
 │   │   │   ├── common.css
-│   │   │   ├── fonts.css
-│   │   │   └── typography.css
+│   │   │   └── fonts.css
+│   │   ├── components/  # Stylové závislosti pro komponenty
 │   │   ├── docs/        # Dokumentace stylů
-│   │   └── index.css    # Vstupní bod pro styly
+│   │   └── index.css    # Vstupní bod pro styly (obsahuje Tailwind)
 │   ├── translations/    # Překlady pro i18n
 │   │   ├── locales/     # Jazykové mutace
 │   │   │   ├── cs/      # Čeština
@@ -59,27 +64,35 @@ antix-ui/
    - Název adresáře je v PascalCase a shoduje se s názvem komponenty
    - Každá komponenta musí obsahovat:
      - `ComponentName.tsx` - hlavní implementace (včetně exportů)
-     - `ComponentName.module.css` - styly (CSS moduly)
-   - Testy se umísťují do adresáře `__tests__/`
-   - Dokumentace se umísťuje do adresáře `docs/`
+     - Testy se umísťují do adresáře `__tests__/`
+     - Dokumentace se umísťuje do adresáře `docs/`
+   - Komponenty využívají Tailwind CSS pro stylování, nikoliv CSS moduly
 
-2. **Styly**
-   - Základní styly jsou v `src/styles/foundations/` a exportují se v `src/styles/index.css`
+2. **Základní UI elementy**
+   - Základní shadcn komponenty jsou umístěny v `src/components/ui/`
+   - Tyto komponenty mají flat strukturu a každá je v samostatném souboru
+
+3. **Styly**
+   - Projekt využívá kombinaci Tailwind CSS a vlastních CSS proměnných
+   - Základní styly jsou v `src/styles/foundations/` a importují se v `src/styles/index.css`
    - CSS proměnné jsou v příslušných souborech podle kategorie
-   - Pro komponenty používáme CSS moduly s názvem `ComponentName.module.css`
-   - Komponentně specifické CSS proměnné jsou definované v CSS modulu dané komponenty
+   - Komponentně specifické styly jsou definovány pomocí CVA (class-variance-authority)
    
-3. **Překlady**
+4. **Překlady**
    - Překlady jsou organizované podle jazyka v `src/translations/locales/`
-   - Každá komponenta má své překlady v samostatném souboru
+   - Pro každou komponentu existuje samostatný soubor s namespace
 
-4. **Ukázky**
+5. **Ikony**
+   - SVG ikony jsou implementovány jako React komponenty
+   - Ikony jsou umístěny ve složce `src/icons/`
+
+6. **Ukázky**
    - Každá komponenta by měla mít ukázkovou implementaci v `examples/`
-   - Ukázky používají stejnou strukturu jako komponenty
+   - Demo aplikace je implementována v `examples/LibraryDemo.tsx`
 
-5. **Buildování**
-   - Výstupní adresáře `dist/` a `dist-examples/` nejsou verzované
-   - Konfigurační soubory pro build jsou v kořenovém adresáři
+7. **Utility**
+   - Pomocné funkce jsou umístěny v `src/lib/`
+   - CVA a cn utility jsou v `src/lib/utils.ts`
 
 ## Import a Export konvence
 
@@ -88,6 +101,7 @@ antix-ui/
    // src/components/Button/Button.tsx
    export interface ButtonProps { ... }
    export const Button = ({ ... }) => { ... };
+   export default Button;
    
    // src/components/index.ts
    export * from './Button/Button';
@@ -97,11 +111,26 @@ antix-ui/
 2. **Import komponent**
    ```typescript
    // Preferovaný způsob importu
-   import { Button } from '../../src/components';
+   import { Button } from '@/components';
    
    // Alternativní způsob
-   import { Button } from '../../src/components/Button/Button';
+   import { Button } from '@/components/Button/Button';
    ```
+
+3. **Import utilit**
+   ```typescript
+   import { cn } from '@/lib/utils';
+   ```
+
+## Buildování a publikování
+
+1. **Buildování**
+   - Pro build knihovny se používá Rollup: `npm run build`
+   - Pro build ukázek se používá Vite: `npm run examples:build`
+
+2. **Publikování**
+   - Knihovna se publikuje na npm pod scope `@antixuser`
+   - Pro vydání nové verze: `npm run release:[patch|minor|major]`
 
 ## Doporučení
 

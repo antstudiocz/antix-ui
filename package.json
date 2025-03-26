@@ -22,7 +22,7 @@
     "release:patch": "npm run build && npm version patch && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
     "release:minor": "npm run build && npm version minor && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
     "release:major": "npm run build && npm version major && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
-    "examples": "vite",
+    "dev": "vite",
     "examples:build": "vite build --emptyOutDir"
   },
   "peerDependencies": {
@@ -40,6 +40,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.13",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
@@ -83,7 +84,15 @@
     ]
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
+    "@tailwindcss/vite": "^4.0.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "i18next": "^24.2.3",
-    "react-i18next": "^15.4.1"
+    "lucide-react": "^0.483.0",
+    "react-i18next": "^15.4.1",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.16",
+    "tw-animate-css": "^1.2.4"
   }
 }

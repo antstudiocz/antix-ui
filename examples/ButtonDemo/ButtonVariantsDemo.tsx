@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "../../src"; // Import z lokálního zdroje balíčku
-import styles from "./ButtonVariantsDemo.module.css";
 
 // Použití typů z komponenty Button
 type ButtonVariant = "solid" | "outlined" | "text";
@@ -74,46 +73,55 @@ const ButtonVariantsDemo: React.FC = () => {
 
   const buttonScenarios: ButtonScenario[] = [
     {
-      title: "Button bez ikony",
-      variants: [
-        { variant: "solid", hasIcon: false },
-        { variant: "outlined", hasIcon: false },
-      ],
+      title: "Button Solid - bez ikony",
+      variants: [{ variant: "solid", hasIcon: false }],
       colors: ["conversion", "primary", "secondary"],
       sizes: ["xl", "lg", "md", "sm"],
     },
     {
-      title: "Button s ikonou - před",
-      variants: [
-        { variant: "solid", hasIcon: true, iconPosition: "left" },
-        { variant: "outlined", hasIcon: true, iconPosition: "left" },
-      ],
+      title: "Button Outlined - bez ikony",
+      variants: [{ variant: "outlined", hasIcon: false }],
       colors: ["conversion", "primary", "secondary"],
       sizes: ["xl", "lg", "md", "sm"],
     },
     {
-      title: "Button s ikonou - za",
-      variants: [
-        { variant: "solid", hasIcon: true, iconPosition: "right" },
-        { variant: "outlined", hasIcon: true, iconPosition: "right" },
-      ],
+      title: "Button Solid - s ikonou před",
+      variants: [{ variant: "solid", hasIcon: true, iconPosition: "left" }],
       colors: ["conversion", "primary", "secondary"],
       sizes: ["xl", "lg", "md", "sm"],
     },
     {
-      title: "Button-text",
+      title: "Button Outlined - s ikonou před",
+      variants: [{ variant: "outlined", hasIcon: true, iconPosition: "left" }],
+      colors: ["conversion", "primary", "secondary"],
+      sizes: ["xl", "lg", "md", "sm"],
+    },
+    {
+      title: "Button Solid - s ikonou za",
+      variants: [{ variant: "solid", hasIcon: true, iconPosition: "right" }],
+      colors: ["conversion", "primary", "secondary"],
+      sizes: ["xl", "lg", "md", "sm"],
+    },
+    {
+      title: "Button Outlined - s ikonou za",
+      variants: [{ variant: "outlined", hasIcon: true, iconPosition: "right" }],
+      colors: ["conversion", "primary", "secondary"],
+      sizes: ["xl", "lg", "md", "sm"],
+    },
+    {
+      title: "Button Text - bez ikony",
       variants: [{ variant: "text", hasIcon: false }],
       colors: ["conversion", "primary"],
       sizes: ["xl", "lg", "md", "sm"],
     },
     {
-      title: "Button-text s ikonou - před",
+      title: "Button Text - s ikonou před",
       variants: [{ variant: "text", hasIcon: true, iconPosition: "left" }],
       colors: ["conversion", "primary"],
       sizes: ["xl", "lg", "md", "sm"],
     },
     {
-      title: "Button-text s ikonou - za",
+      title: "Button Text - s ikonou za",
       variants: [{ variant: "text", hasIcon: true, iconPosition: "right" }],
       colors: ["conversion", "primary"],
       sizes: ["xl", "lg", "md", "sm"],
@@ -130,50 +138,88 @@ const ButtonVariantsDemo: React.FC = () => {
   };
 
   return (
-    <div className={styles.demoContainer}>
-      <h1>Ukázka variant tlačítka (Button)</h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold mb-12 text-gray-900 dark:text-white">
+          Ukázka variant tlačítka (Button)
+        </h1>
 
-      {buttonScenarios.map((scenario, scenarioIndex) => (
-        <div className={styles.section} key={`scenario-${scenarioIndex}`}>
-          <h2 className={styles.sectionTitle}>{scenario.title}</h2>
-          <div className={styles.buttonsContainer}>
-            {scenario.variants.map((variant, variantIndex) => (
-              <React.Fragment key={`variant-${variantIndex}`}>
-                {scenario.colors.map((color, colorIndex) => (
-                  <div
-                    className={styles.buttonGroup}
-                    key={`color-${colorIndex}`}
-                  >
-                    <div className={styles.colorLabel}>
-                      {color.charAt(0).toUpperCase() + color.slice(1)}
-                    </div>
-                    {scenario.sizes.map((size, sizeIndex) => {
-                      const buttonProps: ButtonProps = {
-                        variant: variant.variant,
-                        color: color,
-                        size: size,
-                      };
+        <div className="space-y-16">
+          {buttonScenarios.map((scenario, scenarioIndex) => (
+            <div
+              className="relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700"
+              key={`scenario-${scenarioIndex}`}
+            >
+              <div className="absolute -top-4 left-8 bg-gray-50 dark:bg-gray-900 px-4 py-1 rounded-full border border-gray-200 dark:border-gray-600">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {scenario.title}
+                </h2>
+              </div>
 
-                      if (variant.hasIcon) {
-                        buttonProps.icon = getIcon(size);
-                        if (variant.iconPosition === "right") {
-                          buttonProps.iconPosition = "right";
-                        }
-                      }
+              <div className="mt-4 space-y-12">
+                {scenario.variants.map((variant, variantIndex) => (
+                  <React.Fragment key={`variant-${variantIndex}`}>
+                    {scenario.colors.map((color, colorIndex) => (
+                      <div
+                        className="relative bg-gray-50 dark:bg-gray-900 rounded-xl p-6"
+                        key={`color-${colorIndex}`}
+                      >
+                        <div className="flex flex-wrap items-center gap-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+                          <div className="px-3 py-1 bg-white dark:bg-gray-800 rounded-md text-lg font-medium text-gray-900 dark:text-white shadow-sm">
+                            {color.charAt(0).toUpperCase() + color.slice(1)}
+                          </div>
+                          <div className="flex gap-2 flex-wrap">
+                            <code className="px-2 py-1 text-sm bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 font-mono shadow-sm">
+                              variant=&quot;{variant.variant}&quot;
+                            </code>
+                            <code className="px-2 py-1 text-sm bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 font-mono shadow-sm">
+                              color=&quot;{color}&quot;
+                            </code>
+                            {variant.hasIcon && (
+                              <code className="px-2 py-1 text-sm bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 font-mono shadow-sm">
+                                icon={variant.iconPosition || "left"}
+                              </code>
+                            )}
+                          </div>
+                        </div>
 
-                      return (
-                        <Button {...buttonProps} key={`button-${sizeIndex}`}>
-                          Button
-                        </Button>
-                      );
-                    })}
-                  </div>
+                        <div className="flex flex-wrap items-end gap-8">
+                          {scenario.sizes.map((size, sizeIndex) => {
+                            const buttonProps: ButtonProps = {
+                              variant: variant.variant,
+                              color: color,
+                              size: size,
+                            };
+
+                            if (variant.hasIcon) {
+                              buttonProps.icon = getIcon(size);
+                              if (variant.iconPosition === "right") {
+                                buttonProps.iconPosition = "right";
+                              }
+                            }
+
+                            return (
+                              <div
+                                className="flex flex-col items-center gap-3"
+                                key={`button-${sizeIndex}`}
+                              >
+                                <Button {...buttonProps}>Button text</Button>
+                                <code className="text-xs bg-white dark:bg-gray-800 px-2 py-1 rounded-md text-gray-700 dark:text-gray-300 font-mono shadow-sm">
+                                  size=&quot;{size}&quot;
+                                </code>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </React.Fragment>
                 ))}
-              </React.Fragment>
-            ))}
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };
