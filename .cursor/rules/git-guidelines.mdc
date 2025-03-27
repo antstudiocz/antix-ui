@@ -3,352 +3,317 @@ description: Pokyny pro Git workflow a konvence commitů
 globs: 
 alwaysApply: false
 ---
-# Antix UI - Git Workflow Guidelines 🌳
+# Antix UI - Git Workflow 🌳
 
-## Branch Strategy
+## Větvení a správa repozitáře
 
-We use a simplified Git Flow with two main branches:
+### Hlavní větve
+- **main** - Produkční kód
+  - Vždy stabilní, připravený k nasazení
+  - Chráněná větev, vyžaduje code review
+  - Označená verzemi (tagy)
 
-1. **main** - Production-ready code
-   - Always stable and deployable
-   - Protected branch - requires PR review
-   - Tagged with version numbers
+- **development** - Vývojová větev
+  - Integrační větev pro feature větve
+  - Po stabilizaci se merguje do main
 
-2. **development** - Development branch
-   - Integration branch for features
-   - Base for feature branches
-   - Must pass all tests before merging to main
+### Feature větve
+- Vždy vytvářet z development větve
+- Pojmenování: `feature/*`, `fix/*`, `docs/*`, `refactor/*`, `test/*`
+- Po dokončení mergovat zpět do development
 
-### Feature Branches
+## Commit konvence
 
-Create feature branches from development:
+### Formát commit zprávy
+```
+<typ>(<oblast>): <emotikona> <stručný popis>
+```
+
+### Typy změn
+- `feat`: Nová funkcionalita
+- `fix`: Oprava chyby
+- `docs`: Změny v dokumentaci
+- `style`: Změny stylů a formátování
+- `refactor`: Refaktorizace existujícího kódu
+- `test`: Přidání nebo úprava testů
+- `chore`: Úkoly údržby (build systém, dependence)
+
+### Emotikony
+- ✨ Nová funkcionalita
+- 🐛 Oprava chyby
+- 📚 Dokumentace
+- 🎨 Stylování/UI
+- 🔄 Refaktorizace
+- ✅ Testy
+- 🔧 Konfigurace
+
+## DŮLEŽITÉ: RELEASE PROCES
+
+### Příprava změn v development
+1. **Squash commitů před mergem do main**
 ```bash
+# Zjistit všechny commity od poslední synchronizace s main
+git log --oneline main..development
+
+# NEBO zjistit poslední X commitů (pokud je jich hodně)
+git log --oneline -n 20  # Zobrazí posledních 20 commitů
+
+# Vytvořit soubor s detailním commit message
+echo "typ(oblast): 🎨 Hlavní nadpis změn
+
+✨ První popis změny
+🐛 Druhý popis změny
+📚 Třetí popis změny" > commit-message.txt
+
+# Squash posledních X commitů
+git reset --soft HEAD~X  # X nahraďte počtem commitů
+
+# Commit s detailním popisem
+git commit -F commit-message.txt
+
+# Smazat dočasný soubor
+rm commit-message.txt
+
+# Push na origin se -f (force) - POUZE pro development!
+git push -f origin development
+```
+
+### Merge a release
+```bash
+# 1. Přepnout na main a aktualizovat
+git checkout main
+git pull origin main
+
+# 2. Merge development do main (už squashnutý)
+git merge development
+
+# 3. DŮLEŽITÉ: Nyní provést release
+#    - NIKDY nepushovat změny do main bez release!
+#    - Release skript automaticky pushne změny!
+npm run release:patch  # nebo :minor, :major
+
+# 4. Synchronizovat development s main
 git checkout development
-git pull origin development
-git checkout -b feature/component-name
-```
-
-Branch naming conventions:
-- `feature/*` - New features or enhancements
-- `fix/*` - Bug fixes
-- `docs/*` - Documentation updates
-- `refactor/*` - Code refactoring
-- `test/*` - Test additions or updates
-
-## Commit Guidelines
-
-### Commit Message Format
-
-```
-<type>(<scope>): <emoji> <subject>
-
-[optional body]
-
-[optional footer]
-```
-
-### Types
-
-- `feat` - New features
-- `fix` - Bug fixes
-- `docs` - Documentation changes
-- `style` - Code style changes (formatting, etc)
-- `refactor` - Code refactoring
-- `test` - Adding or updating tests
-- `chore` - Maintenance tasks
-
-### Scopes
-
-- Component names (e.g., Button, ProductCard)
-- Config areas (e.g., build, deps)
-- Documentation sections
-
-### Emojis
-
-- ✨ New features
-- 🐛 Bug fixes
-- 📚 Documentation
-- 🎨 Style/UI
-- ♻️ Refactoring
-- ✅ Tests
-- 🚀 Performance
-- 🔧 Configuration
-- 📦 Dependencies
-
-### Examples
-
-```bash
-feat(Button): ✨ Add new variant prop
-fix(ProductCard): 🐛 Fix price formatting
-docs: 📚 Update component guidelines
-style: 🎨 Format code with prettier
-refactor(Button): ♻️ Migrate to Tailwind CSS
-test(ProductCard): ✅ Add snapshot tests
-```
-
-### Multiline Commit Messages
-
-For commits with more complex changes, use multiline commit messages:
-
-1. **Create temporary file**
-   ```bash
-   # Create commit message file
-   echo "<type>(<scope>): <emoji> <subject>
-
-- First change description
-- Second change description
-- Third change description" > commit-message.txt
-
-   # Commit using the file
-   git commit -F commit-message.txt
-
-   # Clean up
-   rm commit-message.txt
-   ```
-
-2. **Using git commit directly**
-   ```bash
-   git commit
-   ```
-   This will open your default editor where you can write a multiline message:
-   ```
-   feat(ProductCard): ✨ Enhance component styling
-
-   - 🎨 Update text styling classes
-   - 🔄 Replace inline SVG with icon component
-   - 💅 Improve status indicators styling
-   - 🎯 Refactor color handling
-   ```
-
-> **Note:** Always clean up temporary files after committing.
-
-## Pull Request Process
-
-1. **Create PR**
-   - Use PR template
-   - Link related issues
-   - Add meaningful description
-
-2. **Review Requirements**
-   - All tests passing
-   - Code follows style guide
-   - Documentation updated
-   - No merge conflicts
-
-3. **Merge Strategy**
-   - Squash and merge to keep history clean
-   - Delete feature branch after merge
-
-## Synchronization with Main
-
-When merging development into main, always follow these steps:
-
-1. **Prepare Development Branch**
-   ```bash
-   git checkout development
-   git pull origin development
-   ```
-
-2. **Merge to Main and Release**
-   ```bash
-   git checkout main
-   git pull origin main
-   git merge development
-   
-   # Choose appropriate release type based on changes
-   npm run release:patch  # For bug fixes
-   npm run release:minor  # For new features
-   npm run release:major  # For breaking changes
-   ```
-
-3. **Rebase Development on Main**
-   ```bash
-   git checkout development
-   git fetch origin
-   git reset --hard origin/main
-   git push --force origin development
-   ```
-
-> **Note:** Never create tags manually. Tags are created automatically during the release process.
-
-## Release Process
-
-The release process is automated through npm scripts:
-
-```bash
-# For bug fixes
-npm run release:patch
-
-# For new features
-npm run release:minor
-
-# For breaking changes
-npm run release:major
-```
-
-These scripts will:
-1. Build the project
-2. Bump version in package.json
-3. Publish to npm
-4. Push changes to git
-5. Create git tags
-6. Generate GitHub release notes
-
-Choose the appropriate release type based on your changes:
-- `patch` (1.0.0 -> 1.0.1) - Bug fixes and minor changes
-- `minor` (1.0.0 -> 1.1.0) - New features, non-breaking changes
-- `major` (1.0.0 -> 2.0.0) - Breaking changes
-
-## Git Commands Reference
-
-### Daily Workflow
-
-```bash
-# Update branches
-git fetch --all
-git pull origin development
-
-# Create feature branch
-git checkout -b feature/new-component
-
-# Stage and commit
-git add .
-git commit -m "feat(component): ✨ Add new feature"
-
-# Push changes
-git push origin feature/new-component
-```
-
-### Code Review Changes
-
-```bash
-# Update feature branch
-git checkout feature/new-component
 git fetch origin
-git merge origin/development
-
-# Add review fixes
-git add .
-git commit -m "fix(component): 🐛 Address review comments"
-git push origin feature/new-component
+git reset --hard origin/main
+git push -f origin development
 ```
 
-### Clean Up
+## Pravidla pro kvalitní commit message
 
+### Krátký commit
+```
+feat(Button): ✨ Přidána nová varianta tlačítka
+```
+
+### Detailní commit (vždy používat pro merge do main)
+```
+feat(Button): ✨ Přidána nová varianta tlačítka
+
+✨ Implementace outline varianty tlačítka
+🎨 Vylepšeno stylování pro různé velikosti
+📚 Aktualizace dokumentace a příkladů
+✅ Přidány testy pro novou variantu
+```
+
+## Checklist před releasem
+
+- [ ] Proveden squash commitů s detailním popisem
+- [ ] Všechny testy procházejí (`npm test`)
+- [ ] Build projektu je funkční (`npm run build`)
+- [ ] Verze je vhodně zvolena podle typu změn
+
+## Checklist po releasu
+
+- [ ] Tag byl úspěšně vytvořen
+- [ ] GitHub release byl vytvořen
+- [ ] Development větev je synchronizována s main
+- [ ] NPM balíček byl publikován
+
+## Řešení běžných problémů
+
+### Aktualizace snapshotů
 ```bash
-# Delete local branch
-git branch -d feature/old-component
-
-# Delete remote branch
-git push origin --delete feature/old-component
-
-# Clean up merged branches
-git fetch -p
+npm test -- -u
+git add '**/*.snap'
+git commit --amend --no-edit  # Přidá snapshoty do posledního commitu
 ```
 
-## Best Practices
-
-1. **Commit Often**
-   - Make small, focused commits
-   - Each commit should be a logical unit
-   - Use meaningful commit messages
-
-2. **Keep Branches Updated**
-   - Regularly sync with development
-   - Resolve conflicts early
-
-3. **Clean History**
-   - Squash commits before merging
-   - Use rebase to keep history linear
-   - Write clear commit messages
-
-4. **Protected Branches**
-   - Never force push to main
-   - Always create PR for changes
-   - Keep main stable
-
-5. **Code Review**
-   - Review all changes before merge
-   - Use PR templates
-   - Address all comments
-
-## Git Hooks
-
-We use Husky for Git hooks:
-
-1. **pre-commit**
-   - Runs linting
-   - Runs tests
-   - Checks types
-
-2. **commit-msg**
-   - Validates commit message format
-   - Ensures emoji usage
-   - Checks scope format
-
-## Troubleshooting
-
-### Reset to Main
-
-If development gets out of sync:
-
+### Synchronizace development s main
 ```bash
 git checkout development
 git fetch origin
 git reset --hard origin/main
-git push --force origin development
+git push -f origin development
 ```
 
-### Fix Wrong Branch
+## Vylepšení release procesu
 
-If you committed to wrong branch:
+### Vytvoření bohatšího changelogu
+Pro vytvoření lepšího changelogu s popisem všech změn můžeme použít vlastní skript:
 
+1. **Vytvoření skriptu pro generování changelogu**
+   Vytvořte soubor `scripts/generate-changelog.js`:
+   ```javascript
+   const { execSync } = require('child_process');
+   const fs = require('fs');
+   
+   // Získá poslední verzi/tag
+   const getLatestTag = () => {
+     return execSync('git describe --tags --abbrev=0').toString().trim();
+   };
+   
+   // Získá předchozí verzi/tag
+   const getPreviousTag = (latestTag) => {
+     const tags = execSync('git tag -l --sort=-v:refname').toString().trim().split('\n');
+     const index = tags.indexOf(latestTag);
+     return index < tags.length - 1 ? tags[index + 1] : null;
+   };
+   
+   // Generuje popis změn mezi tagy
+   const generateChangelog = (fromTag, toTag) => {
+     // Získá všechny commity s detailním popisem
+     const commits = execSync(`git log ${fromTag}..${toTag} --pretty=format:"%s%n%b%n==COMMIT=="`)
+       .toString().split('==COMMIT==')
+       .filter(Boolean)
+       .map(commit => commit.trim());
+     
+     // Kategorizace změn
+     const features = [];
+     const fixes = [];
+     const docs = [];
+     const other = [];
+     
+     for (const commit of commits) {
+       const lines = commit.split('\n').filter(Boolean);
+       const title = lines[0];
+       const body = lines.slice(1);
+       
+       if (title.includes('feat') || title.includes('✨')) {
+         features.push({ title, body });
+       } else if (title.includes('fix') || title.includes('🐛')) {
+         fixes.push({ title, body });
+       } else if (title.includes('docs') || title.includes('📚')) {
+         docs.push({ title, body });
+       } else {
+         other.push({ title, body });
+       }
+     }
+     
+     // Sestavení changelogu
+     let changelog = '## Co je nového\n\n';
+     
+     if (features.length) {
+       changelog += '### ✨ Nové funkce\n\n';
+       for (const { title, body } of features) {
+         changelog += `- ${title}\n`;
+         if (body.length) {
+           body.forEach(line => {
+             if (line.trim()) changelog += `  - ${line.trim()}\n`;
+           });
+         }
+       }
+       changelog += '\n';
+     }
+     
+     if (fixes.length) {
+       changelog += '### 🐛 Opravy\n\n';
+       for (const { title, body } of fixes) {
+         changelog += `- ${title}\n`;
+         if (body.length) {
+           body.forEach(line => {
+             if (line.trim()) changelog += `  - ${line.trim()}\n`;
+           });
+         }
+       }
+       changelog += '\n';
+     }
+     
+     if (docs.length) {
+       changelog += '### 📚 Dokumentace\n\n';
+       for (const { title, body } of docs) {
+         changelog += `- ${title}\n`;
+         if (body.length) {
+           body.forEach(line => {
+             if (line.trim()) changelog += `  - ${line.trim()}\n`;
+           });
+         }
+       }
+       changelog += '\n';
+     }
+     
+     if (other.length) {
+       changelog += '### 🔄 Ostatní změny\n\n';
+       for (const { title, body } of other) {
+         changelog += `- ${title}\n`;
+         if (body.length) {
+           body.forEach(line => {
+             if (line.trim()) changelog += `  - ${line.trim()}\n`;
+           });
+         }
+       }
+     }
+     
+     return changelog;
+   };
+   
+   // Hlavní logika
+   const latestTag = getLatestTag();
+   const previousTag = getPreviousTag(latestTag);
+   
+   if (previousTag) {
+     const changelog = generateChangelog(previousTag, latestTag);
+     fs.writeFileSync('CHANGELOG.md', changelog);
+     console.log(`Changelog vygenerován pro verze ${previousTag} -> ${latestTag}`);
+   } else {
+     console.log('Není k dispozici předchozí tag pro porovnání');
+   }
+   ```
+
+2. **Úprava release skriptu v package.json**
+   ```json
+   "scripts": {
+     "release:patch": "npm run build && npm version patch -m 'chore(release): 📦 bump version to %s' && node scripts/generate-changelog.js && gh release create v$(node -p \"require('./package.json').version\") -F CHANGELOG.md && npm publish && git push && git push --tags",
+     "release:minor": "npm run build && npm version minor -m 'chore(release): 📦 bump version to %s' && node scripts/generate-changelog.js && gh release create v$(node -p \"require('./package.json').version\") -F CHANGELOG.md && npm publish && git push && git push --tags",
+     "release:major": "npm run build && npm version major -m 'chore(release): 📦 bump version to %s' && node scripts/generate-changelog.js && gh release create v$(node -p \"require('./package.json').version\") -F CHANGELOG.md && npm publish && git push && git push --tags"
+   }
+   ```
+
+### Sloučení commit změn a release do jednoho kroku
+
+Pro sloučení commit změn a verze do jednoho kroku můžeme upravit release proces:
+
+1. **Příprava commit message s verzí před releasem**
 ```bash
-# Save changes
-git stash
+# 1. Přepnout na main a aktualizovat
+git checkout main
+git pull origin main
 
-# Switch to correct branch
-git checkout correct-branch
+# 2. Merge development do main (už squashnutý)
+git merge development --no-commit  # Spojení bez commitu
 
-# Apply changes
-git stash pop
+# 3. Získání nové verze
+NEW_VERSION=$(npm version patch --no-git-tag-version)
+
+# 4. Vytvoření commitu s verzí
+git add package.json
+git commit -m "feat: 🚀 Release $NEW_VERSION
+
+✨ Nová funkcionalita 1
+🐛 Oprava chyby 2"
+
+# 5. Vytvoření tagu
+git tag -a v$NEW_VERSION -m "Version $NEW_VERSION"
+
+# 6. Publikace
+npm publish
+
+# 7. Push změn a tagu
+git push && git push --tags
+
+# 8. Synchronizace development s main
+git checkout development
+git fetch origin
+git reset --hard origin/main
+git push -f origin development
 ```
-
-### Undo Last Commit
-
-If you need to undo last commit:
-
-```bash
-# Undo commit but keep changes
-git reset --soft HEAD^
-
-# Undo commit and discard changes
-git reset --hard HEAD^
-```
-
-### Failed Snapshot Tests
-
-If your commit fails due to snapshot test failures:
-
-1. **Update snapshots**
-   ```bash
-   # Update all snapshots
-   npm test -- -u
-   ```
-
-2. **Stage and commit updated snapshots**
-   ```bash
-   # Stage snapshot updates
-   git add '**/*.snap'
-
-   # Amend your previous commit to include snapshot updates
-   git commit --amend --no-edit
-   ```
-
-3. **Push changes**
-   ```bash
-   # Push the amended commit
-   git push origin your-branch-name
-   ```
-
-> **Important:** Never ignore snapshot test failures. Always review the changes to ensure they are expected and include them in your commit.
