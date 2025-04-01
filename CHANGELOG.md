@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2024-04-01
+
+### Added
+
+- ✨ New Pagination component with pagination support
+- 📚 Complete documentation for Pagination component
+- 🧪 Unit tests for Pagination component
+- 🎯 Integration with shadcn/ui Button component
+- 🎨 Responsive design with mobile support
+
+### Changed
+
+- 🔄 Updated LibraryDemo with Pagination example
+
 ## [0.2.0] - 2024-04-01
 
 ### Added
@@ -58,3 +72,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🎨 CSS moduly pro izolaci stylů
 - 📚 Dokumentace komponent
 - 📦 NPM balíček pro snadnou instalaci
+
+## [1.3.0] - 2024-03-26
+
+### Přidáno
+
+- ✨ Nová Pagination komponenta s podporou pro stránkování
+- 📚 Kompletní dokumentace pro Pagination komponentu
+- 🧪 Unit testy pro Pagination komponentu
+- 🎯 Integrace s shadcn/ui Button komponentou
+- 🎨 Responzivní design s podporou pro mobilní zařízení
+
+### Změněno
+
+- 🔄 Aktualizace LibraryDemo o ukázku Pagination komponenty

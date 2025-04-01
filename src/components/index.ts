@@ -5,6 +5,7 @@ import "../styles/index.css";
 export * from "./Button/Button";
 export * from "./ProductCard/ProductCard";
 export * from "./FilterPanel/FilterPanel";
+export * from "./Pagination/Pagination";
 
 // Type definitions
 export type { ButtonProps } from "./Button/Button";
