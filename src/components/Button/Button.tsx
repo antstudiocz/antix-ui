@@ -193,17 +193,20 @@ export const Button = ({
 
   return (
     <Comp
-      className={cn(
-        buttonVariants({
-          variant,
-          size,
-          color,
-          iconPosition,
-          withIcon: !!icon,
-        }),
-        getTextSizeClass(size || "md"),
-        className
-      )}
+      className={
+        cn(
+          buttonVariants({
+            variant,
+            size,
+            color,
+            iconPosition,
+            withIcon: Boolean(icon),
+          }),
+          className
+        ) +
+        " " +
+        getTextSizeClass(size || "md")
+      }
       disabled={disabled}
       {...props}
     >
