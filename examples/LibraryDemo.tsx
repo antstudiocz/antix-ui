@@ -3,12 +3,18 @@ import React, { useState } from "react";
 import ButtonVariantsDemo from "./ButtonDemo/ButtonVariantsDemo";
 import ProductCardDemo from "./ProductCardDemo/ProductCardDemo";
 import FilterPanelDemo from "./FilterPanelDemo/FilterPanelDemo";
+import PaginationDemo from "./PaginationDemo/PaginationDemo";
 
 /**
  * Hlavní aplikace pro zobrazení všech příkladů
  */
 const LibraryDemo: React.FC = () => {
-  type ExampleType = "button" | "customization" | "productCard" | "filterPanel";
+  type ExampleType =
+    | "button"
+    | "customization"
+    | "productCard"
+    | "filterPanel"
+    | "pagination";
 
   const [activeExample, setActiveExample] = useState<ExampleType>("button");
 
@@ -20,6 +26,8 @@ const LibraryDemo: React.FC = () => {
         return <ProductCardDemo />;
       case "filterPanel":
         return <FilterPanelDemo />;
+      case "pagination":
+        return <PaginationDemo />;
       default:
         return <ButtonVariantsDemo />;
     }
@@ -71,6 +79,17 @@ const LibraryDemo: React.FC = () => {
           onClick={() => setActiveExample("filterPanel")}
         >
           Filtry
+        </button>
+        <button
+          className={`cursor-pointer py-2 px-4 rounded-md text-base transition-all duration-200 
+            ${
+              activeExample === "pagination"
+                ? "bg-green-800 text-white hover:bg-green-900"
+                : "bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            }`}
+          onClick={() => setActiveExample("pagination")}
+        >
+          Stránkování
         </button>
       </nav>
 
