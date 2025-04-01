@@ -133,8 +133,6 @@ const FilterPanelDemo: React.FC = () => {
         sortOptions={sortOptions}
         filters={filters}
         activeFilters={activeFilters}
-        heading="Workspace Collection"
-        description="Our thoughtfully designed workspace objects are crafted in limited runs. Improve your productivity and organization with these items before we run out."
         onSortChange={handleSortChange}
         onFilterChange={handleFilterChange}
         onFilterRemove={handleFilterRemove}
