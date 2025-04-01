@@ -13,7 +13,7 @@ yarn add @antixuser/antix-ui
 ## Basic Usage
 
 ```jsx
-import { Button, ProductCard } from "@antixuser/antix-ui";
+import { Button, ProductCard, FilterPanel } from "@antixuser/antix-ui";
 
 function App() {
   return (
@@ -25,6 +25,27 @@ function App() {
       >
         Click me
       </Button>
+
+      <FilterPanel
+        sortOptions={[
+          { name: "Newest", value: "newest", current: true },
+          { name: "Price: Low to High", value: "price-asc", current: false },
+        ]}
+        filters={[
+          {
+            id: "category",
+            name: "Category",
+            options: [
+              { value: "electronics", label: "Electronics", checked: false },
+              { value: "clothing", label: "Clothing", checked: false },
+            ],
+          },
+        ]}
+        onSortChange={(value) => console.log("Sort changed:", value)}
+        onFilterChange={(sectionId, value, checked) =>
+          console.log("Filter changed:", { sectionId, value, checked })
+        }
+      />
 
       <ProductCard
         title="Sample Product"
@@ -44,6 +65,7 @@ The library currently includes the following components:
 
 - **[Button](src/components/Button/docs/README.md)** - Button with various variants and styles
 - **[ProductCard](src/components/ProductCard/docs/README.md)** - Product card component with customizable layout and badges
+- **[FilterPanel](src/components/FilterPanel/docs/README.md)** - Advanced filter panel with sort options, checkboxes, and mobile support
 
 ## Features
 
