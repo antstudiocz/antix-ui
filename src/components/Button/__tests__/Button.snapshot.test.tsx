@@ -9,7 +9,9 @@ describe("Button Snapshots", () => {
   });
 
   it("matches snapshot for outlined variant", () => {
-    const { container } = render(<Button variant="outlined">Outlined Button</Button>);
+    const { container } = render(
+      <Button variant="outlined">Outlined Button</Button>
+    );
     expect(container).toMatchSnapshot();
   });
 
@@ -19,13 +21,19 @@ describe("Button Snapshots", () => {
   });
 
   it("matches snapshot for different sizes", () => {
-    const { container: smallContainer } = render(<Button size="sm">Small Button</Button>);
+    const { container: smallContainer } = render(
+      <Button size="sm">Small Button</Button>
+    );
     expect(smallContainer).toMatchSnapshot();
 
-    const { container: mediumContainer } = render(<Button size="md">Medium Button</Button>);
+    const { container: mediumContainer } = render(
+      <Button size="md">Medium Button</Button>
+    );
     expect(mediumContainer).toMatchSnapshot();
 
-    const { container: largeContainer } = render(<Button size="lg">Large Button</Button>);
+    const { container: largeContainer } = render(
+      <Button size="lg">Large Button</Button>
+    );
     expect(largeContainer).toMatchSnapshot();
   });
 
@@ -37,7 +45,7 @@ describe("Button Snapshots", () => {
   it("matches snapshot for button with icon", () => {
     const { container } = render(
       <Button icon={<span>🔍</span>} iconPosition="left">
-        Button with Icon
+        With Icon
       </Button>
     );
     expect(container).toMatchSnapshot();
@@ -46,14 +54,9 @@ describe("Button Snapshots", () => {
   it("matches snapshot for button with right icon", () => {
     const { container } = render(
       <Button icon={<span>🔍</span>} iconPosition="right">
-        Button with Right Icon
+        With Right Icon
       </Button>
     );
-    expect(container).toMatchSnapshot();
-  });
-
-  it("matches snapshot for full width button", () => {
-    const { container } = render(<Button fullWidth>Full Width Button</Button>);
     expect(container).toMatchSnapshot();
   });
 
@@ -63,4 +66,4 @@ describe("Button Snapshots", () => {
     );
     expect(container).toMatchSnapshot();
   });
-}); 
+});

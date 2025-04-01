@@ -3,15 +3,15 @@
 exports[`Button Snapshots matches snapshot for button with additional text 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-md"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Button with Text
     </span>
     <span
-      class="text-button3 font-bold"
+      class="text-button-sm font-bold text-current"
     >
       Additional Info
     </span>
@@ -22,19 +22,19 @@ exports[`Button Snapshots matches snapshot for button with additional text 1`] =
 exports[`Button Snapshots matches snapshot for button with icon 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-1.5"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-1.5 text-button-md"
   >
     <span
-      class="icon inline-flex items-center justify-center"
+      class="icon inline-flex items-center justify-center text-current"
     >
       <span>
         🔍
       </span>
     </span>
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
-      Button with Icon
+      With Icon
     </span>
   </button>
 </div>
@@ -43,19 +43,19 @@ exports[`Button Snapshots matches snapshot for button with icon 1`] = `
 exports[`Button Snapshots matches snapshot for button with right icon 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row-reverse text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-1.5"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row-reverse bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-1.5 text-button-md"
   >
     <span
-      class="icon inline-flex items-center justify-center"
+      class="icon inline-flex items-center justify-center text-current"
     >
       <span>
         🔍
       </span>
     </span>
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
-      Button with Right Icon
+      With Right Icon
     </span>
   </button>
 </div>
@@ -64,10 +64,10 @@ exports[`Button Snapshots matches snapshot for button with right icon 1`] = `
 exports[`Button Snapshots matches snapshot for different sizes 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-2 flex-row text-button-sm bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-2 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-sm"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Small Button
     </span>
@@ -78,10 +78,10 @@ exports[`Button Snapshots matches snapshot for different sizes 1`] = `
 exports[`Button Snapshots matches snapshot for different sizes 2`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-md"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Medium Button
     </span>
@@ -92,10 +92,10 @@ exports[`Button Snapshots matches snapshot for different sizes 2`] = `
 exports[`Button Snapshots matches snapshot for different sizes 3`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-lg"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Large Button
     </span>
@@ -106,27 +106,13 @@ exports[`Button Snapshots matches snapshot for different sizes 3`] = `
 exports[`Button Snapshots matches snapshot for disabled state 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-md"
     disabled=""
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Disabled Button
-    </span>
-  </button>
-</div>
-`;
-
-exports[`Button Snapshots matches snapshot for full width button 1`] = `
-<div>
-  <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
-  >
-    <span
-      class="inline-block whitespace-nowrap overflow-visible"
-    >
-      Full Width Button
     </span>
   </button>
 </div>
@@ -135,10 +121,10 @@ exports[`Button Snapshots matches snapshot for full width button 1`] = `
 exports[`Button Snapshots matches snapshot for outlined variant 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current bg-transparent outline-[1.67px] outline-offset-[-1.67px] outline-current px-3.5 py-3 flex-row text-button-md hover:bg-conversion-900 hover:outline-conversion-900 hover:*:text-neutral-00 hover:*:stroke-neutral-00"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer bg-transparent outline-[1.67px] outline-offset-[-1.67px] outline-current px-3.5 py-3 flex-row hover:bg-conversion-900 hover:outline-conversion-900 hover:*:text-neutral-00 text-button-md"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Outlined Button
     </span>
@@ -149,10 +135,10 @@ exports[`Button Snapshots matches snapshot for outlined variant 1`] = `
 exports[`Button Snapshots matches snapshot for solid variant 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-3.5 py-3 flex-row text-button-md bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-3.5 py-3 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 text-button-md"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Solid Button
     </span>
@@ -163,10 +149,10 @@ exports[`Button Snapshots matches snapshot for solid variant 1`] = `
 exports[`Button Snapshots matches snapshot for text variant 1`] = `
 <div>
   <button
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current bg-transparent p-[2px] *:decoration-current px-3.5 py-3 flex-row text-button-md hover:text-conversion-900 hover:stroke-conversion-900 *:underline hover:*:no-underline"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer bg-transparent *:decoration-current px-3.5 py-3 flex-row hover:text-conversion-900 *:no-underline hover:underline !p-0 text-button-md"
   >
     <span
-      class="inline-block whitespace-nowrap overflow-visible"
+      class="inline-block whitespace-nowrap overflow-visible text-current"
     >
       Text Button
     </span>

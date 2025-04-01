@@ -11,14 +11,14 @@ export type ButtonIconPosition = "left" | "right";
 
 // Base button styling with accurate values from the original .button
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer",
   {
     variants: {
       variant: {
         solid: "", // Base styles for solid, specific colors are handled in combination with color
         outlined:
           "bg-transparent outline outline-[1.67px] outline-offset-[-1.67px] outline-current",
-        text: "bg-transparent p-[2px] *:decoration-current",
+        text: "bg-transparent *:decoration-current",
       },
       size: {
         sm: "px-3.5 py-2",
@@ -50,76 +50,59 @@ const buttonVariants = cva(
     },
     // Complex variant combinations using conditional classes
     compoundVariants: [
-      // Size specific text styles
-      {
-        size: "sm",
-        className: "text-button-sm",
-      },
-      {
-        size: "md",
-        className: "text-button-md",
-      },
-      {
-        size: "lg",
-        className: "text-button-lg",
-      },
-      {
-        size: "xl",
-        className: "text-button-xl",
-      },
       // Solid variant specific styles by color
       {
         variant: "solid",
         color: "conversion",
         className:
-          "bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900",
+          "bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900",
       },
       {
         variant: "solid",
         color: "primary",
         className:
-          "relative bg-gradient-to-r to-primary-500 from-highlight-300 z-10 *:text-neutral-00 *:stroke-neutral-00 before:content-[''] before:absolute before:inset-0 before:bg-primary-700 before:opacity-0 before:transition-opacity before:duration-200 before:z-[-1] before:rounded-lg hover:before:opacity-100",
+          "relative bg-gradient-to-r to-primary-500 from-highlight-300 z-10 *:text-neutral-00 before:content-[''] before:absolute before:inset-0 before:bg-primary-700 before:opacity-0 before:transition-opacity before:duration-200 before:z-[-1] before:rounded-lg hover:before:opacity-100",
       },
       {
         variant: "solid",
         color: "secondary",
         className:
-          "bg-secondary-300 *:text-primary-500 *:stroke-primary-500 hover:bg-primary-700 hover:*:text-neutral-00 hover:*:stroke-neutral-00",
+          "bg-secondary-300 *:text-primary-500 hover:bg-primary-700 hover:*:text-neutral-00",
       },
       // Outlined variant specific styles by color
       {
         variant: "outlined",
         color: "conversion",
         className:
-          "hover:bg-conversion-900 hover:outline-conversion-900 hover:*:text-neutral-00 hover:*:stroke-neutral-00",
+          "hover:bg-conversion-900 hover:outline-conversion-900 hover:*:text-neutral-00",
       },
       {
         variant: "outlined",
         color: "primary",
         className:
-          "hover:bg-primary-700 hover:outline-primary-700 hover:*:text-neutral-00 hover:*:stroke-neutral-00",
+          "hover:bg-primary-700 hover:outline-primary-700 hover:*:text-neutral-00",
       },
       {
         variant: "outlined",
         color: "secondary",
         className:
-          "bg-secondary-300 hover:bg-primary-700 hover:outline-primary-700 hover:*:text-neutral-00 hover:*:stroke-neutral-00",
+          "bg-secondary-300 hover:bg-primary-700 hover:outline-primary-700 hover:*:text-neutral-00",
       },
       // Text variant specific styles by color
       {
         variant: "text",
         color: "conversion",
-        className: "hover:text-conversion-900 hover:stroke-conversion-900",
+        className: "hover:text-conversion-900",
       },
       {
         variant: "text",
         color: "primary",
-        className: "hover:text-primary-700 hover:stroke-primary-700",
+        className: "hover:text-primary-700",
       },
       {
         variant: "text",
         color: "secondary",
-        className: "hover:text-primary-700 hover:stroke-primary-700",
+        className: "hover:text-primary-700",
       },
       // Specific spacing for icons based on size
       {
@@ -135,14 +118,12 @@ const buttonVariants = cva(
       // Specific styles for text variant with icon
       {
         variant: "text",
-        withIcon: true,
-        className: "*:no-underline hover:*:underline",
+        className: "*:no-underline hover:underline",
       },
-      // Specific styles for text variant without icon
+      // Ensure text variant has no padding regardless of size
       {
         variant: "text",
-        withIcon: false,
-        className: "*:underline hover:*:no-underline",
+        className: "!p-0",
       },
     ],
   }
@@ -177,7 +158,7 @@ export interface ButtonProps
 export const Button = ({
   className,
   variant,
-  size,
+  size = "md",
   color,
   iconPosition,
   asChild = false,
@@ -189,6 +170,27 @@ export const Button = ({
 }: ButtonProps) => {
   const Comp = asChild ? Slot : "button";
 
+  /**
+   * Important: Text size classes are applied directly through the cn() function instead of using variants in cva.
+   *
+   * Reason: When using variants in cva, conflicts may occur where other variants (e.g., color)
+   * override text size classes. By extracting these classes from the variant system and applying them
+   * directly in the cn() function, we ensure they are never overridden by other variants.
+   */
+  const getTextSizeClass = (size: ButtonSize) => {
+    switch (size) {
+      case "xl":
+        return "text-button-xl";
+      case "lg":
+        return "text-button-lg";
+      case "sm":
+        return "text-button-sm";
+      case "md":
+      default:
+        return "text-button-md";
+    }
+  };
+
   return (
     <Comp
       className={cn(
@@ -197,25 +199,28 @@ export const Button = ({
           size,
           color,
           iconPosition,
-          withIcon: Boolean(icon),
-          className,
-        })
+          withIcon: !!icon,
+        }),
+        getTextSizeClass(size || "md"),
+        className
       )}
       disabled={disabled}
       {...props}
     >
       {icon && (
-        <span className="icon inline-flex items-center justify-center">
+        <span className="icon inline-flex items-center justify-center text-current">
           {icon}
         </span>
       )}
       {children && (
-        <span className="inline-block whitespace-nowrap overflow-visible">
+        <span className="inline-block whitespace-nowrap overflow-visible text-current">
           {children}
         </span>
       )}
       {additionalText && (
-        <span className="text-button3 font-bold">{additionalText}</span>
+        <span className="text-button-sm font-bold text-current">
+          {additionalText}
+        </span>
       )}
     </Comp>
   );

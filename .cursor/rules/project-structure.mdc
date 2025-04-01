@@ -48,12 +48,7 @@ antix-ui/
 │   │   ├── components/  # Stylové závislosti pro komponenty
 │   │   ├── docs/        # Dokumentace stylů
 │   │   └── index.css    # Vstupní bod pro styly (obsahuje Tailwind)
-│   ├── translations/    # Překlady pro i18n
-│   │   ├── locales/     # Jazykové mutace
-│   │   │   ├── cs/      # Čeština
-│   │   │   └── en/      # Angličtina
-│   │   └── i18n.ts      # Konfigurace i18next
-│   ├── types/           # TypeScript definice
+│   └── types/           # TypeScript definice
 │   └── index.ts         # Hlavní vstupní bod knihovny
 ```
 
@@ -78,19 +73,15 @@ antix-ui/
    - CSS proměnné jsou v příslušných souborech podle kategorie
    - Komponentně specifické styly jsou definovány pomocí CVA (class-variance-authority)
    
-4. **Překlady**
-   - Překlady jsou organizované podle jazyka v `src/translations/locales/`
-   - Pro každou komponentu existuje samostatný soubor s namespace
+4. **Ukázky**
+   - Každá komponenta by měla mít ukázkovou implementaci v `examples/`
+   - Demo aplikace je implementována v `examples/LibraryDemo.tsx`
 
 5. **Ikony**
    - SVG ikony jsou implementovány jako React komponenty
    - Ikony jsou umístěny ve složce `src/icons/`
 
-6. **Ukázky**
-   - Každá komponenta by měla mít ukázkovou implementaci v `examples/`
-   - Demo aplikace je implementována v `examples/LibraryDemo.tsx`
-
-7. **Utility**
+6. **Utility**
    - Pomocné funkce jsou umístěny v `src/lib/`
    - CVA a cn utility jsou v `src/lib/utils.ts`
 

@@ -3,314 +3,121 @@ description: Pravidla pro lokalizaci a internacionalizaci
 globs: 
 alwaysApply: false
 ---
-# Antix UI - Internacionalizace a lokalizaci 🌐
+# Antix UI - Přístup k lokalizaci 🌐
 
 ## Základní principy
 
-Antix UI používá knihovnu `i18next` a `react-i18next` pro internacionalizaci (i18n) a lokalizaci (l10n) komponent. Tento přístup zajišťuje, že komponenty mohou být snadno použity v různých jazykových verzích a lze je přizpůsobit různým kulturním zvyklostem.
+Antix UI **nepoužívá** interní podporu pro internacionalizaci (i18n). Místo toho komponenty přijímají textové řetězce pomocí objektu `texts`, což umožňuje uživatelům knihovny implementovat vlastní řešení pro překlady na úrovni své aplikace.
 
-## Struktura i18n
+## Přizpůsobení textů v komponentách
 
-### Adresářová struktura
+### Centralizovaný objekt `texts`
 
-```
-src/
-└── translations/
-    ├── i18n.ts              # Konfigurační soubor pro i18next
-    └── locales/             # Adresář pro překlady
-        ├── cs/              # Čeština
-        │   ├── common.json  # Sdílené překlady
-        │   └── componentName.json  # Překlady pro konkrétní komponentu
-        └── en/              # Angličtina
-            ├── common.json  # Sdílené překlady
-            └── componentName.json  # Překlady pro konkrétní komponentu
-```
-
-### Konfigurační soubor i18n.ts
-
-Základní konfigurace i18next:
-
-```typescript
-// src/translations/i18n.ts
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-
-// Import default translations
-import csProductCard from './locales/cs/productCard.json';
-import enProductCard from './locales/en/productCard.json';
-
-type TranslationObject = {
-  [key: string]: string | TranslationObject;
-};
-
-// Default translations
-const resources = {
-  cs: {
-    ...csProductCard,
-  },
-  en: {
-    ...enProductCard,
-  },
-};
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: 'cs', // default language
-    fallbackLng: 'cs',
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-
-// Function to add or update translations
-export const updateTranslations = (
-  language: string,
-  namespace: string,
-  translations: TranslationObject
-) => {
-  if (!i18n.hasResourceBundle(language, namespace)) {
-    i18n.addResourceBundle(language, namespace, translations);
-  } else {
-    i18n.addResourceBundle(language, namespace, translations, true, true);
-  }
-};
-
-export default i18n;
-```
-
-## Organizace překladů
-
-### Struktura překladových souborů
-
-Překlady jsou organizovány podle namespace, který odpovídá názvu komponenty:
-
-```json
-// src/translations/locales/cs/productCard.json
-{
-  "productCard": {
-    "addToCart": "Do košíku"
-  }
-}
-```
-
-```json
-// src/translations/locales/en/productCard.json
-{
-  "productCard": {
-    "addToCart": "Add to cart"
-  }
-}
-```
-
-### Konvence pojmenování klíčů
-
-1. **Namespace** - používejte název komponenty jako namespace:
-   ```json
-   {
-     "componentName": {
-       "key": "value"
-     }
-   }
-   ```
-
-2. **Hierarchie** - používejte tečkovou notaci pro hierarchii:
-   ```json
-   {
-     "form": {
-       "inputs": {
-         "name": "Jméno",
-         "email": "E-mail"
-       },
-       "buttons": {
-         "submit": "Odeslat",
-         "cancel": "Zrušit"
-       }
-     }
-   }
-   ```
-
-3. **Konzistence** - podobné koncepty by měly být pojmenovány konzistentně:
-   ```json
-   {
-     "actions": {
-       "save": "Uložit",
-       "edit": "Upravit",
-       "delete": "Smazat"
-     }
-   }
-   ```
-
-## Použití překladů v komponentách
-
-### Základní použití
-
-Použití `useTranslation` hooku:
+Všechny komponenty, které obsahují textové řetězce, přijímají objekt `texts` s jednotlivými texty. Například komponenta `ProductCard` přijímá objekt `texts` s property `addToCart` pro text tlačítka:
 
 ```tsx
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-
-export interface ComponentProps {
-  // Ostatní props...
-  translationNamespace?: string;
-}
-
-export const Component: React.FC<ComponentProps> = ({ 
-  translationNamespace = 'componentName',
-  // Ostatní props...
-}) => {
-  const { t } = useTranslation(translationNamespace);
-  
-  return (
-    <button>
-      {t('submit')}
-    </button>
-  );
-};
+<ProductCard
+  imageUrl="https://example.com/product-image.jpg"
+  title="Název produktu"
+  currentPrice="599 Kč"
+  texts={{
+    addToCart: "Přidat do košíku"
+  }}
+  // ...další props
+/>
 ```
 
-### Namespace jako prop
+### Implementace vlastního řešení překladů
 
-Pro větší flexibilitu a znovupoužitelnost komponent poskytněte možnost přepsání výchozího namespace:
-
-```tsx
-export interface ProductCardProps {
-  // ...ostatní props
-  translationNamespace?: string;
-}
-
-export const ProductCard: React.FC<ProductCardProps> = ({
-  // ...ostatní props
-  translationNamespace = 'productCard',
-}) => {
-  const { t } = useTranslation(translationNamespace);
-  
-  return (
-    <Button onClick={onAddToCart}>
-      {t('addToCart')}
-    </Button>
-  );
-};
-```
-
-### Interpolace hodnot
-
-Vkládání dynamických hodnot do překladů:
-
-```tsx
-// V překladu:
-// "welcome": "Vítejte, {{name}}!"
-
-const { t } = useTranslation();
-t('welcome', { name: 'Jan' }); // -> "Vítejte, Jan!"
-```
-
-### Pluralizace
-
-Podpora plurálů - v češtině můžeme potřebovat až tři formy:
-
-```json
-// cs.json
-{
-  "items": "{{count}} položka",
-  "items_plural": "{{count}} položky",
-  "items_plural_2": "{{count}} položek"
-}
-```
-
-```tsx
-const { t } = useTranslation();
-t('items', { count: 1 }); // -> "1 položka"
-t('items', { count: 3 }); // -> "3 položky"
-t('items', { count: 5 }); // -> "5 položek"
-```
-
-## Dynamické přidávání překladů
-
-Překlady lze přidat dynamicky pomocí funkce `updateTranslations`:
-
-```tsx
-import { updateTranslations } from '@/translations/i18n';
-
-// Přidání nových překladů
-updateTranslations('cs', 'newComponent', {
-  newComponent: {
-    title: 'Nový titulek',
-    description: 'Nový popis'
-  }
-});
-```
-
-## Překlady v demo příkladech
-
-Pro demo příklady je možné nastavit výchozí jazyk nebo povolit změnu jazyka:
+Uživatelé knihovny mohou implementovat vlastní řešení překladů pomocí preferované knihovny (react-i18next, react-intl, lingui, atd.) ve své aplikaci. Příklad s react-i18next:
 
 ```tsx
 import { useTranslation } from 'react-i18next';
+import { ProductCard } from '@antixuser/antix-ui';
 
-export const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+function TranslatedProductCard(props) {
+  const { t } = useTranslation();
+  
+  // Překlad všech textů v jednom objektu
+  const texts = {
+    addToCart: t('productCard.addToCart')
   };
-
+  
   return (
-    <div>
-      <button onClick={() => changeLanguage('cs')}>CS</button>
-      <button onClick={() => changeLanguage('en')}>EN</button>
-    </div>
+    <ProductCard
+      {...props}
+      texts={texts}
+      deliveryStatus={t('productCard.deliveryStatus')}
+      storeAvailability={t('productCard.storeAvailability')}
+    />
   );
-};
+}
 ```
 
-## Best Practices
+### Konvence pro pojmenování textových klíčů
 
-1. **Vyhnout se hardcoded textům**
-   - Všechny texty v UI by měly být lokalizovatelné
-   - Nepoužívejte hardcoded texty přímo v komponentách
+Pro konzistenci všechny textové klíče v objektu `texts` dodržují následující konvence:
 
-2. **Znovupoužitelnost překladů**
-   - Kategorizujte překlady do namespaces podle komponent
-   - Globální nebo sdílené překlady umístěte do `common.json`
+1. **Popisné názvy** - používejte jasné a popisné názvy, které indikují účel textu, např. `addToCart`, `submitLabel`, `cancelButton`
+2. **camelCase notace** - používejte camelCase pro pojmenování klíčů
+3. **Výchozí hodnoty** - implementujte výchozí hodnoty v angličtině pro případ, kdy nejsou texty poskytnuty
 
-3. **Poskytování kontextu**
-   - Pokud je potřeba poskytnout více kontextu pro překladatele, použijte komentáře:
-     ```json
-     {
-       "key": "value", // Kontext: Toto se používá v konkrétní situaci
-     }
-     ```
+## Doporučení pro lokalizaci aplikace
 
-4. **Standardní formátování**
-   - Pro data použijte https://date-fns.org/ s příslušnou lokalizací
-   - Pro čísla a měny použijte `Intl.NumberFormat` API
+Ačkoliv Antix UI neposkytuje interní řešení pro překlady, doporučujeme následující přístupy pro lokalizaci aplikace:
 
-5. **Testování**
-   - Testujte komponenty s různými jazyky
-   - Ujistěte se, že UI správně funguje s různě dlouhými texty
+1. **Centralizované překlady** - Udržujte všechny překlady na jednom místě v aplikaci
+2. **Strukturované překladové objekty** - Používejte strukturované objekty odpovídající struktuře `texts` objektů v komponentách
+3. **Kontextové klíče** - Používejte kontextové klíče pro překlady, například `componentName.actionName`
+4. **Podpora pluralizace** - Zvažte potřebu pluralizace v různých jazycích
+5. **Formátování dat a čísel** - Použijte správné formátování pro data, časy a čísla podle lokálních zvyklostí
 
-6. **Dokumentace**
-   - Dokumentujte všechny překladové klíče
-   - Poskytněte ukázky použití pro překladatele
+## Příklad implementace překladové vrstvy
 
-## Přístupnost a internacionalizace
+```tsx
+import { Button, ProductCard } from '@antixuser/antix-ui';
+import { useMyTranslation } from './my-translation-library';
 
-1. **Směr textu**
-   - Podporujte RTL (right-to-left) jazyky, pokud je to potřeba
-   - Používejte CSS vlastnost `direction` a HTML atribut `dir`
+// Wrapper komponenta pro tlačítko
+function MyButton(props) {
+  const { t } = useMyTranslation();
+  
+  // Sestavení objektu texts z překladů
+  const texts = {
+    label: t(`buttons.${props.translationKey}.label`),
+    secondaryLabel: props.hasSecondaryLabel 
+      ? t(`buttons.${props.translationKey}.secondaryLabel`) 
+      : undefined
+  };
+  
+  return <Button {...props} texts={texts} />;
+}
 
-2. **Jazykové atributy**
-   - Nastavte HTML atribut `lang` na kořenovém elementu
-   - Aktualizujte atribut při změně jazyka:
-     ```tsx
-     useEffect(() => {
-       document.documentElement.lang = i18n.language;
-     }, [i18n.language]);
-     ```
+// Wrapper komponenta pro ProductCard
+function MyProductCard(props) {
+  const { t, locale } = useMyTranslation();
+  
+  // Formátování ceny podle lokalizace
+  const formattedPrice = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: locale === 'cs' ? 'CZK' : 'EUR'
+  }).format(props.price);
+  
+  // Sestavení objektu texts z překladů
+  const texts = {
+    addToCart: t('product.addToCart')
+  };
+  
+  return (
+    <ProductCard
+      {...props}
+      currentPrice={formattedPrice}
+      texts={texts}
+      deliveryStatus={t('product.deliveryStatus')}
+      storeAvailability={t('product.storeAvailability')}
+    />
+  );
+}
+```
 
-3. **Formátování čísel a dat**
-   - Používejte lokalizované formáty pro čísla a data
-   - Respektujte kulturní rozdíly (např. oddělovače tisíců, formát data) 
+Tento přístup umožňuje flexibilitu a přímou kontrolu nad lokalizací vaší aplikace bez závislosti na konkrétním řešení i18n v komponentní knihovně. 

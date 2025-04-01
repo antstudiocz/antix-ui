@@ -86,7 +86,7 @@ function App() {
 ## Main components
 
 - Button - flexible button with many variants
-- ProductCard - product card with i18n support
+- ProductCard - customizable product card component
 
 ## Documentation
 

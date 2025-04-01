@@ -1,0 +1,5 @@
+@theme {
+  --text-filter-label: 14px;
+  --text-filter-label--line-height: 1;
+  --text-filter-label--font-weight: 600;
+}

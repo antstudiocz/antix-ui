@@ -1,13 +1,12 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ProductCard } from '../ProductCard';
-import '../../../translations/i18n';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { ProductCard } from "../ProductCard";
 
-describe('ProductCard', () => {
+describe("ProductCard", () => {
   const defaultProps = {
-    imageUrl: 'https://example.com/product-image.jpg',
-    title: 'Test Product',
-    currentPrice: '299.00 Kč / pc',
+    imageUrl: "https://example.com/product-image.jpg",
+    title: "Test Product",
+    currentPrice: "299.00 Kč / pc",
     onAddToCart: jest.fn(),
   };
 
@@ -15,95 +14,105 @@ describe('ProductCard', () => {
     jest.clearAllMocks();
   });
 
-  describe('rendering', () => {
-    it('renders basic product card correctly', () => {
+  describe("rendering", () => {
+    it("renders basic product card correctly", () => {
       render(<ProductCard {...defaultProps} />);
-      
-      expect(screen.getByText('Test Product')).toBeInTheDocument();
-      expect(screen.getByText('299.00 Kč / pc')).toBeInTheDocument();
-      expect(screen.getByAltText('Test Product')).toHaveAttribute('src', 'https://example.com/product-image.jpg');
-      expect(screen.getByRole('button')).toBeInTheDocument();
-    });
 
-    it('renders original price when provided', () => {
-      render(
-        <ProductCard 
-          {...defaultProps} 
-          originalPrice="399.00 Kč / pc" 
-        />
+      expect(screen.getByText("Test Product")).toBeInTheDocument();
+      expect(screen.getByText("299.00 Kč / pc")).toBeInTheDocument();
+      expect(screen.getByAltText("Test Product")).toHaveAttribute(
+        "src",
+        "https://example.com/product-image.jpg"
       );
-      
-      expect(screen.getByText('399.00 Kč / pc')).toBeInTheDocument();
+      expect(screen.getByRole("button")).toBeInTheDocument();
     });
 
-    it('renders badges when provided', () => {
+    it("renders original price when provided", () => {
+      render(<ProductCard {...defaultProps} originalPrice="399.00 Kč / pc" />);
+
+      expect(screen.getByText("399.00 Kč / pc")).toBeInTheDocument();
+    });
+
+    it("renders badges when provided", () => {
       const badges = [
-        { text: 'Novinka' },
-        { text: 'Akce', backgroundColor: '#FF0000', textColor: '#FFFFFF' }
+        { text: "Novinka" },
+        { text: "Akce", backgroundColor: "#FF0000", textColor: "#FFFFFF" },
       ];
 
       render(<ProductCard {...defaultProps} badges={badges} />);
-      
-      expect(screen.getByText('Novinka')).toBeInTheDocument();
-      expect(screen.getByText('Akce')).toBeInTheDocument();
+
+      expect(screen.getByText("Novinka")).toBeInTheDocument();
+      expect(screen.getByText("Akce")).toBeInTheDocument();
     });
 
-    it('renders delivery status when provided', () => {
+    it("renders delivery status when provided", () => {
       render(<ProductCard {...defaultProps} deliveryStatus="Doručíme dnes" />);
-      
-      expect(screen.getByText('Doručíme dnes')).toBeInTheDocument();
+
+      expect(screen.getByText("Doručíme dnes")).toBeInTheDocument();
     });
 
-    it('renders store availability when provided', () => {
-      render(<ProductCard {...defaultProps} storeAvailability="Ihned na prodejně" />);
-      
-      expect(screen.getByText('Ihned na prodejně')).toBeInTheDocument();
+    it("renders store availability when provided", () => {
+      render(
+        <ProductCard {...defaultProps} storeAvailability="Ihned na prodejně" />
+      );
+
+      expect(screen.getByText("Ihned na prodejně")).toBeInTheDocument();
     });
 
-    it('renders all badges and availability info', () => {
+    it("renders all badges and availability info", () => {
       const badges = [
-        { text: 'Novinka' },
-        { text: 'Akce', backgroundColor: '#FF0000', textColor: '#FFFFFF' }
+        { text: "Novinka" },
+        { text: "Akce", backgroundColor: "#FF0000", textColor: "#FFFFFF" },
       ];
 
       render(
-        <ProductCard 
-          {...defaultProps} 
+        <ProductCard
+          {...defaultProps}
           badges={badges}
           deliveryStatus="Doručíme dnes"
           storeAvailability="Ihned na prodejně"
         />
       );
-      
-      expect(screen.getByText('Novinka')).toBeInTheDocument();
-      expect(screen.getByText('Akce')).toBeInTheDocument();
-      expect(screen.getByText('Doručíme dnes')).toBeInTheDocument();
-      expect(screen.getByText('Ihned na prodejně')).toBeInTheDocument();
+
+      expect(screen.getByText("Novinka")).toBeInTheDocument();
+      expect(screen.getByText("Akce")).toBeInTheDocument();
+      expect(screen.getByText("Doručíme dnes")).toBeInTheDocument();
+      expect(screen.getByText("Ihned na prodejně")).toBeInTheDocument();
+    });
+
+    it("renders with custom text using texts object", () => {
+      render(
+        <ProductCard {...defaultProps} texts={{ addToCart: "Buy Now" }} />
+      );
+
+      expect(screen.getByText("Buy Now")).toBeInTheDocument();
     });
   });
 
-  describe('interactions', () => {
-    it('calls onAddToCart when add to cart button is clicked', () => {
+  describe("interactions", () => {
+    it("calls onAddToCart when add to cart button is clicked", () => {
       render(<ProductCard {...defaultProps} />);
-      
-      fireEvent.click(screen.getByRole('button'));
+
+      fireEvent.click(screen.getByRole("button"));
       expect(defaultProps.onAddToCart).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('accessibility', () => {
-    it('has accessible image with alt text', () => {
+  describe("accessibility", () => {
+    it("has accessible image with alt text", () => {
       render(<ProductCard {...defaultProps} />);
-      
-      const image = screen.getByAltText('Test Product');
+
+      const image = screen.getByAltText("Test Product");
       expect(image).toBeInTheDocument();
     });
-    
-    it('has accessible add to cart button', () => {
-      render(<ProductCard {...defaultProps} />);
-      
-      const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('aria-label', 'Do košíku');
+
+    it("has accessible add to cart button", () => {
+      render(
+        <ProductCard {...defaultProps} texts={{ addToCart: "Add to Cart" }} />
+      );
+
+      const button = screen.getByRole("button");
+      expect(button).toHaveAttribute("aria-label", "Add to Cart");
     });
   });
-}); 
+});

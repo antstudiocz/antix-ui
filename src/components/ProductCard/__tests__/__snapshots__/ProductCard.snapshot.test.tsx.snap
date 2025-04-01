@@ -89,11 +89,11 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
         </div>
       </div>
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -112,9 +112,9 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>
@@ -171,11 +171,11 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
         class="flex flex-col justify-start items-center"
       />
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -194,9 +194,9 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>
@@ -279,11 +279,11 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
         </div>
       </div>
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -302,9 +302,9 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>
@@ -343,11 +343,11 @@ exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
         class="flex flex-col justify-start items-center"
       />
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -366,9 +366,9 @@ exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>
@@ -414,11 +414,11 @@ exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
         class="flex flex-col justify-start items-center"
       />
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -437,9 +437,9 @@ exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>
@@ -504,11 +504,11 @@ exports[`ProductCard Snapshots matches snapshot with store availability only 1`]
         </div>
       </div>
       <button
-        aria-label="Do košíku"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-lg font-secondary font-bold transition-all duration-200 text-center relative overflow-hidden box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer stroke-current px-6 py-3.5 flex-row text-button-lg bg-conversion-500 *:text-neutral-00 *:stroke-neutral-00 hover:bg-conversion-900 gap-2.5"
+        aria-label="Add to cart"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
-          class="icon inline-flex items-center justify-center"
+          class="icon inline-flex items-center justify-center text-current"
         >
           <svg
             fill="none"
@@ -527,9 +527,9 @@ exports[`ProductCard Snapshots matches snapshot with store availability only 1`]
           </svg>
         </span>
         <span
-          class="inline-block whitespace-nowrap overflow-visible"
+          class="inline-block whitespace-nowrap overflow-visible text-current"
         >
-          Do košíku
+          Add to cart
         </span>
       </button>
     </div>

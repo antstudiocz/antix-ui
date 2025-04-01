@@ -48,7 +48,6 @@ The library currently includes the following components:
 ## Features
 
 - 🎨 Modern and customizable design
-- 🌐 Built-in i18n support
 - 🎯 TypeScript support
 - 📦 Tree-shakeable
 - 🔧 Easy to customize with CSS variables
@@ -56,24 +55,6 @@ The library currently includes the following components:
 ## Customization
 
 The library uses CSS variables for easy appearance customization. For more information, see the [styles documentation](src/styles/docs/README.md).
-
-### Internationalization
-
-The library supports i18n out of the box using i18next. You can provide your own translations:
-
-```jsx
-import { i18n } from "@antixuser/antix-ui";
-
-// Add your translations
-i18n.addResourceBundle('en', 'translation', {
-  productCard: {
-    addToCart: 'Add to Cart'
-  }
-});
-
-// Change language
-i18n.changeLanguage('en');
-```
 
 ## Examples
 
@@ -111,11 +92,6 @@ antix-ui/
     │   │   ├── typography.css
     │   │   └── ...
     │   └── docs/       # Styles documentation
-    ├── translations/    # i18n translations
-    │   ├── locales/    # Language files
-    │   │   ├── cs/     # Czech translations
-    │   │   └── en/     # English translations
-    │   └── i18n.ts     # i18next configuration
     └── types/          # Shared TypeScript types
 ```
 
@@ -135,6 +111,7 @@ npm run release:major
 ```
 
 Each release command performs the following steps:
+
 1. Build package and examples
 2. Version update
 3. Publishing to npm

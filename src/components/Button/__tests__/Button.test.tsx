@@ -26,7 +26,8 @@ describe("Button", () => {
 
     rerender(<Button variant="text">Text</Button>);
     const textButton = screen.getByText("Text").closest("button");
-    expect(textButton).toHaveClass("*:underline");
+    expect(textButton).toHaveClass("*:no-underline");
+    expect(textButton).toHaveClass("hover:underline");
   });
 
   it("applies different colors correctly", () => {

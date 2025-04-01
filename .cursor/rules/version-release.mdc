@@ -56,10 +56,10 @@ a tento projekt dodržuje [Semantic Versioning](mdc:https:/semver.org/spec/v2.0.
 ## [1.2.0] - 2024-03-25
 
 ### Přidáno
-- ✨ ProductCard komponenta s podporou i18n
-- 🌐 Přidána podpora pro i18next
-- 🔤 Přidány překlady pro všechny komponenty
-- 🎨 Tailwind CSS konfigurace pro všechny komponenty
+- ✨ Nová FilterPanel komponenta
+- 🎨 Vylepšená podpora pro tmavý režim
+- 🎯 Nové varianty pro Button komponentu
+- 🧩 Rozšíření možností personalizace ProductCard
 
 ### Změněno
 - 🏗️ Refaktoring CSS organizace - migrace na Tailwind a CVA
@@ -68,7 +68,7 @@ a tento projekt dodržuje [Semantic Versioning](mdc:https:/semver.org/spec/v2.0.
 - 📁 Komponentně specifické proměnné přesunuty do CSS
 
 ### Patch Releases
-- 1.2.1 - 1.2.3: Opravy chyb v překladech a přístupnosti
+- 1.2.1 - 1.2.3: Opravy chyb v přístupnosti
 - 1.2.4: Optimalizace výkonu
 - 1.2.5: Aktualizace závislostí
 

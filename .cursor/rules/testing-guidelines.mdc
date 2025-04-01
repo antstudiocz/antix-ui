@@ -31,7 +31,7 @@ alwaysApply: false
   - Snapshot testy: `ComponentName.snapshot.test.tsx`
   - Integrační testy: `ComponentName.integration.test.tsx`
 
-```
+```typescript
 src/
 └── components/
     └── Button/
@@ -183,36 +183,45 @@ jest.mock('../../utils/api', () => ({
 const handleClick = jest.fn();
 ```
 
-## Testování s i18n
+## Testování komponent s texty
 
-- Pro testování komponent s překladem použijte testovací wrapper
+- Pro testování komponent s různými texty používejte objekt `texts` pro předávání textových řetězců
 
 ```typescript
-// testUtils.tsx
-import { render, RenderOptions } from '@testing-library/react';
-import { I18nextProvider } from 'react-i18next';
-import i18n from '../../translations/i18n';
-
-// Testovací i18n instance
-i18n.changeLanguage('cs');
-
-const AllTheProviders = ({ children }) => {
-  return (
-    <I18nextProvider i18n={i18n}>
-      {children}
-    </I18nextProvider>
-  );
-};
-
-export const renderWithI18n = (ui: React.ReactElement, options?: RenderOptions) =>
-  render(ui, { wrapper: AllTheProviders, ...options });
-
 // V testech
-import { renderWithI18n } from '../../testUtils';
+it('renders with custom texts', () => {
+  render(<Button texts={{ label: "Custom Button Text" }} />);
+  expect(screen.getByText('Custom Button Text')).toBeInTheDocument();
+});
 
-it('renders translated text', () => {
-  renderWithI18n(<ProductCard />);
-  expect(screen.getByText('Do košíku')).toBeInTheDocument();
+it('renders with default texts when no texts object is provided', () => {
+  render(<Button />);
+  expect(screen.getByText('Submit')).toBeInTheDocument(); // Výchozí text
+});
+
+it('renders ProductCard with custom texts', () => {
+  render(
+    <ProductCard
+      imageUrl="test-image.jpg"
+      title="Test Product"
+      currentPrice="$99.99"
+      texts={{ addToCart: "Buy Now" }}
+    />
+  );
+  expect(screen.getByText('Buy Now')).toBeInTheDocument();
+});
+
+it('prioritizes legacy props over texts object for backward compatibility', () => {
+  render(
+    <Button 
+      text="Legacy Text" 
+      texts={{ label: "New Text Structure" }}
+    />
+  );
+  
+  // Starší prop má přednost
+  expect(screen.getByText('Legacy Text')).toBeInTheDocument();
+  expect(screen.queryByText('New Text Structure')).not.toBeInTheDocument();
 });
 ```
 

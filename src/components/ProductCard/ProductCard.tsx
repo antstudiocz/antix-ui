@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Button } from "../Button/Button";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
@@ -14,6 +13,11 @@ export interface ProductBadge {
   backgroundColor?: string;
   /** Text color in hex format (e.g. #FFFFFF) */
   textColor?: string;
+}
+
+export interface ProductCardTexts {
+  /** Text for add to cart button */
+  addToCart?: string;
 }
 
 export interface ProductCardProps {
@@ -33,8 +37,8 @@ export interface ProductCardProps {
   storeAvailability?: string;
   /** Callback when add to cart button is clicked */
   onAddToCart?: () => void;
-  /** Translation namespace for the component */
-  translationNamespace?: string;
+  /** Text content for the component */
+  texts?: ProductCardTexts;
   /** Additional CSS classes */
   className?: string;
 }
@@ -48,10 +52,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   deliveryStatus,
   storeAvailability,
   onAddToCart,
-  translationNamespace = "productCard",
+  texts = {},
   className,
 }) => {
-  const { t } = useTranslation(translationNamespace);
+  const finalAddToCartText = texts.addToCart || "Add to cart";
 
   return (
     <div
@@ -109,9 +113,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           size="lg"
           icon={<CartIcon />}
           onClick={onAddToCart}
-          aria-label={t("addToCart")}
+          aria-label={finalAddToCartText}
         >
-          {t("addToCart")}
+          {finalAddToCartText}
         </Button>
       </div>
 

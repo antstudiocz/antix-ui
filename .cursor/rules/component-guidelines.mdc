@@ -196,24 +196,83 @@ function useComponentState(initialValue: number) {
    - Používejte `useMemo` pro výpočetně náročné operace
    - Používejte `useCallback` pro funkce předávané jako props
 
-## Práce s i18n
+## Práce s texty v komponentách
 
-1. **Použití překladů**
-   - Importujte `useTranslation` a požívejte funkci `t()` pro překlady
-   - Konstantní texty nikdy nepoužívejte přímo v komponentě
-   - Překlady by měly mít namespace odpovídající názvu komponenty
+1. **Centralizované texty pomocí objektu**
+   - Všechny textové řetězce by měly být předávány v objektu `texts`
+   - Tento objekt by měl být typován pomocí interface (např. `ComponentTexts`)
+   - Používejte popisné klíče v objektu pro jednotlivé textové řetězce
 
 ```typescript
-import { useTranslation } from 'react-i18next';
+export interface ButtonTexts {
+  /** Text to display inside the button */
+  label?: string;
+  /** Additional text for secondary action */
+  secondaryLabel?: string;
+}
 
-export const ComponentName: React.FC<ComponentNameProps> = ({ 
-  translationNamespace = 'componentName',
+export interface ButtonProps {
+  /** All text content for the button */
+  texts?: ButtonTexts;
+  // Další props...
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  texts = {},
   ...props 
 }) => {
-  const { t } = useTranslation(translationNamespace);
+  const { label = "Submit", secondaryLabel } = texts;
   
-  return <button>{t('button.label')}</button>;
+  return (
+    <button {...props}>
+      {label}
+      {secondaryLabel && <span className="ml-2">{secondaryLabel}</span>}
+    </button>
+  );
 };
+```
+
+2. **Zpětná kompatibilita**
+   - Pro backward kompatibilitu můžete poskytovat i jednotlivé textové props
+   - V tom případě tyto props označte jako deprecated
+   - Prioritizujte jednotlivé props nad objektem `texts` pro zachování zpětné kompatibility
+
+```typescript
+export interface ButtonProps {
+  /** All text content for the button */
+  texts?: ButtonTexts;
+  /** @deprecated Use texts.label instead */
+  text?: string;
+  // Další props...
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  texts = {},
+  text,
+  ...props 
+}) => {
+  // Prioritize direct props for backward compatibility
+  const finalText = text || texts.label || "Submit";
+  
+  return (
+    <button {...props}>
+      {finalText}
+    </button>
+  );
+};
+```
+
+3. **Aria atributy**
+   - Pro přístupnost používejte aria atributy s odpovídajícími texty
+   - Např. `aria-label`, `aria-description` apod.
+
+```typescript
+<button 
+  aria-label={texts.closeLabel || "Close"}
+  onClick={onClose}
+>
+  <CloseIcon />
+</button>
 ```
 
 ## Komponenty shadcn/ui
@@ -243,8 +302,8 @@ export const CustomButton = ({
 
 3. **Instalace nových komponent ze shadcn/ui**
    - Pokud potřebujete novou základní komponentu, můžete ji nainstalovat přímo ze shadcn CLI
-   - Použijte příkaz `npx shadcn-ui@latest add [component-name]`
-   - Například: `npx shadcn-ui@latest add dialog`
+   - Použijte příkaz `npx shadcn@latest add [component-name]`
+   - Například: `npx shadcn@latest add dialog`
    - Nově nainstalované komponenty se umístí do složky `src/components/ui/`
    - Vždy zkontrolujte nově nainstalované komponenty a přizpůsobte je designu Antix UI
 
