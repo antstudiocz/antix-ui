@@ -90,7 +90,7 @@ exports[`ProductCard Snapshots matches snapshot with all props 1`] = `
       </div>
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"
@@ -172,7 +172,7 @@ exports[`ProductCard Snapshots matches snapshot with badges only 1`] = `
       />
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"
@@ -280,7 +280,7 @@ exports[`ProductCard Snapshots matches snapshot with delivery status only 1`] = 
       </div>
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"
@@ -344,7 +344,7 @@ exports[`ProductCard Snapshots matches snapshot with minimal props 1`] = `
       />
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"
@@ -415,7 +415,7 @@ exports[`ProductCard Snapshots matches snapshot with original price only 1`] = `
       />
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"
@@ -505,7 +505,7 @@ exports[`ProductCard Snapshots matches snapshot with store availability only 1`]
       </div>
       <button
         aria-label="Add to cart"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-secondary font-bold transition-all duration-200 text-center relative box-border h-fit disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer px-6 py-3.5 text-conversion-500 flex-row bg-conversion-500 *:text-neutral-00 hover:bg-conversion-900 gap-2.5 text-button-lg"
       >
         <span
           class="icon inline-flex items-center justify-center text-current"

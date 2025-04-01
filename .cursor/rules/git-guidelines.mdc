@@ -5,6 +5,19 @@ alwaysApply: false
 ---
 # Antix UI - Git Workflow 🌳
 
+## ⚠️ CRITICAL WORKFLOW RULES
+
+1. **Branch Management**
+   - ALWAYS work in `development` branch
+   - NEVER commit directly to `main`
+   - ALL changes must go through `development` first
+   - Release ONLY from `main` after proper merge from `development`
+
+2. **Release Process Flow**
+   ```
+   development (work here) -> merge to main -> release from main
+   ```
+
 ## Větvení a správa repozitáře
 
 ### Hlavní větve

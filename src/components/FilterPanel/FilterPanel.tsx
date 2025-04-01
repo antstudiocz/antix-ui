@@ -175,6 +175,7 @@ export const FilterPanel = React.forwardRef<HTMLDivElement, FilterPanelProps>(
                       {section.options.map((option, optionIdx) => (
                         <div key={option.value} className="flex gap-3">
                           <Checkbox
+                            variant="primary"
                             id={`filter-mobile-${section.id}-${optionIdx}`}
                             checked={option.checked}
                             onCheckedChange={(checked) =>
@@ -233,6 +234,7 @@ export const FilterPanel = React.forwardRef<HTMLDivElement, FilterPanelProps>(
                       {section.options.map((option, optionIdx) => (
                         <div key={option.value} className="flex gap-3">
                           <Checkbox
+                            variant="primary"
                             id={`filter-${section.id}-${optionIdx}`}
                             checked={option.checked}
                             onCheckedChange={(checked) =>
@@ -294,6 +296,7 @@ export const FilterPanel = React.forwardRef<HTMLDivElement, FilterPanelProps>(
                         className="flex items-center gap-3"
                       >
                         <RadioGroupItem
+                          variant="primary"
                           value={option.value}
                           id={`sort-${option.value}`}
                         />
