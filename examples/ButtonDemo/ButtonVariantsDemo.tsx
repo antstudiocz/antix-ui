@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../src"; // Import z lokálního zdroje balíčku
+import { Button } from "@/components/Button/Button";
 
 // Použití typů z komponenty Button
 type ButtonVariant = "solid" | "outlined" | "text";

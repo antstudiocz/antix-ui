@@ -278,15 +278,15 @@ export const Button: React.FC<ButtonProps> = ({
 ## Komponenty shadcn/ui
 
 1. **Použití základních komponent**
-   - Pro běžné UI elementy používejte komponenty ze složky `ui/`
-   - Tyto komponenty jsou založené na shadcn/ui a lze je přizpůsobit
+   - Pro běžné UI elementy používejte prvořadé komponenty ze složky `components/`
+   - Tyto komponenty jsou založené na shadcn/ui a jsou přizpůsobeny pro Antix UI
 
 2. **Vytváření nových komponent**
-   - Nové komponenty vytvářejte nad existujícími ui komponenty
-   - Dodržujte stejnou strukturu a vzory jako shadcn/ui
+   - Nové komponenty vytvářejte nad existujícími komponentami
+   - Dodržujte stejnou strukturu a vzory jako ostatní komponenty
 
 ```typescript
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/Button/Button";
 
 export const CustomButton = ({
   children,
@@ -303,12 +303,11 @@ export const CustomButton = ({
 3. **Instalace nových komponent ze shadcn/ui**
    - Pokud potřebujete novou základní komponentu, můžete ji nainstalovat přímo ze shadcn CLI
    - Použijte příkaz `npx shadcn@latest add [component-name]`
-   - Například: `npx shadcn@latest add dialog`
-   - Nově nainstalované komponenty se umístí do složky `src/components/ui/`
+   - Po instalaci vytvořte prvořadou komponentu ve vlastní složce podle vzoru existujících komponent
    - Vždy zkontrolujte nově nainstalované komponenty a přizpůsobte je designu Antix UI
 
-4. **Přizpůsobení shadcn/ui komponent**
-   - Nainstalované komponenty můžete podle potřeby upravit
+4. **Přizpůsobení komponent**
+   - Komponenty můžete podle potřeby upravit
    - Respektujte jejich strukturu a varianty
    - Udržujte konzistenci s ostatními Antix UI komponentami
 

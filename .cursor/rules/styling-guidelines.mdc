@@ -245,7 +245,7 @@ Respektujte uživatelské preference pomocí Tailwind:
 
 ## Integrace s UI knihovnami
 
-Při používání shadcn/ui nebo jiných komponent:
+Při používání Antix UI komponent:
 
 1. **Úpravy existujících komponent**
    - Používejte `className` prop pro předání vlastních tříd

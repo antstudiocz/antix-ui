@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PaginationButton } from "@/components/ui/pagination-button";
+import { PaginationButton } from "@/components/PaginationButton/PaginationButton";
 import { cn } from "@/lib/utils";
 
 export interface PaginationProps {

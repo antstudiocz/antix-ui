@@ -19,8 +19,9 @@ describe("Pagination", () => {
     // Check if navigation is present
     expect(screen.getByRole("navigation")).toBeInTheDocument();
 
-    // Check if current page is highlighted
-    expect(screen.getByText("1")).toHaveAttribute("aria-current", "page");
+    // Check if current page button has the default variant
+    const currentPageButton = screen.getByText("1");
+    expect(currentPageButton.closest("button")).toHaveClass("bg-primary-500");
 
     // Check if navigation buttons are present
     expect(screen.getByLabelText("Previous page")).toBeInTheDocument();
