@@ -15,13 +15,19 @@
     "isolatedModules": true,
     "jsx": "react",
     "declaration": true,
-    "declarationDir": "dist",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "examples"],
-  "exclude": ["node_modules", "dist", "rollup.config.js"]
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "examples",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.tsx"
+  ]
 }

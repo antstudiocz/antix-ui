@@ -23,7 +23,6 @@ export default defineConfig(({ command, mode }) => {
           ],
           rollupTypes: true,
           insertTypesEntry: true,
-          copyDtsFiles: true,
         }),
     ].filter(Boolean),
     resolve: {
@@ -47,10 +46,12 @@ export default defineConfig(({ command, mode }) => {
                   react: "React",
                   "react-dom": "ReactDOM",
                 },
+                assetFileNames: "style.css",
               },
             },
-            cssCodeSplit: true,
+            cssCodeSplit: false,
             sourcemap: true,
+            emptyOutDir: true,
           }
         : {
             root: "examples",
@@ -62,6 +63,11 @@ export default defineConfig(({ command, mode }) => {
               },
             },
           }),
+    },
+    css: {
+      modules: {
+        generateScopedName: "[name]__[local]___[hash:base64:5]",
+      },
     },
     server: {
       port: 5173,

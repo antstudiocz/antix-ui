@@ -1,6 +1,3 @@
-// Import global styles
-import "../styles/index.css";
-
 // Components - only export main components
 export * from "./Button/Button";
 export * from "./ProductCard/ProductCard";
