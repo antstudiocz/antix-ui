@@ -4,6 +4,7 @@ import ButtonVariantsDemo from "./ButtonDemo/ButtonVariantsDemo";
 import ProductCardDemo from "./ProductCardDemo/ProductCardDemo";
 import FilterPanelDemo from "./FilterPanelDemo/FilterPanelDemo";
 import PaginationDemo from "./PaginationDemo/PaginationDemo";
+import NewComponentsDemo from "./NewComponentsDemo/NewComponentsDemo";
 
 /**
  * Hlavní aplikace pro zobrazení všech příkladů
@@ -14,7 +15,8 @@ const LibraryDemo: React.FC = () => {
     | "customization"
     | "productCard"
     | "filterPanel"
-    | "pagination";
+    | "pagination"
+    | "newComponents";
 
   const [activeExample, setActiveExample] = useState<ExampleType>("button");
 
@@ -28,6 +30,8 @@ const LibraryDemo: React.FC = () => {
         return <FilterPanelDemo />;
       case "pagination":
         return <PaginationDemo />;
+      case "newComponents":
+        return <NewComponentsDemo />;
       default:
         return <ButtonVariantsDemo />;
     }
@@ -90,6 +94,17 @@ const LibraryDemo: React.FC = () => {
           onClick={() => setActiveExample("pagination")}
         >
           Stránkování
+        </button>
+        <button
+          className={`cursor-pointer py-2 px-4 rounded-md text-base transition-all duration-200 
+            ${
+              activeExample === "newComponents"
+                ? "bg-green-800 text-white hover:bg-green-900"
+                : "bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            }`}
+          onClick={() => setActiveExample("newComponents")}
+        >
+          Nové komponenty
         </button>
       </nav>
 

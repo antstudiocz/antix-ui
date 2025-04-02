@@ -7,14 +7,14 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
+} from "@/components/Sheet/Sheet";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from "@/components/Popover/Popover";
+import { Checkbox } from "@/components/Checkbox/Checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/RadioGroup/RadioGroup";
 import { cn } from "@/lib/utils";
 
 import XMarkIcon from "@/icons/XMarkIcon";

@@ -7,6 +7,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+export type CheckboxVariant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "conversion";
+
 const checkboxVariants = cva(
   "peer size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
   {
@@ -30,9 +36,27 @@ const checkboxVariants = cva(
 
 export interface CheckboxProps
   extends React.ComponentProps<typeof CheckboxPrimitive.Root>,
-    VariantProps<typeof checkboxVariants> {}
+    Omit<VariantProps<typeof checkboxVariants>, "className"> {
+  /** Additional CSS classes to be applied to the checkbox */
+  className?: string;
+  /** Custom icon to display when checked (defaults to CheckIcon) */
+  icon?: React.ReactNode;
+}
 
-function Checkbox({ className, variant, ...props }: CheckboxProps) {
+/**
+ * Checkbox component with multiple variants
+ *
+ * @param variant - Visual style of the checkbox ("default", "primary", "secondary", "conversion")
+ * @param className - Additional CSS classes
+ * @param icon - Custom icon to display when checked
+ * @param disabled - Whether the checkbox is disabled
+ */
+export const Checkbox = ({
+  className,
+  variant,
+  icon,
+  ...props
+}: CheckboxProps) => {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
@@ -43,10 +67,10 @@ function Checkbox({ className, variant, ...props }: CheckboxProps) {
         data-slot="checkbox-indicator"
         className="flex items-center justify-center text-current transition-none"
       >
-        <CheckIcon className="size-3.5" />
+        {icon || <CheckIcon className="size-3.5" />}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );
-}
+};
 
-export { Checkbox };
+export default Checkbox;

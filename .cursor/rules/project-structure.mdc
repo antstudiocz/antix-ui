@@ -32,9 +32,14 @@ antix-ui/
 │   │   │   ├── __tests__/  # Testy
 │   │   │   ├── docs/       # Dokumentace
 │   │   │   └── ProductCard.tsx # Implementace komponenty
-│   │   ├── ui/          # Základní UI elementy (shadcn)
-│   │   │   ├── badge.tsx
-│   │   │   └── ...
+│   │   ├── Popover/     # Popover komponenta
+│   │   │   ├── __tests__/  # Testy
+│   │   │   ├── docs/       # Dokumentace
+│   │   │   └── Popover.tsx # Implementace komponenty
+│   │   ├── Sheet/       # Sheet komponenta
+│   │   │   ├── __tests__/  # Testy
+│   │   │   ├── docs/       # Dokumentace
+│   │   │   └── Sheet.tsx   # Implementace komponenty
 │   │   └── index.ts     # Exporty všech komponent
 │   ├── icons/           # SVG ikony jako React komponenty
 │   ├── lib/             # Pomocné funkce a utility
@@ -64,8 +69,8 @@ antix-ui/
    - Komponenty využívají Tailwind CSS pro stylování, nikoliv CSS moduly
 
 2. **Základní UI elementy**
-   - Základní shadcn komponenty jsou umístěny v `src/components/ui/`
-   - Tyto komponenty mají flat strukturu a každá je v samostatném souboru
+   - Základní UI komponenty jsou organizovány ve vlastních složkách v `src/components/`
+   - Každá komponenta má svou vlastní složku s implementací, testy a dokumentací
 
 3. **Styly**
    - Projekt využívá kombinaci Tailwind CSS a vlastních CSS proměnných

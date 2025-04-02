@@ -1,6 +1,6 @@
 # Product Card
 
-Product Card component displays product information in a standardized format with customizable features. This component now uses Tailwind CSS for styling and shadcn/ui Badge component for badges.
+The ProductCard component displays product information in a standardized card format. It now uses Tailwind CSS for styling and Antix UI Badge component for badges.
 
 ## Import
 

@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2024-04-02
+
+### Added
+
+- ✨ New UI components:
+  - Separator - Horizontal and vertical dividers
+  - Dialog - Accessible modal dialogs
+  - Popover - Floating content panels
+  - Sheet - Slide-in panels from any edge
+  - Badge - Status indicators
+  - RadioGroup - Selection controls
+  - Checkbox - Toggle controls
+- 📚 Complete documentation for all new components
+- 🧪 Comprehensive test suite for all components
+- 🎨 New demo page showcasing all new components
+
+### Changed
+
+- 🔧 Fixed dev server configuration to properly serve examples
+- 🏗️ Reorganized UI components from ui/ folder to separate component folders
+- ♻️ Updated imports to follow project standards
+- 📦 Enhanced Vite build configuration
+
 ## [0.3.0] - 2024-04-01
 
 ### Added

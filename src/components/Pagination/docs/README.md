@@ -9,7 +9,7 @@ A reusable pagination component that provides navigation through pages with a cl
 - Dynamic page number display
 - Support for large number of pages with ellipsis
 - Customizable through className prop
-- Built with shadcn/ui Button component
+- Built with Antix UI PaginationButton component
 
 ## Usage
 
@@ -56,7 +56,7 @@ The component uses Tailwind CSS for styling and can be customized through the `c
 - Outline variant for page numbers
 - Filled variant for current page
 - Responsive icon sizes
-- Hover and focus states from shadcn/ui Button component
+- Hover and focus states from Antix UI PaginationButton component
 
 ## Examples
 

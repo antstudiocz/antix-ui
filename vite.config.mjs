@@ -10,6 +10,8 @@ export default defineConfig(({ command, mode }) => {
   const isLib = mode === "lib";
 
   return {
+    // Nastavení root na examples adresář pro development
+    root: command === "serve" ? "examples" : undefined,
     plugins: [
       react(),
       tailwindcss(),
@@ -54,7 +56,6 @@ export default defineConfig(({ command, mode }) => {
             emptyOutDir: true,
           }
         : {
-            root: "examples",
             outDir: "../dist/examples",
             emptyOutDir: true,
             rollupOptions: {

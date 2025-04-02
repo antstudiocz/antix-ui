@@ -110,5 +110,5 @@ type ActiveFilter = {
 
 - Pro mobilní zařízení se filtry zobrazují v postranním panelu (Sheet)
 - Na počítačích se filtry zobrazují v popover menu
-- Komponenta používá shadcn/ui komponenty pro Sheet, Popover, Select a Checkbox
+- Komponenta používá prvořadé Antix UI komponenty pro Sheet, Popover, Checkbox a RadioGroup
 - Aktivní filtry jsou zobrazeny jako odstraňovatelné štítky

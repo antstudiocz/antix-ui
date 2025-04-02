@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../Button/Button";
-import { Badge } from "../ui/badge";
+import { Badge } from "../Badge/Badge";
 import { cn } from "@/lib/utils";
 import DeliveryIcon from "@/icons/DeliveryIcon";
 import CartIcon from "@/icons/CartIcon";

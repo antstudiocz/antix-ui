@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCard } from "../../src";
+import { ProductCard } from "@/components/ProductCard/ProductCard";
 
 // Typové definice pro komponenty
 interface ProductBadge {

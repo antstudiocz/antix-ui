@@ -5,6 +5,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+export type RadioGroupVariant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "conversion";
+
 const radioGroupItemVariants = cva(
   "aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
   {
@@ -26,10 +32,28 @@ const radioGroupItemVariants = cva(
   }
 );
 
-function RadioGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+export interface RadioGroupProps
+  extends React.ComponentProps<typeof RadioGroupPrimitive.Root> {
+  /** Additional CSS classes to be applied to the radio group */
+  className?: string;
+}
+
+export interface RadioGroupItemProps
+  extends React.ComponentProps<typeof RadioGroupPrimitive.Item>,
+    Omit<VariantProps<typeof radioGroupItemVariants>, "className"> {
+  /** Additional CSS classes to be applied to the radio group item */
+  className?: string;
+  /** Custom indicator icon to display when selected (defaults to CircleIcon) */
+  icon?: React.ReactNode;
+}
+
+/**
+ * RadioGroup component for selecting a single option from a list
+ *
+ * @param className - Additional CSS classes
+ * @param children - Radio group items
+ */
+const RadioGroup = ({ className, ...props }: RadioGroupProps) => {
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
@@ -37,13 +61,22 @@ function RadioGroup({
       {...props}
     />
   );
-}
+};
 
-interface RadioGroupItemProps
-  extends React.ComponentProps<typeof RadioGroupPrimitive.Item>,
-    VariantProps<typeof radioGroupItemVariants> {}
-
-function RadioGroupItem({ className, variant, ...props }: RadioGroupItemProps) {
+/**
+ * RadioGroupItem component - individual option within a RadioGroup
+ *
+ * @param variant - Visual style of the radio item ("default", "primary", "secondary", "conversion")
+ * @param className - Additional CSS classes
+ * @param icon - Custom indicator icon
+ * @param disabled - Whether the radio item is disabled
+ */
+const RadioGroupItem = ({
+  className,
+  variant,
+  icon,
+  ...props
+}: RadioGroupItemProps) => {
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
@@ -54,10 +87,12 @@ function RadioGroupItem({ className, variant, ...props }: RadioGroupItemProps) {
         data-slot="radio-group-indicator"
         className="relative flex items-center justify-center"
       >
-        <CircleIcon className="fill-current absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
+        {icon || (
+          <CircleIcon className="fill-current absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
+        )}
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );
-}
+};
 
 export { RadioGroup, RadioGroupItem };
