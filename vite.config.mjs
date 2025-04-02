@@ -64,11 +64,6 @@ export default defineConfig(({ command, mode }) => {
             },
           }),
     },
-    css: {
-      modules: {
-        generateScopedName: "[name]__[local]___[hash:base64:5]",
-      },
-    },
     server: {
       port: 5173,
       open: true,
