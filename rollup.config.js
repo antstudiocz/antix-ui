@@ -48,7 +48,8 @@ export default [
         extensions: [".css"],
         modules: true,
         use: ["sass"],
-        extract: false,
+        extract: "dist/styles.css",
+        minimize: true,
       }),
       url(),
       terser({
@@ -111,7 +112,8 @@ export default [
         extensions: [".css"],
         modules: true,
         use: ["sass"],
-        extract: false,
+        extract: "dist/styles.css",
+        minimize: true,
       }),
       url(),
       terser({

@@ -10,6 +10,39 @@ npm install @antixuser/antix-ui
 yarn add @antixuser/antix-ui
 ```
 
+## Styles Setup
+
+This library uses Tailwind CSS and custom CSS variables. To use the components properly, you need to:
+
+1. Install and configure Tailwind CSS in your project if you haven't already:
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+2. Import the library styles in your main CSS file:
+
+```css
+@import "@antixuser/antix-ui/styles";
+```
+
+3. Configure your `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    // ... your content paths
+    "./node_modules/@antixuser/antix-ui/**/*.{js,ts,jsx,tsx}", // Add this line
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
 ## Basic Usage
 
 ```jsx
