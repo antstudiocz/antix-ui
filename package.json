@@ -6,6 +6,18 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
+    "./demo": {
+      "types": "./dist/demo.d.ts",
+      "import": "./dist/demo.esm.js",
+      "require": "./dist/demo.js"
+    }
+  },
   "files": [
     "dist",
     "examples"
@@ -61,6 +73,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "rollup": "^4.37.0",
+    "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "ts-jest": "^29.3.0",

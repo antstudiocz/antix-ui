@@ -12,7 +12,8 @@ export default defineConfig({
   },
   root: "examples",
   build: {
-    outDir: "../dist-examples",
+    outDir: "../dist/examples",
+    emptyOutDir: true,
   },
   server: {
     port: 5173,
