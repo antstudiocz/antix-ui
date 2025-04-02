@@ -16,7 +16,14 @@ export default defineConfig(({ command, mode }) => {
       isLib &&
         dts({
           include: ["src"],
-          exclude: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+          exclude: [
+            "src/**/*.test.ts",
+            "src/**/*.test.tsx",
+            "src/**/*.stories.tsx",
+          ],
+          rollupTypes: true,
+          insertTypesEntry: true,
+          copyDtsFiles: true,
         }),
     ].filter(Boolean),
     resolve: {

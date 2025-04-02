@@ -3,21 +3,23 @@
   "version": "0.5.0",
   "description": "A reusable UI component library with multiple components and styles",
   "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "style": "dist/style.css",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/style.css",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "style": "./dist/style.css",
       "import": "./dist/index.es.js",
       "require": "./dist/index.cjs.js"
     },
-    "./demo": "./dist/examples/i,,ndex.html"
+    "./style.css": "./dist/style.css"
   },
-  "files": [
-    "dist"
+  "sideEffects": [
+    "**/*.css"
   ],
   "scripts": {
     "dev": "vite",
