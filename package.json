@@ -3,30 +3,25 @@
   "version": "0.4.2",
   "description": "A reusable UI component library with multiple components and styles",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
-  "style": "dist/styles.css",
+  "style": "dist/style.css",
   "exports": {
     ".": {
-      "style": "./dist/styles.css",
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "style": "./dist/style.css",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
     },
-    "./styles": "./dist/styles.css",
-    "./demo": {
-      "types": "./dist/demo.d.ts",
-      "import": "./dist/demo.esm.js",
-      "require": "./dist/demo.js"
-    }
+    "./demo": "./dist/examples/i,,ndex.html"
   },
   "files": [
-    "dist",
-    "examples"
+    "dist"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && npm run examples:build",
+    "dev": "vite",
+    "build": "vite build --mode lib && vite build",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -36,9 +31,7 @@
     "prepare": "husky",
     "release:patch": "npm run build && npm version patch && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
     "release:minor": "npm run build && npm version minor && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
-    "release:major": "npm run build && npm version major && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
-    "dev": "vite",
-    "examples:build": "vite build --emptyOutDir"
+    "release:major": "npm run build && npm version major && npm publish && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
@@ -47,11 +40,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-typescript": "^7.27.0",
-    "@rollup/plugin-commonjs": "^28.0.3",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.2",
-    "@rollup/plugin-url": "^8.0.2",
+    "@tailwindcss/postcss": "^4.1.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
@@ -75,14 +64,11 @@
     "lint-staged": "^15.5.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
-    "rollup": "^4.37.0",
-    "rollup-plugin-analyzer": "^4.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
     "ts-jest": "^29.3.0",
     "tslib": "^2.8.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.3"
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3"
   },
   "keywords": [
     "ui",
@@ -107,12 +93,12 @@
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
-    "@tailwindcss/vite": "^4.0.16",
+    "@tailwindcss/vite": "^4.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.483.0",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4.0.16",
+    "tailwindcss": "^4.1.1",
     "tw-animate-css": "^1.2.4"
   }
 }
