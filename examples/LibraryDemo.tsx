@@ -5,7 +5,6 @@ import ProductCardDemo from "./ProductCardDemo/ProductCardDemo";
 import FilterPanelDemo from "./FilterPanelDemo/FilterPanelDemo";
 import PaginationDemo from "./PaginationDemo/PaginationDemo";
 import NewComponentsDemo from "./NewComponentsDemo/NewComponentsDemo";
-import CarouselDemo from "./CarouselDemo/CarouselDemo";
 
 /**
  * Hlavní aplikace pro zobrazení všech příkladů
