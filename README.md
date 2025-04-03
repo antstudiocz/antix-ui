@@ -10,45 +10,40 @@ npm install @antixuser/antix-ui
 yarn add @antixuser/antix-ui
 ```
 
-## Styles Setup
+## Setup
 
-This library uses Tailwind CSS and custom CSS variables. To use the components properly, you need to:
+Make sure you have Tailwind CSS v4 installed in your project, then import our styles in your entry file (e.g. `element.tsx`):
 
-1. Install and configure Tailwind CSS in your project if you haven't already:
-
-```bash
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-```
-
-2. Import the library styles in your main CSS file:
-
-```css
-@import "@antixuser/antix-ui/styles";
-```
-
-3. Configure your `tailwind.config.js`:
-
-```js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    // ... your content paths
-    "./node_modules/@antixuser/antix-ui/**/*.{js,ts,jsx,tsx}", // Add this line
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
+```tsx
+import "@antixuser/antix-ui/styles";
 ```
 
 ## Basic Usage
 
 ```jsx
-import { Button, ProductCard, FilterPanel } from "@antixuser/antix-ui";
+import {
+  Button,
+  ProductCard,
+  FilterPanel,
+  Carousel,
+} from "@antixuser/antix-ui";
 
 function App() {
+  const carouselItems = [
+    <div
+      key="1"
+      className="flex aspect-square items-center justify-center p-6 bg-accent"
+    >
+      <span className="text-4xl font-semibold">1</span>
+    </div>,
+    <div
+      key="2"
+      className="flex aspect-square items-center justify-center p-6 bg-accent"
+    >
+      <span className="text-4xl font-semibold">2</span>
+    </div>,
+  ];
+
   return (
     <div>
       <Button
@@ -87,6 +82,13 @@ function App() {
         badges={["New", "Sale"]}
         onAddToCart={() => console.log("Adding to cart...")}
       />
+
+      <Carousel
+        items={carouselItems}
+        showNavigation
+        autoplay
+        autoplayInterval={5000}
+      />
     </div>
   );
 }
@@ -96,9 +98,20 @@ function App() {
 
 The library currently includes the following components:
 
+- **[Badge](src/components/Badge/docs/README.md)** - Display short information like status, counts, or labels
 - **[Button](src/components/Button/docs/README.md)** - Button with various variants and styles
-- **[ProductCard](src/components/ProductCard/docs/README.md)** - Product card component with customizable layout and badges
+- **[Carousel](src/components/Carousel/docs/README.md)** - Carousel for cycling through elements like a slideshow
+- **[Checkbox](src/components/Checkbox/docs/README.md)** - Allows users to select one or multiple items
+- **[Dialog](src/components/Dialog/docs/README.md)** - Modal dialog for user interaction
 - **[FilterPanel](src/components/FilterPanel/docs/README.md)** - Advanced filter panel with sort options, checkboxes, and mobile support
+- **[Pagination](src/components/Pagination/docs/README.md)** - Navigation through pages with a clean interface
+- **[PaginationButton](src/components/PaginationButton/docs/README.md)** - Button designed for pagination interfaces
+- **[Popover](src/components/Popover/docs/README.md)** - Floating panel with contextual information or actions
+- **[ProductCard](src/components/ProductCard/docs/README.md)** - Product card component with customizable layout and badges
+- **[RadioGroup](src/components/RadioGroup/docs/README.md)** - Allows users to select a single option from a list
+- **[Select](src/components/Select/docs/README.md)** - Dropdown select component for choosing from a list
+- **[Separator](src/components/Separator/docs/README.md)** - Visual divider between content
+- **[Sheet](src/components/Sheet/docs/README.md)** - Slide-in panel from the edge of the screen
 
 ## Features
 
@@ -106,6 +119,9 @@ The library currently includes the following components:
 - 🎯 TypeScript support
 - 📦 Tree-shakeable
 - 🔧 Easy to customize with CSS variables
+- 🌐 Responsive components
+- ♿ Accessibility built-in
+- 🌙 Dark mode support
 
 ## Customization
 
@@ -138,8 +154,7 @@ antix-ui/
     │   │   │   └── README.md
     │   │   ├── docs/           # Component documentation
     │   │   │   └── README.md   # Usage and examples
-    │   │   ├── ComponentName.tsx        # Implementation
-    │   │   ├── ComponentName.module.css  # Styles
+    │   │   ├── ComponentName.tsx  # Implementation
     ├── styles/          # Shared styles
     │   ├── foundations/ # Core styles (colors, typography, etc.)
     │   │   ├── borders.css
