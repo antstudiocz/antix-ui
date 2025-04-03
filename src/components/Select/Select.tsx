@@ -6,39 +6,37 @@ import { cn } from "@/lib/utils";
 
 export type SelectSize = "default" | "sm";
 
-export interface SelectProps
-  extends React.ComponentProps<typeof SelectPrimitive.Root> {}
-
-export interface SelectTriggerProps
-  extends React.ComponentProps<typeof SelectPrimitive.Trigger> {
-  /** Size of the select trigger */
+export type SelectProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Root
+>;
+export type SelectTriggerProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Trigger
+> & {
   size?: SelectSize;
-}
-
-export interface SelectContentProps
-  extends React.ComponentProps<typeof SelectPrimitive.Content> {}
-
-export interface SelectItemProps
-  extends React.ComponentProps<typeof SelectPrimitive.Item> {}
-
-export interface SelectGroupProps
-  extends React.ComponentProps<typeof SelectPrimitive.Group> {}
-
-export interface SelectLabelProps
-  extends React.ComponentProps<typeof SelectPrimitive.Label> {}
-
-export interface SelectSeparatorProps
-  extends React.ComponentProps<typeof SelectPrimitive.Separator> {}
-
-export interface SelectValueProps
-  extends React.ComponentProps<typeof SelectPrimitive.Value> {}
+};
+export type SelectContentProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Content
+>;
+export type SelectValueProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Value
+>;
+export type SelectGroupProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Group
+>;
+export type SelectLabelProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Label
+>;
+export type SelectItemProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Item
+>;
+export type SelectSeparatorProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Separator
+>;
 
 /**
  * Root Select component that manages the select state
  */
-const Select = ({ ...props }: SelectProps) => {
-  return <SelectPrimitive.Root data-slot="select" {...props} />;
-};
+const Select = SelectPrimitive.Root;
 
 /**
  * SelectTrigger component that opens the select when clicked

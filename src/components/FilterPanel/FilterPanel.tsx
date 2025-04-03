@@ -119,6 +119,64 @@ export const FilterPanel = React.forwardRef<HTMLDivElement, FilterPanelProps>(
       );
     };
 
+    const renderFilterSection = (section: FilterSection) => {
+      return (
+        <div
+          key={section.name}
+          className="border-t border-neutral-200 px-4 py-6"
+        >
+          <h3 className="-mx-2 -my-3 flow-root">
+            <button
+              type="button"
+              className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-neutral-400 hover:text-neutral-500"
+              onClick={() => toggleSection(section.id)}
+            >
+              <span className="font-medium text-secondary-800">
+                {section.name}
+              </span>
+              <span className="ml-6 flex items-center">
+                <ChevronDownIcon
+                  className={cn(
+                    "h-5 w-5 transition-transform duration-200",
+                    expandedSections.includes(section.id) ? "rotate-180" : ""
+                  )}
+                />
+              </span>
+            </button>
+          </h3>
+          <div
+            className={cn(
+              "overflow-hidden transition-all duration-200",
+              expandedSections.includes(section.id)
+                ? "pt-6 opacity-100"
+                : "h-0 pt-0 opacity-0"
+            )}
+          >
+            <div className="space-y-6">
+              {section.options.map((option, optionIdx) => (
+                <div key={option.value} className="flex gap-3">
+                  <Checkbox
+                    variant="primary"
+                    id={`filter-mobile-${section.id}-${optionIdx}`}
+                    checked={option.checked}
+                    onCheckedChange={(checked) =>
+                      handleFilterChange(section.id, option.value, !!checked)
+                    }
+                  />
+                  <label
+                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                    className="text-sm text-neutral-500"
+                  >
+                    {option.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div ref={ref} {...props}>
         {/* Mobile filter sheet */}
@@ -137,67 +195,7 @@ export const FilterPanel = React.forwardRef<HTMLDivElement, FilterPanelProps>(
 
             {/* Filters */}
             <form className="mt-4">
-              {filters.map((section) => (
-                <div
-                  key={section.name}
-                  className="border-t border-neutral-200 px-4 py-6"
-                >
-                  <h3 className="-mx-2 -my-3 flow-root">
-                    <button
-                      type="button"
-                      className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-neutral-400 hover:text-neutral-500"
-                      onClick={() => toggleSection(section.id)}
-                    >
-                      <span className="font-medium text-secondary-800">
-                        {section.name}
-                      </span>
-                      <span className="ml-6 flex items-center">
-                        <ChevronDownIcon
-                          className={cn(
-                            "h-5 w-5 transition-transform duration-200",
-                            expandedSections.includes(section.id)
-                              ? "rotate-180"
-                              : ""
-                          )}
-                        />
-                      </span>
-                    </button>
-                  </h3>
-                  <div
-                    className={cn(
-                      "overflow-hidden transition-all duration-200",
-                      expandedSections.includes(section.id)
-                        ? "pt-6 opacity-100"
-                        : "h-0 pt-0 opacity-0"
-                    )}
-                  >
-                    <div className="space-y-6">
-                      {section.options.map((option, optionIdx) => (
-                        <div key={option.value} className="flex gap-3">
-                          <Checkbox
-                            variant="primary"
-                            id={`filter-mobile-${section.id}-${optionIdx}`}
-                            checked={option.checked}
-                            onCheckedChange={(checked) =>
-                              handleFilterChange(
-                                section.id,
-                                option.value,
-                                !!checked
-                              )
-                            }
-                          />
-                          <label
-                            htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                            className="text-sm text-neutral-500"
-                          >
-                            {option.label}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {filters.map((section) => renderFilterSection(section))}
             </form>
           </SheetContent>
         </Sheet>

@@ -3,24 +3,18 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 import { cn } from "@/lib/utils";
 
-export interface PopoverProps
-  extends React.ComponentProps<typeof PopoverPrimitive.Root> {}
-
-export interface PopoverTriggerProps
-  extends React.ComponentProps<typeof PopoverPrimitive.Trigger> {}
-
-export interface PopoverContentProps
-  extends React.ComponentProps<typeof PopoverPrimitive.Content> {
-  /** Additional CSS classes to be applied to the content */
-  className?: string;
-  /** The preferred alignment against the trigger element */
-  align?: "start" | "center" | "end";
-  /** The offset distance in pixels from the trigger */
-  sideOffset?: number;
-}
-
-export interface PopoverAnchorProps
-  extends React.ComponentProps<typeof PopoverPrimitive.Anchor> {}
+export type PopoverProps = React.ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Root
+>;
+export type PopoverTriggerProps = React.ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Trigger
+>;
+export type PopoverContentProps = React.ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Content
+>;
+export type PopoverAnchorProps = React.ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Anchor
+>;
 
 /**
  * Root Popover component that manages the popover state

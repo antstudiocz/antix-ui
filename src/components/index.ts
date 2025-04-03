@@ -12,6 +12,7 @@ export * from "./Separator/Separator";
 export * from "./Dialog/Dialog";
 export * from "./Popover/Popover";
 export * from "./Sheet/Sheet";
+export * from "./Carousel/Carousel";
 
 // Type definitions
 export type { ButtonProps } from "./Button/Button";

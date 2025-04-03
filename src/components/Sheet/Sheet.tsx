@@ -8,38 +8,27 @@ import { cn } from "@/lib/utils";
 
 export type SheetSide = "top" | "right" | "bottom" | "left";
 
-export interface SheetProps
-  extends React.ComponentProps<typeof SheetPrimitive.Root> {}
-
-export interface SheetTriggerProps
-  extends React.ComponentProps<typeof SheetPrimitive.Trigger> {}
-
-export interface SheetCloseProps
-  extends React.ComponentProps<typeof SheetPrimitive.Close> {}
-
-export interface SheetPortalProps
-  extends React.ComponentProps<typeof SheetPrimitive.Portal> {}
-
-export interface SheetOverlayProps
-  extends React.ComponentProps<typeof SheetPrimitive.Overlay> {
-  /** Additional CSS classes to be applied to the overlay */
-  className?: string;
-}
-
-export interface SheetContentProps
-  extends React.ComponentProps<typeof SheetPrimitive.Content> {
-  /** Additional CSS classes to be applied to the content */
-  className?: string;
-  /** Content of the sheet */
-  children?: React.ReactNode;
-  /** The side of the screen from which the sheet appears */
+export type SheetProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Root
+>;
+export type SheetTriggerProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Trigger
+>;
+export type SheetCloseProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Close
+>;
+export type SheetPortalProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Portal
+>;
+export type SheetOverlayProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Overlay
+>;
+export type SheetContentProps = React.ComponentPropsWithoutRef<
+  typeof SheetPrimitive.Content
+> & {
   side?: SheetSide;
-}
-
-export interface SheetHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Additional CSS classes to be applied to the header */
-  className?: string;
-}
+};
+export type SheetHeaderProps = React.HTMLAttributes<HTMLDivElement>;
 
 export interface SheetFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Additional CSS classes to be applied to the footer */

@@ -4,55 +4,32 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-export interface DialogProps
-  extends React.ComponentProps<typeof DialogPrimitive.Root> {}
-
-export interface DialogTriggerProps
-  extends React.ComponentProps<typeof DialogPrimitive.Trigger> {}
-
-export interface DialogPortalProps
-  extends React.ComponentProps<typeof DialogPrimitive.Portal> {}
-
-export interface DialogCloseProps
-  extends React.ComponentProps<typeof DialogPrimitive.Close> {}
-
-export interface DialogOverlayProps
-  extends React.ComponentProps<typeof DialogPrimitive.Overlay> {
-  /** Additional CSS classes to be applied to the overlay */
-  className?: string;
-}
-
-export interface DialogContentProps
-  extends React.ComponentProps<typeof DialogPrimitive.Content> {
-  /** Additional CSS classes to be applied to the content */
-  className?: string;
-  /** Content of the dialog */
-  children?: React.ReactNode;
-}
-
-export interface DialogHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /** Additional CSS classes to be applied to the header */
-  className?: string;
-}
-
-export interface DialogFooterProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /** Additional CSS classes to be applied to the footer */
-  className?: string;
-}
-
-export interface DialogTitleProps
-  extends React.ComponentProps<typeof DialogPrimitive.Title> {
-  /** Additional CSS classes to be applied to the title */
-  className?: string;
-}
-
-export interface DialogDescriptionProps
-  extends React.ComponentProps<typeof DialogPrimitive.Description> {
-  /** Additional CSS classes to be applied to the description */
-  className?: string;
-}
+export type DialogProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Root
+>;
+export type DialogTriggerProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Trigger
+>;
+export type DialogPortalProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Portal
+>;
+export type DialogCloseProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Close
+>;
+export type DialogOverlayProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Overlay
+>;
+export type DialogContentProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Content
+>;
+export type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement>;
+export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
+export type DialogTitleProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Title
+>;
+export type DialogDescriptionProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Description
+>;
 
 /**
  * Root Dialog component that manages the dialog state
